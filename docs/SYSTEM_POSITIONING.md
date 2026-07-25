@@ -1,49 +1,128 @@
-# 系統定位（System Positioning）
+# MRL 系統定位（MRL System Positioning）
 
-> 本文件定義本倉庫在整體系統中的位置、層級結構與各層職責。
+> 本文件定義 MRL 根源倉庫、DL580 定義執行層、官方後端與官方前端之間的 canonical 關係。
 
-## 1. 定位總述
+## 1. 最高層位置
 
-本倉庫是整體系統的**根源層（Root Layer）**：
+GitHub 身分層最高位置為 Root Owner 帳號：
 
-- 存放核心定義文件（主權聲明、系統定位、命名規則）。
-- 作為所有衍生工作（實驗、應用、發佈）的共同上游。
-- 根源層本身（`main` 分支的核心定義文件與 `docs/`）不承載實驗性或臨時性內容；實驗內容應放在工作層（功能分支與 `examples/`）迭代，成熟後再合入根源層。
-
-## 2. 層級結構
-
-```
-┌─────────────────────────────┐
-│  根源層（本倉庫）            │  核心定義、規則、最終依據
-├─────────────────────────────┤
-│  工作層（examples/、分支）   │  實驗、草稿、開發中內容
-├─────────────────────────────┤
-│  衍生層（衍生倉庫、鏡像）    │  應用、發佈、對外呈現
-└─────────────────────────────┘
+```text
+github.com/dofaromg
 ```
 
-| 層級 | 位置 | 職責 | 穩定性 |
-|------|------|------|--------|
-| 根源層 | 本倉庫 `main` 分支 + `docs/` | 定義規則與最終依據 | 高（變更須核准） |
-| 工作層 | 功能分支、`examples/` | 實驗與開發 | 中（可自由迭代） |
-| 衍生層 | 其他倉庫、鏡像 | 應用與發佈 | 依各自需求 |
+可直接保存與版本化 canonical 檔案的最高位置，為本根源倉庫：
 
-## 3. 目錄職責
+```text
+dofaromg/----2
+└── main
+```
 
-| 目錄 / 檔案 | 職責 |
-|-------------|------|
-| `README.md` | 倉庫入口，導覽至各核心文件 |
-| `docs/` | 核心定義文件（主權、定位、命名） |
-| `examples/` | 範例與實驗筆記本 |
-| 根目錄筆記本 | 主要工作內容（如量子化學計算輸入結構） |
+`main` 分支的根目錄與 `docs/` 為目前確認的 MRL Root Definition Layer。
 
-## 4. 資訊流向
+## 2. 四層正式定位
 
-1. **定義自根源出**：規則與定義只在根源層修改，往下游傳遞。
-2. **內容自工作層入**：新內容在工作層迭代成熟後，經 Pull Request 合入根源層。
-3. **衍生層不回寫**：衍生層引用根源層，但不直接修改根源層；如需變更，回到工作層提案。
+```text
+ROOT / Governance
+  dofaromg/----2@main
+  └─ 主權、命名、定義、lineage、官方路由
 
-## 5. 相關文件
+DEFINITION RUNTIME
+  DL580
+  └─ LAW / Registry / Particle / Builder / Verification / Runtime orchestration
+
+OFFICIAL BACKEND
+  mrliouhan.ai
+  └─ API、身份、資料服務、任務、模型與內部產品後端
+
+OFFICIAL FRONTEND
+  mrliouword.com
+  └─ 官方入口、Web UI、產品呈現、使用者互動與商務介面
+```
+
+## 3. Root Repository 職責
+
+- 保存 MRL 主權、命名與層級規格。
+- 保存 canonical registry、manifest、lineage 與遷移狀態。
+- 作為所有內部產品、衍生倉庫與平台的上游。
+- 不直接承載外部平台專有名稱作為 canonical identity。
+
+## 4. DL580 的正式角色
+
+DL580 不是單純部署主機，而是：
+
+```text
+MRL Definition Runtime Host
+```
+
+其職責為：
+
+- 載入 MRL 定義層與 LAW。
+- 執行粒子字典、Registry、Builder、生成器與驗證器。
+- 驗證來源、差異、版本、hash、manifest 與 round-trip。
+- 驅動或發布能力至 `mrliouhan.ai`。
+- 保存可由 Root Owner 控制的本地執行狀態。
+
+## 5. 官方資料與請求流向
+
+```text
+User / Browser / Device
+  → https://mrliouword.com
+  → https://mrliouhan.ai
+  → MRL service / API / task routing
+  → DL580 Definition Runtime when required
+  → result / state / proof
+  → mrliouhan.ai
+  → mrliouword.com
+```
+
+## 6. 轉移回自有控制的原則
+
+目前外部平台、雲端服務與臨時 URL 均視為：
+
+- source
+- adapter
+- mirror
+- migration origin
+- temporary runtime
+
+不得視為 MRL 的最終權威位置。每一項轉移須保存：
+
+- 原平台與 URL
+- 原始設定與環境變數
+- 資料匯出或鏡像
+- 自有後端對應服務
+- 切換與回滾方法
+- 驗證結果與 proof
+
+## 7. 目錄職責
+
+| 位置 | 職責 |
+|---|---|
+| `/README.md` | 根源入口與官方拓撲 |
+| `/docs/` | 主權、定位、命名、路由與 canonical 規格 |
+| `/ingest/` | 來源、證據、外部材料與待回填版本 |
+| `/registry/` | canonical registry 與映射 |
+| `/runtime/` | DL580 可執行定義 Runtime 規格與程式 |
+| `/platform/` | mrliouhan.ai / mrliouword.com 對接定義 |
+| `/evidence/` | hash、manifest、trace、proof 與稽核報告 |
+
+## 8. 變更流向
+
+```text
+source / evidence
+  → ingest branch
+  → compare / classify / map
+  → Root Owner review
+  → main
+  → DL580 Definition Runtime
+  → mrliouhan.ai
+  → mrliouword.com
+```
+
+衍生層如需修正，必須透過 evidence 回到根源層提案，不得讓衍生平台反向取代 ROOT。
+
+## 9. 相關文件
 
 - [主權聲明](SOVEREIGNTY.md)
 - [命名規則](NAMING.md)
+- [官方平台路由](MRL_PLATFORM_ROUTING.md)

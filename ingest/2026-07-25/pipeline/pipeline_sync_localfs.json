@@ -1,0 +1,31 @@
+{
+  "graph_id": "pipeline_sync_localfs",
+  "nodes": [
+    {
+      "id": "stage_snapshot",
+      "kind": "python_stage",
+      "action": "snapshot_create",
+      "impl": "pipeline_vnext.stages.stage_clean_snapshot"
+    },
+    {
+      "id": "bridge_localfs",
+      "kind": "cmd",
+      "action": "bridge_localfs",
+      "cmd": "python cli/main.py --data-root data bridge_localfs --root ."
+    },
+    {
+      "id": "runner_audit",
+      "kind": "runner",
+      "name": "audit"
+    },
+    {
+      "id": "runner_rebuild",
+      "kind": "runner",
+      "name": "rebuild"
+    }
+  ],
+  "policy": {
+    "on_fail": "redirect",
+    "default_redirect_runner": "repair"
+  }
+}

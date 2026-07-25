@@ -1,0 +1,48 @@
+{
+  "batch_id": "MRL_INGEST_20260725",
+  "target_repo": "dofaromg/----2",
+  "items": [
+    {
+      "filename": "templates-main.zip",
+      "size": 9224301,
+      "sha256": "090f26198657975d5d69db1539a029fafdc53d0840a5eb94343de66763273e2a",
+      "classification": "external-source"
+    },
+    {
+      "filename": "terms-of-use.pdf",
+      "size": 216164,
+      "sha256": "d3d6b4c3e71874112ee78837614be90a70b6bb65ece6c70de6febb2b009fe84e",
+      "classification": "external-source"
+    },
+    {
+      "filename": "linearmcpserver.zip",
+      "size": 59194,
+      "sha256": "ae7d6b9c1a1ce78892f44cbd9ae915681862825b214dbc71e1d5d41a84f937d0",
+      "classification": "external-source"
+    },
+    {
+      "filename": "claude-mem-main.zip",
+      "size": 9114351,
+      "sha256": "09178ad909649872e03bc6613773db7fcf9c7b1b19c526193a008119f1acee13",
+      "classification": "external-source"
+    },
+    {
+      "filename": "mrliouword-system-main (4).zip",
+      "size": 3762260,
+      "sha256": "280cc3e1e7284521082ad116891d67a151be27af918c39fccfd936e5e1d6f90e",
+      "classification": "owned-package"
+    },
+    {
+      "filename": "MRLspdx_Production_v1.0.0(2).zip",
+      "size": 152304,
+      "sha256": "30a0a1ef491279df199a4f0571381ceb736820ee6a1bdf183190aa782e31d23e",
+      "classification": "owned-package"
+    },
+    {
+      "filename": "Mrliou_MRL_ParticleDatabase_DefinitionLayer_v2(1).zip",
+      "size": 30374,
+      "sha256": "0e727691d6b8a4f86fbe4b93e7cf299b1cac0086ab7e9b5584d7fed0f0425a9a",
+      "classification": "owned-package"
+    }
+  ]
+}

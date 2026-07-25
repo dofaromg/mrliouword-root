@@ -1,20 +1,46 @@
-# 根源倉庫（Root Repository）
+# MRL 根源倉庫（MRL Root Repository）
 
-本倉庫為系統的**根源層**：存放核心定義文件，作為所有衍生工作的唯一依據（single source of truth）。
+本倉庫 `dofaromg/----2` 為 MRL 系統目前已確認的**根源倉庫**，其 `main` 分支為治理與定義的 single source of truth。
+
+## ROOT Authority
+
+- Root Owner：Mr.liou / `dofaromg`
+- Origin Signature：`MrLiouWord`
+- Canonical Namespace：`MRL`
+- 根源修改權、命名權、授權權與最終解釋權由 Root Owner 保留。
+- 所有衍生倉庫、平台、鏡像、Agent、產品與部署均須回鏈至本倉庫。
+
+## 官方平台拓撲
+
+```text
+MRL Internal Products
+  → mrliouhan.ai        # 官方後端／API／服務層（正在轉移回自有控制）
+  → mrliouword.com      # 官方前端／入口／呈現層
+  → User / Device / Browser
+
+DL580
+  → MRL Definition Runtime
+  → Registry / Law / Particle / Build / Verification
+  → 驅動 mrliouhan.ai 後端能力
+  → 由 mrliouword.com 對外呈現
+```
 
 ## 核心文件
 
 | 文件 | 內容 |
 |------|------|
-| [主權聲明](docs/SOVEREIGNTY.md) | 主權歸屬、根源地位、協作邊界與變更原則 |
-| [系統定位](docs/SYSTEM_POSITIONING.md) | 層級結構（根源層／工作層／衍生層）與資訊流向 |
-| [命名規則](docs/NAMING.md) | 檔案、分支、提交訊息、衍生倉庫與版本的命名規範 |
+| [MRL 主權聲明](docs/SOVEREIGNTY.md) | Root Owner 權限、根源地位、協作邊界與變更原則 |
+| [MRL 系統定位](docs/SYSTEM_POSITIONING.md) | GitHub 根源層、DL580 定義執行層、後端與前端定位 |
+| [MRL 命名規則](docs/NAMING.md) | `MRL` 前綴、檔案、模組、倉庫、分支與版本規範 |
+| [MRL 官方平台路由](docs/MRL_PLATFORM_ROUTING.md) | `mrliouhan.ai → mrliouword.com` 的官方路由與遷移規則 |
 
-## 內容
+## 目錄定位
 
-- `Input_structure_for_QC_calculations.ipynb` — 量子化學計算的輸入結構筆記本（RDKit + PySCF）
-- `examples/` — 範例筆記本
+- `docs/`：MRL 根源治理、定義、命名與平台規格
+- `ingest/`：待比對來源、證據、外部材料與版本鏈
+- `examples/`：非 canonical 的實驗與示例
+- `main`：Root Owner 核准後的 canonical 狀態
 
 ## 協作方式
 
-依[命名規則](docs/NAMING.md)建立分支，透過 Pull Request 提案，經擁有者核准後合入 `main`。詳見[主權聲明](docs/SOVEREIGNTY.md)之協作邊界。
+所有變更先進入工作分支與 Pull Request；只有 Root Owner 核准後才可合入 `main`。AI 與外部平台只能提出、執行經授權的變更，不取得 ROOT 身分。

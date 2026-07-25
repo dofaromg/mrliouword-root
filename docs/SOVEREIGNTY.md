@@ -1,35 +1,57 @@
-# 主權聲明（Sovereignty Statement）
+# MRL 主權聲明（MRL Sovereignty Statement）
 
-> 本文件說明本倉庫及其內容的主權歸屬、根源地位與使用邊界。
+> 本文件說明 MRL 根源倉庫、平台、Runtime、資料與衍生產品的主權歸屬及使用邊界。
 
-## 1. 主權歸屬
+## 1. Root Owner
 
-- 本倉庫（以下稱「根源倉庫」）之所有原創內容，其主權歸屬於倉庫擁有者本人。
-- 「主權」在此指：內容的**定義權、修改權、授權權與最終解釋權**，皆由擁有者保留。
-- 任何協作者（包含人類協作者與 AI 協作工具）產出的內容，一經合入本倉庫，即納入本倉庫的主權範圍管理。
+- Root Owner：Mr.liou / GitHub `dofaromg`
+- Root Repository：`dofaromg/----2`
+- Origin Signature：`MrLiouWord`
+- Canonical Namespace：`MRL`
 
-## 2. 根源地位（Root of Origin）
+Root Owner 保留以下權利：
 
-- 本倉庫為系統的**唯一根源（single source of truth）**。
-- 所有衍生倉庫、鏡像、分支發佈版本，皆以本倉庫的 `main` 分支為最終依據。
-- 若衍生內容與根源倉庫發生衝突，**以根源倉庫為準**。
-- 衍生或引用時，應保留來源標註，回鏈至本倉庫。
+- 定義權
+- 新增與修改權
+- 命名與更名權
+- 授權與撤回授權權
+- 合併與拒絕合併權
+- 平台路由與部署決定權
+- 最終解釋權
 
-## 3. 協作邊界
+## 2. 根源地位
+
+- 本倉庫 `main` 分支為目前確認的 MRL single source of truth。
+- 所有衍生倉庫、分支、鏡像、平台、Agent、產品與部署都必須回鏈至本倉庫。
+- 發生衝突時，以 Root Owner 核准並合入 `main` 的 canonical 狀態為準。
+- GitHub 帳號、第三方雲端、AI 工具與部署平台均不因託管或執行而取得 ROOT 身分。
+
+## 3. 官方平台主權邊界
+
+- `mrliouword.com`：MRL 官方前端、產品入口與呈現層。
+- `mrliouhan.ai`：MRL 官方後端、API、服務與資料交換層。
+- DL580：MRL Definition Runtime Host，負責定義、LAW、Registry、Builder、驗證與本地運行。
+- 外部平台只能作為 source、adapter、mirror、migration origin 或 temporary runtime。
+
+## 4. 協作邊界
 
 | 角色 | 權限 | 說明 |
-|------|------|------|
-| 擁有者 | 完整主權 | 定義、修改、授權、合併的最終決定權 |
-| 協作者 | 提案權 | 透過分支與 Pull Request 提案，經擁有者核准後合入 |
-| AI 工具 | 輔助權 | 產出草稿與建議；不具備自主合併與定義權 |
+|---|---|---|
+| Root Owner | 完整主權 | 定義、修改、命名、授權、部署、合併與最終裁定 |
+| 協作者 | 提案權 | 經分支與 Pull Request 提案 |
+| AI 工具 | 受授權執行權 | 可依明確指令新增、修改與整理，但不能自行取得 ROOT 或合併主權 |
+| 外部平台 | 執行／託管權 | 不取得 canonical identity、命名權或根源地位 |
 
-## 4. 變更原則
+## 5. 變更與存證原則
 
-1. 任何對主權聲明、系統定位、命名規則三份核心文件的修改，須經擁有者明確核准。
-2. 核心文件的修改應透過 Pull Request 進行，保留完整的變更紀錄。
-3. 歷史紀錄不可竄改：以新增修訂取代覆寫，git 歷史即為主權變更的存證。
+1. 核心規格變更必須保留 Git 歷史。
+2. 不以刪除掩蓋衝突；以新增映射、遷移紀錄與修訂處理。
+3. 更名必須保存 `previous_name`、`canonical_name`、來源 commit 與 migration status。
+4. 外部來源必須隔離於 evidence、external、adapter 或 provenance 區域。
+5. 只有 Root Owner 核准後，變更才可進入 `main`。
 
-## 5. 相關文件
+## 6. 相關文件
 
 - [系統定位](SYSTEM_POSITIONING.md)
 - [命名規則](NAMING.md)
+- [官方平台路由](MRL_PLATFORM_ROUTING.md)

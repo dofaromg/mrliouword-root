@@ -28,18 +28,21 @@
     },
     {
       "filename": "mrliouword-system-main (4).zip",
+      "name_role": "source_filename",
       "size": 3762260,
       "sha256": "280cc3e1e7284521082ad116891d67a151be27af918c39fccfd936e5e1d6f90e",
       "classification": "owned-package"
     },
     {
       "filename": "MRLspdx_Production_v1.0.0(2).zip",
+      "name_role": "source_filename",
       "size": 152304,
       "sha256": "30a0a1ef491279df199a4f0571381ceb736820ee6a1bdf183190aa782e31d23e",
       "classification": "owned-package"
     },
     {
       "filename": "Mrliou_MRL_ParticleDatabase_DefinitionLayer_v2(1).zip",
+      "name_role": "source_filename",
       "size": 30374,
       "sha256": "0e727691d6b8a4f86fbe4b93e7cf299b1cac0086ab7e9b5584d7fed0f0425a9a",
       "classification": "owned-package"

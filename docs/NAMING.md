@@ -34,12 +34,14 @@
 
 | 類型 | 規則 | 範例 |
 |---|---|---|
-| 核心定義文件 | `MRL_` + 全大寫主題 + `.md` | `MRL_PLATFORM_ROUTING.md` |
+| 核心定義文件（新增） | `MRL_` + 全大寫主題 + `.md` | `MRL_PLATFORM_ROUTING.md` |
 | 一般文件 | `mrl-` + kebab-case | `mrl-runtime-guide.md` |
 | Registry | `MRL_` + 主題 + `_vN` | `MRL_ParticleRegistry_v1.json` |
 | Manifest | `MRL_` + 主題 + `_MANIFEST` | `MRL_DefinitionLayer_MANIFEST.json` |
 | Evidence | `evidence/MRL_...` | `evidence/MRL_Lineage_Report.md` |
 | 外部來源 | `external/<provider>/...` | `external/azure/pipelines-agent/` |
+
+既有核心文件（如 `SOVEREIGNTY.md`、`SYSTEM_POSITIONING.md`、`NAMING.md`）屬於 legacy 命名，須先建立 lineage/mapping 後再更名。
 
 ## 5. 分支命名
 

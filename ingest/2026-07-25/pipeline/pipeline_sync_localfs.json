@@ -5,13 +5,15 @@
       "id": "stage_snapshot",
       "kind": "python_stage",
       "action": "snapshot_create",
-      "impl": "pipeline_vnext.stages.stage_clean_snapshot"
+      "impl": "pipeline_vnext.stages.stage_clean_snapshot",
+      "note": "reference-only ingest evidence; implementation not included in this repository"
     },
     {
       "id": "bridge_localfs",
       "kind": "cmd",
       "action": "bridge_localfs",
-      "cmd": "python cli/main.py --data-root data bridge_localfs --root ."
+      "cmd": "python cli/main.py --data-root data bridge_localfs --root .",
+      "note": "reference-only ingest evidence; command target is external to this repository"
     },
     {
       "id": "runner_audit",

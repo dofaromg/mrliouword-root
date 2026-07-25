@@ -101,10 +101,10 @@ User / Browser / Device
 | `/README.md` | 根源入口與官方拓撲 |
 | `/docs/` | 主權、定位、命名、路由與 canonical 規格 |
 | `/ingest/` | 來源、證據、外部材料與待回填版本 |
-| `/registry/` | canonical registry 與映射 |
-| `/runtime/` | DL580 可執行定義 Runtime 規格與程式 |
-| `/platform/` | mrliouhan.ai / mrliouword.com 對接定義 |
-| `/evidence/` | hash、manifest、trace、proof 與稽核報告 |
+| `/registry/`（規劃／預留，尚未建立） | canonical registry 與映射 |
+| `/runtime/`（規劃／預留，尚未建立） | DL580 可執行定義 Runtime 規格與程式 |
+| `/platform/`（規劃／預留，尚未建立） | mrliouhan.ai / mrliouword.com 對接定義 |
+| `/evidence/`（規劃／預留，尚未建立） | hash、manifest、trace、proof 與稽核報告 |
 
 ## 8. 變更流向
 

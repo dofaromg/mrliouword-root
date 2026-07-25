@@ -1,7 +1,7 @@
 # MRLiou Logic Pipeline 統合執行模組
 
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 # 模擬函數鏈邏輯（對應 core_fn）
 def run_logic_chain(x: str) -> str:
@@ -31,7 +31,7 @@ def to_human_readable(fn_steps):
 # 儲存執行紀錄
 def store_result(input_val, result, fn_steps, filename="simulation_result.json"):
     data = {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "input": input_val,
         "logic_chain": fn_steps,
         "result": result

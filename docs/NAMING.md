@@ -1,61 +1,77 @@
-# 命名規則（Naming Conventions）
+# MRL 命名規則（MRL Naming Conventions）
 
-> 本文件定義本倉庫及其衍生系統中，各類名稱的命名規則。
+> 本文件定義根源倉庫及所有衍生系統的 canonical 命名規則。
 
-## 1. 總則
+## 1. ROOT 命名原則
 
-1. 名稱應**見名知義**：看到名稱即可判斷內容與層級。
-2. 同一層級內的名稱風格保持一致。
-3. 核心文件使用英文大寫檔名（如 `SOVEREIGNTY.md`），一般內容使用小寫。
-4. 避免使用空格與特殊符號；以 `-`（連字號）或 `_`（底線）分隔。
+1. 所有新增的 MRL 自有資產，必須使用 `MRL` 或 `Mrliou` 前綴。
+2. 外部品牌、供應商與框架名稱不得升格為內部 canonical 名稱，只能出現在 `source`、`evidence`、`adapter`、`provenance` 或 `external` 路徑。
+3. `origin_signature` 固定為 `MrLiouWord`。
+4. 既有未加前綴的檔案與模組，先建立 lineage 與映射後再遷移；不得無證據批次改名造成來源斷裂。
+5. 名稱須能辨識層級、角色與用途。
 
-## 2. 檔案命名
+## 2. Canonical 前綴
+
+| 類型 | 正式前綴 | 範例 |
+|---|---|---|
+| 根源規格 | `MRL_` | `MRL_ROOT_AUTHORITY.md` |
+| 模組 | `MRL_` / `Mrliou_` | `MRL_ParticleRegistry_v1.json` |
+| Runtime | `mrl-` | `mrl-definition-runtime` |
+| API / Service | `mrl-` | `mrl-registry-api` |
+| 封包 | `MRL_` | `MRL_DefinitionLayer_v1.flpkg` |
+| 資料庫 | `mrl_` | `mrl_particle_registry` |
+| 環境變數 | `MRL_` | `MRL_API_BASE_URL` |
+| 網路服務 | `mrl.` 子網域或正式網域 | `api.mrliouhan.ai` |
+
+## 3. 官方網域命名
+
+- `mrliouword.com`：MRL 官方前端、入口、產品呈現與使用者介面。
+- `mrliouhan.ai`：MRL 官方後端、API、身份、服務與資料交換層。
+- 內部產品不得把第三方平台 URL 寫成 canonical 入口；必須經 MRL 自有網域路由。
+- 第三方部署僅能作為暫時 adapter、mirror 或 origin，並須保留回收與遷移路徑。
+
+## 4. 檔案命名
 
 | 類型 | 規則 | 範例 |
-|------|------|------|
-| 核心定義文件 | 全大寫 + `.md`，置於 `docs/` | `SOVEREIGNTY.md`、`NAMING.md` |
-| 一般文件 | 小寫 kebab-case | `setup-guide.md` |
-| 筆記本 | 首字大寫、底線分隔主題 | `Input_structure_for_QC_calculations.ipynb` |
-| 範例檔 | 置於 `examples/`，命名同筆記本規則 | `examples/Spatial_understanding_3d.ipynb` |
+|---|---|---|
+| 核心定義文件 | `MRL_` + 全大寫主題 + `.md` | `MRL_PLATFORM_ROUTING.md` |
+| 一般文件 | `mrl-` + kebab-case | `mrl-runtime-guide.md` |
+| Registry | `MRL_` + 主題 + `_vN` | `MRL_ParticleRegistry_v1.json` |
+| Manifest | `MRL_` + 主題 + `_MANIFEST` | `MRL_DefinitionLayer_MANIFEST.json` |
+| Evidence | `evidence/MRL_...` | `evidence/MRL_Lineage_Report.md` |
+| 外部來源 | `external/<provider>/...` | `external/azure/pipelines-agent/` |
 
-## 3. 分支命名
+## 5. 分支命名
 
-格式：`<類型>/<簡述>`，簡述使用小寫 kebab-case。
+格式：`<類型>/mrl-<簡述>`。
 
 | 類型 | 用途 | 範例 |
-|------|------|------|
-| `feature/` | 新增內容或功能 | `feature/add-dft-examples` |
-| `docs/` | 文件新增或修訂 | `docs/update-naming-rules` |
-| `fix/` | 修正錯誤 | `fix/notebook-import-error` |
-| `claude/` | AI 協作工具的工作分支 | `claude/sovereignty-positioning-naming-ynz6e1` |
+|---|---|---|
+| `feature/` | 新能力 | `feature/mrl-definition-runtime` |
+| `docs/` | 根源文件 | `docs/mrl-platform-routing` |
+| `fix/` | 修正 | `fix/mrl-lineage-gap` |
+| `ingest/` | 來源回填 | `ingest/mrl-lineage-20260725` |
 
-主分支固定為 `main`，為根源層的最終依據，不直接推送，僅接受 Pull Request 合入。
+`main` 為 canonical root，不直接推送，只接受 Root Owner 核准的 Pull Request。
 
-## 4. 提交訊息（Commit Message）
+## 6. 衍生倉庫與產品命名
 
-格式：`<類型>: <簡述>`
+- 新增衍生倉庫格式：`MRL-<用途>` 或 `Mrliou-<用途>`。
+- README 首段必須標明：
+  - `root_repository: dofaromg/----2`
+  - `origin_signature: MrLiouWord`
+  - `official_frontend: https://mrliouword.com`
+  - `official_backend: https://mrliouhan.ai`
+- 既有倉庫不立即批次改名；先建立 `MRL_REPOSITORY_MAP.json`，確認 lineage、用途、狀態與遷移計畫。
 
-| 類型 | 用途 |
-|------|------|
-| `docs` | 文件變更 |
-| `feat` | 新增內容或功能 |
-| `fix` | 修正 |
-| `chore` | 雜項維護 |
+## 7. 提交訊息與版本
 
-- 簡述以動詞開頭，說明「做了什麼」，中英文皆可。
-- 範例：`docs: 新增主權聲明與系統定位文件`
+- 格式：`<類型>: <動作>`。
+- 重大根源變更提升主版本。
+- 所有改名必須留下 `previous_name`、`canonical_name`、`migration_status` 與來源 commit。
 
-## 5. 衍生倉庫命名
-
-- 衍生倉庫建議格式：`<根源名稱>-<用途>`，例如根源倉庫名為 `core` 時，衍生為 `core-app`、`core-mirror`。
-- 衍生倉庫的 README 首段應標明其根源倉庫，並附回鏈。
-
-## 6. 版本標籤（Tag）
-
-- 採語意化版本：`v<主版本>.<次版本>.<修訂>`，例如 `v1.0.0`。
-- 核心定義文件的重大修訂應提升主版本號。
-
-## 7. 相關文件
+## 8. 相關文件
 
 - [主權聲明](SOVEREIGNTY.md)
 - [系統定位](SYSTEM_POSITIONING.md)
+- [官方平台路由](MRL_PLATFORM_ROUTING.md)

@@ -5,7 +5,7 @@
 
 【文件支持】pipeline_sync_localfs.json 節點 stage_snapshot：
     kind=python_stage, action=snapshot_create,
-    impl=pipeline_vnext.stages.stage_clean_snapshot
+    impl=mrl_pipeline.stages.stage_clean_snapshot
 
 【工程推論】「clean snapshot」在此實作為「非破壞性的基準快照」：
     在後續 bridge/audit/rebuild 之前，先記錄 data_root 的當前狀態，

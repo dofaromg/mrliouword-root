@@ -16,7 +16,9 @@ policy：
 from __future__ import annotations
 
 import importlib
+import inspect
 import os
+import shlex
 import subprocess
 import sys
 from typing import Any, Dict, List
@@ -42,8 +44,8 @@ def _run_python_stage(node: Dict, context: Context) -> Dict:
 
 def _run_cmd(node: Dict, context: Context, cwd: str) -> Dict:
     cmd = node["cmd"]
-    # 以目前 Python 直譯器取代前導 "python"，確保子行程環境一致。
-    argv = cmd.split()
+    # 用 shlex 做 shell-style tokenization，正確處理含空白／引號的參數。
+    argv = shlex.split(cmd)
     if argv and argv[0] == "python":
         argv[0] = sys.executable
     proc = subprocess.run(
@@ -94,8 +96,18 @@ def run_graph(graph_path: str, context: Context) -> Dict:
             final_ok = False
             if policy.get("on_fail") == "redirect":
                 redirect = policy.get("default_redirect_runner", "repair")
-                repair_res = get_runner(redirect)(context) if redirect in _known_runners() else {"ok": False, "error": f"unknown redirect runner {redirect!r}"}
-                # 若 repair 支援 incident 參數則帶入。
+                reason = res.get("error") or f"node {node_id!r} returned ok=false"
+                if redirect in _known_runners():
+                    # 帶入失敗節點與原因供修復報告追溯；對不收額外參數的
+                    # runner 自動降級為只傳 context。
+                    repair_res = _call_redirect(
+                        get_runner(redirect), context, node_id, reason
+                    )
+                else:
+                    repair_res = {
+                        "ok": False,
+                        "error": f"unknown redirect runner {redirect!r}",
+                    }
                 results.append({
                     "node": f"redirect:{redirect}",
                     "kind": "runner",
@@ -113,6 +125,21 @@ def run_graph(graph_path: str, context: Context) -> Dict:
         "artifacts": dict(context.artifacts),
     }
     return summary
+
+
+def _call_redirect(fn, context: Context, failed_node: str, reason: str) -> Dict:
+    """呼叫重導向 runner；若其簽章支援 failed_node/reason 則帶入以供追溯，
+    否則降級為只傳 context（相容 audit/rebuild 這類不收額外參數的 runner）。"""
+    try:
+        params = inspect.signature(fn).parameters
+    except (TypeError, ValueError):
+        return fn(context)
+    kwargs = {}
+    if "failed_node" in params:
+        kwargs["failed_node"] = failed_node
+    if "reason" in params:
+        kwargs["reason"] = reason
+    return fn(context, **kwargs)
 
 
 def _known_runners():

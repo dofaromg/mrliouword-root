@@ -2,7 +2,7 @@
 # origin_signature: MrLiouWord｜canonical_namespace: MRL｜Root Owner: Mr.liou / dofaromg
 """端對端測試：MRL Local-FS Sync Pipeline。
 
-無外部依賴，直接用 stdlib unittest。可用 `python tests/test_pipeline_vnext.py`
+無外部依賴，直接用 stdlib unittest。可用 `python tests/test_mrl_pipeline.py`
 或 `pytest tests/ -q` 執行。
 """
 
@@ -13,15 +13,15 @@ import sys
 import tempfile
 import unittest
 
-# 讓測試從 repo 根目錄或 tests/ 目錄執行皆可匯入 pipeline_vnext。
+# 讓測試從 repo 根目錄或 tests/ 目錄執行皆可匯入 mrl_pipeline。
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from pipeline_vnext.bridge import bridge_localfs
-from pipeline_vnext.context import Context
-from pipeline_vnext.fsutil import read_json, write_json
-from pipeline_vnext.graph import run_graph
-from pipeline_vnext.runners import audit, rebuild, repair
-from pipeline_vnext.stages import stage_clean_snapshot
+from mrl_pipeline.bridge import bridge_localfs
+from mrl_pipeline.context import Context
+from mrl_pipeline.fsutil import read_json, write_json
+from mrl_pipeline.graph import run_graph
+from mrl_pipeline.runners import audit, rebuild, repair
+from mrl_pipeline.stages import stage_clean_snapshot
 
 
 class PipelineEndToEndTest(unittest.TestCase):
@@ -85,7 +85,7 @@ class PipelineEndToEndTest(unittest.TestCase):
             "nodes": [
                 {"id": "s", "kind": "python_stage",
                  "action": "snapshot_create",
-                 "impl": "pipeline_vnext.stages.stage_clean_snapshot"},
+                 "impl": "mrl_pipeline.stages.stage_clean_snapshot"},
                 {"id": "a", "kind": "runner", "name": "audit"},
             ],
             "policy": {"on_fail": "redirect", "default_redirect_runner": "repair"},

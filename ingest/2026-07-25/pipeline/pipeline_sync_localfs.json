@@ -5,7 +5,7 @@
       "id": "stage_snapshot",
       "kind": "python_stage",
       "action": "snapshot_create",
-      "impl": "pipeline_vnext.stages.stage_clean_snapshot"
+      "impl": "mrl_pipeline.stages.stage_clean_snapshot"
     },
     {
       "id": "bridge_localfs",

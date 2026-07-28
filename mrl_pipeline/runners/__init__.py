@@ -1,7 +1,7 @@
 # 產品：MRL Local-FS Sync Pipeline（MRL 企業所屬）｜root_repository: dofaromg/----2
 # origin_signature: MrLiouWord｜canonical_namespace: MRL｜Root Owner: Mr.liou / dofaromg
 # 依 docs/SOVEREIGNTY.md：本資產所有權歸 MRL 企業；AI 僅受授權執行，無 ROOT／命名主權。
-"""pipeline_vnext.runners — runner 節點的實作與註冊表。
+"""mrl_pipeline.runners — runner 節點的實作與註冊表。
 
 【文件支持】pipeline_sync_localfs.json：
     runner_audit(name=audit)、runner_rebuild(name=rebuild)，

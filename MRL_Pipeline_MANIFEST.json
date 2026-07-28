@@ -11,16 +11,18 @@
   "official_backend": "https://mrliouhan.ai",
   "graph_ref": "ingest/2026-07-25/pipeline/pipeline_sync_localfs.json",
   "lineage": {
-    "note": "技術匯入路徑沿用 pipeline_sync_localfs.json 既有宣告，未改名（依 NAMING.md §1.4 先映射不斷源）；產品所有權歸 MRL 企業。",
-    "migration_status": "mapped",
+    "note": "套件由非 MRL 名稱 pipeline_vnext 重構更名為 MRL 名稱 mrl_pipeline；功能不變，pipeline_sync_localfs.json 的 impl 參照同步更新。依 NAMING.md §7 保留 previous_name/canonical_name。",
+    "previous_name": "pipeline_vnext",
+    "canonical_name": "mrl_pipeline",
+    "migration_status": "renamed",
     "assets": [
       {
-        "technical_module": "pipeline_vnext",
+        "technical_module": "mrl_pipeline",
         "canonical_owner": "MRL 企業",
         "role": "package-root"
       },
       {
-        "technical_module": "pipeline_vnext.stages.stage_clean_snapshot",
+        "technical_module": "mrl_pipeline.stages.stage_clean_snapshot",
         "graph_node": "stage_snapshot",
         "action": "snapshot_create",
         "canonical_owner": "MRL 企業"
@@ -32,19 +34,19 @@
         "canonical_owner": "MRL 企業"
       },
       {
-        "technical_module": "pipeline_vnext.runners.audit",
+        "technical_module": "mrl_pipeline.runners.audit",
         "graph_node": "runner_audit",
         "runner": "audit",
         "canonical_owner": "MRL 企業"
       },
       {
-        "technical_module": "pipeline_vnext.runners.rebuild",
+        "technical_module": "mrl_pipeline.runners.rebuild",
         "graph_node": "runner_rebuild",
         "runner": "rebuild",
         "canonical_owner": "MRL 企業"
       },
       {
-        "technical_module": "pipeline_vnext.runners.repair",
+        "technical_module": "mrl_pipeline.runners.repair",
         "policy": "default_redirect_runner",
         "runner": "repair",
         "canonical_owner": "MRL 企業"
@@ -55,13 +57,13 @@
     {
       "id": "localfs_bridge",
       "status": "implemented",
-      "via": "cli/main.py bridge_localfs / pipeline_vnext.bridge",
+      "via": "cli/main.py bridge_localfs / mrl_pipeline.bridge",
       "desc": "本地檔案系統延伸對接：掃描 --root 產生 localfs 清單進 data_root。"
     },
     {
       "id": "failure_repair_redirect",
       "status": "implemented",
-      "via": "pipeline_vnext.graph + runners.repair",
+      "via": "mrl_pipeline.graph + runners.repair",
       "desc": "失敗自動修復對接：policy on_fail=redirect → repair 重建乾淨基準。"
     },
     {

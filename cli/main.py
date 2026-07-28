@@ -25,14 +25,14 @@ import json
 import os
 import sys
 
-# 允許以 `python cli/main.py` 從 repo 根目錄直接執行時找到 pipeline_vnext。
+# 允許以 `python cli/main.py` 從 repo 根目錄直接執行時找到 mrl_pipeline。
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from pipeline_vnext.bridge import bridge_localfs  # noqa: E402
-from pipeline_vnext.context import Context  # noqa: E402
-from pipeline_vnext.graph import run_graph  # noqa: E402
-from pipeline_vnext.runners import get_runner  # noqa: E402
-from pipeline_vnext.stages import stage_clean_snapshot  # noqa: E402
+from mrl_pipeline.bridge import bridge_localfs  # noqa: E402
+from mrl_pipeline.context import Context  # noqa: E402
+from mrl_pipeline.graph import run_graph  # noqa: E402
+from mrl_pipeline.runners import get_runner  # noqa: E402
+from mrl_pipeline.stages import stage_clean_snapshot  # noqa: E402
 
 
 def _emit(result: object) -> None:

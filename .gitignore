@@ -1,0 +1,7 @@
+# MRL Local-FS Sync Pipeline — 產生物（不納入 canonical）
+/data/
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/

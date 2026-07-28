@@ -1,0 +1,86 @@
+{
+  "product_name": "MRL Local-FS Sync Pipeline",
+  "runtime_id": "mrl-localfs-sync-pipeline",
+  "version": "1.0.0",
+  "owner": "MRL 企業（MRL Enterprise）",
+  "root_owner": "Mr.liou / dofaromg",
+  "root_repository": "dofaromg/----2",
+  "origin_signature": "MrLiouWord",
+  "namespace": "MRL",
+  "official_frontend": "https://mrliouword.com",
+  "official_backend": "https://mrliouhan.ai",
+  "graph_ref": "ingest/2026-07-25/pipeline/pipeline_sync_localfs.json",
+  "lineage": {
+    "note": "技術匯入路徑沿用 pipeline_sync_localfs.json 既有宣告，未改名（依 NAMING.md §1.4 先映射不斷源）；產品所有權歸 MRL 企業。",
+    "migration_status": "mapped",
+    "assets": [
+      {
+        "technical_module": "pipeline_vnext",
+        "canonical_owner": "MRL 企業",
+        "role": "package-root"
+      },
+      {
+        "technical_module": "pipeline_vnext.stages.stage_clean_snapshot",
+        "graph_node": "stage_snapshot",
+        "action": "snapshot_create",
+        "canonical_owner": "MRL 企業"
+      },
+      {
+        "technical_module": "cli/main.py",
+        "graph_node": "bridge_localfs",
+        "cmd": "python cli/main.py --data-root data bridge_localfs --root .",
+        "canonical_owner": "MRL 企業"
+      },
+      {
+        "technical_module": "pipeline_vnext.runners.audit",
+        "graph_node": "runner_audit",
+        "runner": "audit",
+        "canonical_owner": "MRL 企業"
+      },
+      {
+        "technical_module": "pipeline_vnext.runners.rebuild",
+        "graph_node": "runner_rebuild",
+        "runner": "rebuild",
+        "canonical_owner": "MRL 企業"
+      },
+      {
+        "technical_module": "pipeline_vnext.runners.repair",
+        "policy": "default_redirect_runner",
+        "runner": "repair",
+        "canonical_owner": "MRL 企業"
+      }
+    ]
+  },
+  "extension_points": [
+    {
+      "id": "localfs_bridge",
+      "status": "implemented",
+      "via": "cli/main.py bridge_localfs / pipeline_vnext.bridge",
+      "desc": "本地檔案系統延伸對接：掃描 --root 產生 localfs 清單進 data_root。"
+    },
+    {
+      "id": "failure_repair_redirect",
+      "status": "implemented",
+      "via": "pipeline_vnext.graph + runners.repair",
+      "desc": "失敗自動修復對接：policy on_fail=redirect → repair 重建乾淨基準。"
+    },
+    {
+      "id": "dl580_definition_runtime",
+      "status": "待驗證",
+      "target": "DL580 Definition Runtime",
+      "desc": "【待驗證】對 DL580 定義執行層的對接點；具體介面規格未提供，尚未實作，不腦補。"
+    },
+    {
+      "id": "mrliouhan_backend",
+      "status": "待驗證",
+      "target": "https://mrliouhan.ai",
+      "desc": "【待驗證】對 MRL 官方後端 API/服務層的對接點；規格待 Root Owner 提供後實作。"
+    }
+  ],
+  "governance": {
+    "engineering_spec": "docs/MRL_工程規範_v1.0.md",
+    "sovereignty": "docs/SOVEREIGNTY.md",
+    "naming": "docs/NAMING.md",
+    "ai_role": "受授權執行的工程助手；無 ROOT／命名主權；變更經工作分支 + PR，由 Root Owner 核准合入 main。"
+  }
+}

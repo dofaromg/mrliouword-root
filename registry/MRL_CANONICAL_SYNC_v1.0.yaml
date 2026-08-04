@@ -1,0 +1,60 @@
+version: "1.0"
+updated_at: "2026-08-04"
+origin_owner: "MRLiou"
+origin_signature: "MrLiouWord"
+canonical_namespace: "MRL"
+canonical_root: "dofaromg/----2@main"
+canonical_document: "docs/MRLiou_Particle_World_Canonical_Chain_v1.0.md"
+
+canonical_chain:
+  - "dofaromg/----2"
+  - "完整的粒子世界三態循環"
+  - "MRL_AI_SYSTEM"
+  - "flow-tasks"
+
+three_world_context:
+  - "地球／物理世界"
+  - "電腦／數位世界"
+  - "人／創作世界"
+
+particle_language:
+  role: "三態平衡與可逆轉換點"
+  law: "怎麼過去，就怎麼回來"
+
+platform_roles:
+  notion: "MRLiou 權威知識、定義、關聯與可讀索引"
+  github: "根源定義、工程鏡像、版本、程式、任務與證據鏈"
+  google_drive: "正式文件、跨格式封存、證據與版本輸出"
+  dropbox: "來源封存、同步副本、可逆取回與跨裝置資料通道"
+
+invariants:
+  attribution_preserved: true
+  canonical_names_preserved: true
+  origin_signature_preserved: true
+  lineage_preserved: true
+  three_world_context_preserved: true
+  content_and_source_indivisible: true
+  platform_claims_origin: false
+  platform_may_rename: false
+  derivative_requires_attribution: true
+  reversible_history_required: true
+  evidence_chain_required: true
+  audit_required: true
+
+notes:
+  - "平台僅為來源、Adapter、工程鏡像、版本通道、封存或映射載體。"
+  - "完整粒子世界由多核心、世界模組、粒子語言、共振、投影、回放、回復、驗證與重新同步共同運轉形成。"
+  - "不得以一般 Dev／Stage／Production 框架取代 MRLiou 原始定義。"
+  - "不得將 MRLiou 原始架構反向歸屬於平台。"
+
+verified_repositories:
+  - repository: "dofaromg/----2"
+    role: "MRL 根源倉庫與 Root Definition Layer"
+  - repository: "dofaromg/MRL_AI_SYSTEM"
+    role: "MrliouAI 完整態母體運轉工程入口"
+  - repository: "Mrliou/MRL_AI_SYSTEM"
+    role: "Mother Core Assembly／多核心組合系統"
+  - repository: "dofaromg/flow-tasks"
+    role: "粒子核心、FlowOS、任務、GKE、驗證與部署"
+  - repository: "Mrliou/flow-tasks"
+    role: "地球結構、現實部署、粒子核心與 GitOps 運轉"

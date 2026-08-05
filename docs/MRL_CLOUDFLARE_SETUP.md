@@ -55,11 +55,11 @@ export CLOUDFLARE_API_TOKEN=<token>
 
 腳本行為：
 
-1. 依網域查詢 zone id
-2. 若已存在 `openai-domain-verification` TXT 記錄則更新，否則新建
-3. 透過 `1.1.1.1` 查詢確認記錄可見
+1. 依網域查詢 zone id（僅接受精確的網域名稱，拒絕過濾運算子等非法輸入）
+2. 逐頁掃描該網域的所有 TXT 記錄（Cloudflare API 分頁），若已存在 `openai-domain-verification` 記錄則以 PATCH 局部更新（保留 comment/tags 等欄位），否則新建
+3. 透過 `1.1.1.1` 查詢，並與驗證值**逐字比對**確認記錄可見
 
-完成後回到 OpenAI 後台按 **Verify**。DNS 傳播通常在數分鐘內完成。
+完成後回到 OpenAI 後台按 **Verify**。DNS 傳播通常在數分鐘內完成，但最長可能需要 24 小時；若第一次驗證失敗，請稍候再重試 **Verify**，不代表設定有誤。
 
 ### 手動設定（Cloudflare Dashboard）
 
@@ -68,8 +68,8 @@ Dashboard → 選擇網域 → **DNS** → **Add record** → 依上表填入即
 ## 3. 驗證與稽核
 
 ```bash
-# 確認 TXT 記錄已生效
-dig +short TXT mrliouword.com @1.1.1.1 | grep openai-domain-verification
+# 確認 TXT 記錄已生效（與完整驗證值逐字比對，避免舊的 dv- 值誤判為通過）
+dig +short TXT mrliouword.com @1.1.1.1 | tr -d '"' | grep -Fx "openai-domain-verification=dv-..."
 ```
 
 依 MRL 工程規範，完成後應在遷移紀錄中將對應項目標記：

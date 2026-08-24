@@ -71,12 +71,15 @@ DL580 是 MRL 定義執行層（Definition Runtime）的**單點**。
 
 ### 3.2 備份政策（3-2-1）
 
-| 項目 | 做法 | 頻率 |
-|------|------|------|
-| 定義與 registry | 推回本倉庫（Git 即異地副本） | 每次變更 |
-| 服務設定 | config-as-code，納入版本控制 | 每次變更 |
-| 資料/模型產物 | 加密快照 → 異地（如 R2 bucket） | 每日 |
-| 復原演練 | 從備份重建最小可用環境 | 每季一次 |
+| 項目 | 副本 1（工作） | 副本 2（Git 異地） | 副本 3（獨立不可變） | 頻率／保留 |
+|------|----------------|---------------------|------------------------|------------|
+| 定義與 registry | DL580 | 本倉庫（GitHub） | R2 版本化 bucket 每日 `git bundle` 匯出 | 每次變更；保留 90 天 |
+| 服務設定 | DL580（config-as-code） | 本倉庫（GitHub） | 同上（隨 bundle 一併匯出） | 每次變更；保留 90 天 |
+| 資料/模型產物 | DL580 | 加密快照 → R2 | 離線硬碟（每月輪替一次） | 每日；保留 90 天 |
+
+- 副本 3 必須與 GitHub、Cloudflare 帳號**憑證隔離**（獨立金鑰或離線媒介）——
+  帳號遭入侵或倉庫被刪時仍可還原。
+- 復原演練：**每季一次，從副本 3 還原**重建最小可用環境並驗證內容完整性。
 
 原則：**3** 份副本、**2** 種媒介、**1** 份異地。未經演練的備份視同不存在。
 
@@ -107,7 +110,7 @@ DL580 離線時，`mrliouhan.ai` 的 Workers 層應：
 
 ## 4. 待辦核對清單
 
-- [ ] Email Routing 建立 support/privacy/legal/security 四個位址
+- [ ] Email Routing 建立 support/privacy/legal/security 四個位址，並各寄一封測試信確認可收（`security@` 收信測試是安全政策生效前提）
 - [ ] `mrliouhan.ai` 加上 SPF `-all` + DMARC reject + 空 DKIM
 - [ ] 刪除 `mrliouhan.ai` 的 `100.78.70.78` A 記錄，改走 Cloudflare Tunnel
 - [ ] 外部 uptime 監控上線（UptimeRobot 或同級）

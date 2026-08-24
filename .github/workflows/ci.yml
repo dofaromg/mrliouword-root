@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ShellCheck all shell scripts
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find . -name '*.sh' -not -path './.git/*')
+          if ((${#files[@]})); then
+            shellcheck -S warning "${files[@]}"
+          else
+            echo "no shell scripts"
+          fi
+
+      - name: JavaScript syntax check
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find . -name '*.js' -not -path './.git/*' -not -path '*/node_modules/*')
+          for f in "${files[@]}"; do
+            node --check "$f"
+          done
+          echo "checked ${#files[@]} file(s)"
+
+      - name: Validate JSON files
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find . -name '*.json' -not -path './.git/*' -not -path '*/node_modules/*')
+          for f in "${files[@]}"; do
+            python3 -m json.tool "$f" > /dev/null || { echo "invalid JSON: $f"; exit 1; }
+          done
+          echo "checked ${#files[@]} file(s)"

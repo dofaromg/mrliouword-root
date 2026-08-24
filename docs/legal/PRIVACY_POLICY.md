@@ -38,7 +38,10 @@ MRL（下稱「本服務」）由 Root Owner（Mr.liou）營運。
 | 服務商 | 用途 | 資料落點 |
 |--------|------|----------|
 | Cloudflare | CDN、DNS、Workers 運算、郵件路由 | 全球節點 |
+| Manus（manus.im） | `mrliouhan.ai` 後端目前部分託管與身份驗證（遷移回自有控制進行中，見 [MRL_PLATFORM_ROUTING.md](../MRL_PLATFORM_ROUTING.md)） | 依供應商政策 |
 | （AI 模型供應商，如有） | 內容生成 | 依供應商政策 |
+
+> 正式發布前，本表須依當時實際使用的處理者名單逐項核實更新。
 
 若使用內容會送交第三方 AI 模型處理，我們會在介面上明確標示。
 
@@ -50,8 +53,11 @@ MRL（下稱「本服務」）由 Root Owner（Mr.liou）營運。
 
 ## 6. 資料安全
 
-傳輸全程使用 TLS 加密；憑證與金鑰由 Root Owner 控制，
-存取採最小權限原則（詳見倉庫 `docs/MRL_CLOUDFLARE_SETUP.md` 的 secrets 政策）。
+傳輸全程使用 TLS 加密，存取採最小權限原則
+（詳見倉庫 `docs/MRL_CLOUDFLARE_SETUP.md` 的 secrets 政策）。
+`mrliouhan.ai` 後端目前部分由第三方託管，憑證與金鑰控制權正依
+[官方平台路由](../MRL_PLATFORM_ROUTING.md) 的遷移計畫收回 Root Owner；
+遷移完成前，該部分依託管方的安全機制。
 
 ## 7. 你的權利
 

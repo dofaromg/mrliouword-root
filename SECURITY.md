@@ -1,5 +1,8 @@
 # 安全政策（Security Policy）
 
+> **生效前提**：`security@mrliouword.com` 信箱須先完成建立、轉寄與收信測試
+> （見 [MRL 營運規範](docs/MRL_OPERATIONS.md) 待辦清單）。信箱啟用前，本政策視為草案。
+
 ## 回報漏洞
 
 若你發現 MRL 服務（`mrliouword.com`、`mrliouhan.ai`）或本倉庫的安全漏洞：

@@ -8,15 +8,23 @@
 ```bash
 cd ops/status-worker
 
-# 1. 建立 KV namespace，把輸出的 id 填入 wrangler.toml
+# 1. 先在 Cloudflare DNS 建立 status.mrliouword.com 的 proxied 記錄
+#    （Dashboard → mrliouword.com → DNS → Add record：
+#     Type AAAA、Name status、Content 100::、Proxy 開啟）
+#    沒有這筆記錄，route 部署後會 ERR_NAME_NOT_RESOLVED。
+
+# 2. 建立 KV namespace，把輸出的 id 填入 wrangler.toml
 npx wrangler kv namespace create STATUS_KV
 
-# 2. 部署（含 cron 與 status.mrliouword.com 路由）
+# 3. 部署（含 cron 與 status.mrliouword.com 路由）
 npx wrangler deploy
 ```
 
-前置需求：`wrangler login`（或 `CLOUDFLARE_API_TOKEN`，權限含 Workers Scripts:Edit、
-Workers KV Storage:Edit、Zone Workers Routes:Edit）。
+前置需求：`wrangler login`，或 `CLOUDFLARE_API_TOKEN`，權限（Cloudflare 正式名稱）：
+
+- Account 範圍：**Workers Scripts: Edit**、**Workers KV Storage: Edit**
+- Zone 範圍（mrliouword.com）：**Workers Routes: Edit**
+- 若使用 account-owned token，對應選 **Write** 權限
 
 ## 端點
 

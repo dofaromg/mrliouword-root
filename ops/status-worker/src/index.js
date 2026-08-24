@@ -2,8 +2,8 @@
 // 部署：wrangler deploy（先在 wrangler.toml 填入 KV namespace id）
 
 const TARGETS = [
-  { id: "frontend", name: "mrliouword.com（前端）", url: "https://mrliouword.com/", timeoutMs: 8000 },
-  { id: "backend", name: "mrliouhan.ai（後端 API）", url: "https://mrliouhan.ai/health", timeoutMs: 8000 },
+  { id: "frontend", name: "mrliouword.com（前端）", url: "https://mrliouword.com/", timeoutMs: 8000, latencyLimitMs: 3000 },
+  { id: "backend", name: "mrliouhan.ai（後端 API）", url: "https://mrliouhan.ai/health", timeoutMs: 8000, latencyLimitMs: 3000, expectJsonStatus: "ok" },
 ];
 
 const HISTORY_LIMIT = 288; // 5 分鐘一筆 × 24 小時
@@ -16,12 +16,28 @@ async function checkTarget(t) {
       signal: AbortSignal.timeout(t.timeoutMs),
       headers: { "user-agent": "mrl-status-worker/1.0" },
     });
-    return {
-      ok: res.status >= 200 && res.status < 400,
-      status: res.status,
-      latencyMs: Date.now() - started,
-      at: new Date().toISOString(),
-    };
+    const latencyMs = Date.now() - started;
+    // 健康契約（見 docs/MRL_OPERATIONS.md 2.1）：恰為 200、延遲低於門檻，
+    // health 端點還須回 JSON 且 status 為 ok —— degraded 回應算檢查失敗
+    let ok = res.status === 200 && latencyMs < (t.latencyLimitMs || 3000);
+    let note;
+    if (ok && t.expectJsonStatus) {
+      try {
+        const body = await res.json();
+        if (!body || body.status !== t.expectJsonStatus) {
+          ok = false;
+          note = "health status is not '" + t.expectJsonStatus + "'";
+        }
+      } catch {
+        ok = false;
+        note = "health response is not valid JSON";
+      }
+    } else if (res.status === 200 && !ok) {
+      note = "latency over " + (t.latencyLimitMs || 3000) + "ms";
+    }
+    const result = { ok, status: res.status, latencyMs, at: new Date().toISOString() };
+    if (note) result.note = note;
+    return result;
   } catch (err) {
     return {
       ok: false,

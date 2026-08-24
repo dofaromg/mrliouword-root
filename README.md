@@ -38,6 +38,9 @@ DL580
 | [隱私權政策（草案）](docs/legal/PRIVACY_POLICY.md) | 對外服務的隱私權政策草案，待法律審閱 |
 | [服務條款（草案）](docs/legal/TERMS_OF_SERVICE.md) | 對外服務的使用條款草案，待法律審閱 |
 | [安全政策](SECURITY.md) | 漏洞回報管道與處理承諾 |
+| [授權條款](LICENSE.md) | 專有授權；商業授權洽 legal@mrliouword.com |
+| [商業化策略](docs/business/MRL_COMMERCIALIZATION.md) | 商業模式、定價、公司/商標/金流方向與 90 天路線圖 |
+| [SLA（草案）](docs/business/MRL_SLA.md) | 付費方案的可用率承諾與服務抵扣 |
 
 ## 目錄定位
 

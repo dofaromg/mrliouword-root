@@ -33,6 +33,11 @@ DL580
 | [MRL 系統定位](docs/SYSTEM_POSITIONING.md) | GitHub 根源層、DL580 定義執行層、後端與前端定位 |
 | [MRL 命名規則](docs/NAMING.md) | `MRL` 前綴、檔案、模組、倉庫、分支與版本規範 |
 | [MRL 官方平台路由](docs/MRL_PLATFORM_ROUTING.md) | `mrliouhan.ai → mrliouword.com` 的官方路由與遷移規則 |
+| [MRL 營運規範](docs/MRL_OPERATIONS.md) | 正式信箱、uptime 監控／status page、DL580 備援與災難復原 |
+| [Cloudflare 連線設定](docs/MRL_CLOUDFLARE_SETUP.md) | API Token 政策與 OpenAI 網域驗證流程 |
+| [隱私權政策（草案）](docs/legal/PRIVACY_POLICY.md) | 對外服務的隱私權政策草案，待法律審閱 |
+| [服務條款（草案）](docs/legal/TERMS_OF_SERVICE.md) | 對外服務的使用條款草案，待法律審閱 |
+| [安全政策](SECURITY.md) | 漏洞回報管道與處理承諾 |
 
 ## 目錄定位
 

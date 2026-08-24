@@ -20,6 +20,12 @@ Copyright (c) 2025–2026 Mr.liou（dofaromg）。保留所有權利。All right
 如需將本著作或其衍生內容用於上述範圍以外之用途（含商業使用、再散布、
 整合至其他產品），請洽：`legal@mrliouword.com`。
 
+## 外部來源材料
+
+本倉庫內登錄於 `registry/MRL_EXTERNAL_NAME_MAP.json` 的外部來源材料，
+**不適用本專有授權**；其權利歸屬與使用條件依各自的原始授權為準，
+MRL 品牌別名僅為內部 canonical 代號，不主張對該等材料之著作權。
+
 ## 免責
 
 本著作按「現狀」提供，不附任何明示或默示擔保。

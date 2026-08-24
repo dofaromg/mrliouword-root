@@ -39,7 +39,10 @@
 | Registry | `MRL_` + 主題 + `_vN` | `MRL_ParticleRegistry_v1.json` |
 | Manifest | `MRL_` + 主題 + `_MANIFEST` | `MRL_DefinitionLayer_MANIFEST.json` |
 | Evidence | `evidence/MRL_...` | `evidence/MRL_Lineage_Report.md` |
-| 外部來源 | `external/<provider>/...` | `external/azure/pipelines-agent/` |
+| 外部來源 | 一律取 `MRL_EXT_` 品牌別名，映射登錄後遷移 | `MRL_EXT_Vision_Spatial3D_v1.ipynb` |
+
+外部材料的完整命名與遷移規則見 [MRL 外部材料命名規則](MRL_EXTERNAL_NAMING.md)；
+唯一權威映射表為 `registry/MRL_EXTERNAL_NAME_MAP.json`。
 
 ## 5. 分支命名
 

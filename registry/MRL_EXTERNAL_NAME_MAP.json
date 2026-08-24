@@ -1,0 +1,83 @@
+{
+  "registry": "MRL_EXTERNAL_NAME_MAP",
+  "version": "1.0.0",
+  "origin_signature": "MrLiouWord",
+  "root_repository": "dofaromg/----2",
+  "updated": "2026-08-24",
+  "entries": [
+    {
+      "canonical_name": "MRL_EXT_Vision_Spatial3D_v1.ipynb",
+      "previous_name": "Spatial_understanding_3d.ipynb",
+      "origin": {
+        "provider": "google-gemini/cookbook",
+        "url": "https://github.com/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb",
+        "license": "Apache-2.0（依原倉庫授權；檔內原始署名與連結保留，不得移除）"
+      },
+      "sha256": "695c2e0d28fe89e1ce42b2e91c793381b5348038c4e2f5996588fdd9497c7520",
+      "ingest_batch": "pre-registry",
+      "migration_status": "migrated",
+      "location": "examples/MRL_EXT_Vision_Spatial3D_v1.ipynb"
+    },
+    {
+      "canonical_name": "MRL_EXT_QC_InputStructure_v1.ipynb",
+      "previous_name": "Input_structure_for_QC_calculations.ipynb",
+      "origin": {
+        "provider": "external-notebook",
+        "url": "",
+        "license": "unverified — 原始授權待確認，確認後回填"
+      },
+      "sha256": "41344d42b607ba0a6e203c33dfe348a286d0eb68755eceba0c4795186ac30cb5",
+      "ingest_batch": "pre-registry",
+      "migration_status": "migrated",
+      "location": "examples/MRL_EXT_QC_InputStructure_v1.ipynb"
+    },
+    {
+      "canonical_name": "MRL_EXT_Tooling_TemplatesPack_v1",
+      "previous_name": "templates-main.zip",
+      "origin": {
+        "provider": "external-source",
+        "url": "",
+        "license": "unverified"
+      },
+      "sha256": "090f26198657975d5d69db1539a029fafdc53d0840a5eb94343de66763273e2a",
+      "ingest_batch": "MRL_INGEST_20260725",
+      "migration_status": "mapped"
+    },
+    {
+      "canonical_name": "MRL_EXT_Legal_TermsOfUseRef_v1",
+      "previous_name": "terms-of-use.pdf",
+      "origin": {
+        "provider": "external-source",
+        "url": "",
+        "license": "unverified"
+      },
+      "sha256": "d3d6b4c3e71874112ee78837614be90a70b6bb65ece6c70de6febb2b009fe84e",
+      "ingest_batch": "MRL_INGEST_20260725",
+      "migration_status": "mapped"
+    },
+    {
+      "canonical_name": "MRL_EXT_Tooling_LinearMcpServer_v1",
+      "previous_name": "linearmcpserver.zip",
+      "origin": {
+        "provider": "external-source",
+        "url": "",
+        "license": "unverified"
+      },
+      "sha256": "ae7d6b9c1a1ce78892f44cbd9ae915681862825b214dbc71e1d5d41a84f937d0",
+      "ingest_batch": "MRL_INGEST_20260725",
+      "migration_status": "mapped"
+    },
+    {
+      "canonical_name": "MRL_EXT_Tooling_ClaudeMem_v1",
+      "previous_name": "claude-mem-main.zip",
+      "origin": {
+        "provider": "external-source",
+        "url": "",
+        "license": "unverified"
+      },
+      "sha256": "09178ad909649872e03bc6613773db7fcf9c7b1b19c526193a008119f1acee13",
+      "ingest_batch": "MRL_INGEST_20260725",
+      "migration_status": "mapped"
+    }
+  ]
+}

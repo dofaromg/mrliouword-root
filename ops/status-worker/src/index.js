@@ -59,8 +59,11 @@ async function readStatus(env) {
       samples: history.length,
     });
   }
-  const overall = services.every((s) => s.up !== false);
-  return { overall: overall ? "operational" : "degraded", services, generatedAt: new Date().toISOString() };
+  // 缺資料不得謊報正常：任一服務 down → degraded；無 down 但有未檢查 → unknown
+  const anyDown = services.some((s) => s.up === false);
+  const anyUnknown = services.some((s) => s.up === null);
+  const overall = anyDown ? "degraded" : anyUnknown ? "unknown" : "operational";
+  return { overall, services, generatedAt: new Date().toISOString() };
 }
 
 function renderHtml(status) {
@@ -73,14 +76,17 @@ function renderHtml(status) {
       return `<tr><td>${dot} ${s.name}</td><td>${state}</td><td>${latency}</td><td>${uptime}</td></tr>`;
     })
     .join("");
-  const banner = status.overall === "operational" ? "✅ 所有系統正常運作" : "⚠️ 部分服務異常";
+  const banner =
+    status.overall === "operational" ? "✅ 所有系統正常運作"
+    : status.overall === "unknown" ? "⏳ 監測初始化中，尚無完整資料"
+    : "⚠️ 部分服務異常";
   return `<!doctype html>
 <html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MRL Status</title>
 <style>
   body{font-family:system-ui,sans-serif;max-width:640px;margin:3rem auto;padding:0 1rem;color:#1a1a1a;background:#fafafa}
-  .banner{padding:1rem;border-radius:8px;background:${status.overall === "operational" ? "#e6f6e6" : "#fdeaea"};font-weight:600}
+  .banner{padding:1rem;border-radius:8px;background:${status.overall === "operational" ? "#e6f6e6" : status.overall === "unknown" ? "#f0f0f0" : "#fdeaea"};font-weight:600}
   table{width:100%;border-collapse:collapse;margin-top:1.5rem}
   th,td{text-align:left;padding:.6rem .4rem;border-bottom:1px solid #e2e2e2}
   footer{margin-top:2rem;font-size:.8rem;color:#777}

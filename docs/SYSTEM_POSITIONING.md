@@ -13,7 +13,7 @@ github.com/dofaromg
 可直接保存與版本化 canonical 檔案的最高位置，為本根源倉庫：
 
 ```text
-dofaromg/----2
+dofaromg/mrliouword-root
 └── main
 ```
 
@@ -23,7 +23,7 @@ dofaromg/----2
 
 ```text
 ROOT / Governance
-  dofaromg/----2@main
+  dofaromg/mrliouword-root@main
   └─ 主權、命名、定義、lineage、官方路由
 
 DEFINITION RUNTIME

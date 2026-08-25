@@ -1,0 +1,18 @@
+{
+  "registry": "MRL_REPOSITORY_MAP",
+  "version": "1.0.0",
+  "origin_signature": "MrLiouWord",
+  "updated": "2026-08-25",
+  "note": "倉庫改名血緣紀錄。依 NAMING 律第 6/7 條,改名須留 previous_name/canonical_name/migration_status/來源。GitHub 對舊名自動 301 轉址,舊連結仍可解析。",
+  "repositories": [
+    {
+      "canonical_name": "dofaromg/mrliouword-root",
+      "previous_name": "dofaromg/----2",
+      "role": "MRL 根源倉庫 / Root Definition Layer",
+      "reason": "----2（全連字號+數字）造成連結/404 問題且對外不專業;改為與官方網域 mrliouword.com 一致之品牌名。",
+      "migration_status": "docs_updated_pending_github_rename",
+      "github_redirect": "GitHub 自動 301：舊 URL github.com/dofaromg/----2 轉址至新名",
+      "history_note": "ingest/2026-07-25 之歷史證據 target_repo 保留舊名（不回溯改寫歷史證據）。"
+    }
+  ]
+}

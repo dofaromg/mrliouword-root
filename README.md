@@ -1,6 +1,6 @@
 # MRL 根源倉庫（MRL Root Repository）
 
-本倉庫 `dofaromg/----2` 為 MRL 系統目前已確認的**根源倉庫**，其 `main` 分支為治理與定義的 single source of truth。
+本倉庫 `dofaromg/mrliouword-root` 為 MRL 系統目前已確認的**根源倉庫**，其 `main` 分支為治理與定義的 single source of truth。
 
 ## ROOT Authority
 

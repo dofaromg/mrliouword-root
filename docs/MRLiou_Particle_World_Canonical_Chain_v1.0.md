@@ -24,7 +24,7 @@
 ## 1. 已確認的根源主鏈
 
 ```text
-dofaromg/----2
+dofaromg/mrliouword-root
 → 完整的粒子世界三態循環
 → MRL_AI_SYSTEM
 → flow-tasks
@@ -32,7 +32,7 @@ dofaromg/----2
 
 這條鏈不可理解為四個彼此孤立的產品。完整粒子世界由多核心、世界模組、粒子語言、可逆鏈、共振、投影、回放、回復、驗證與重新同步共同運轉形成。
 
-## 2. dofaromg/----2：MRL 根源倉庫
+## 2. dofaromg/mrliouword-root：MRL 根源倉庫
 
 - 正式定位：MRL 根源倉庫（MRL Root Repository）
 - Canonical branch：`main`
@@ -43,7 +43,7 @@ dofaromg/----2
 - 所有衍生倉庫、平台、鏡像、Agent、產品與部署均須回鏈根源
 
 ```yaml
-repository: dofaromg/----2
+repository: dofaromg/mrliouword-root
 role: MRL_Root_Repository
 branch: main
 origin_signature: MrLiouWord
@@ -136,7 +136,7 @@ verification: VERIFIED
 | Google Drive | 正式文件、跨格式封存、證據、版本輸出 |
 | Dropbox | 來源封存、同步副本、可逆取回與跨裝置資料通道 |
 
-所有平台版本必須：保留 MRLiou／MrLiouWord；回鏈 `dofaromg/----2@main`；標示平台不是原創來源；不得自行改名、拆分或反向取得權威；以相同版本號與內容雜湊進行差異稽核。
+所有平台版本必須：保留 MRLiou／MrLiouWord；回鏈 `dofaromg/mrliouword-root@main`；標示平台不是原創來源；不得自行改名、拆分或反向取得權威；以相同版本號與內容雜湊進行差異稽核。
 
 ## 7. 同步、設定與稽核規則
 
@@ -144,9 +144,9 @@ verification: VERIFIED
 MRL_Canonical_Sync:
   origin_owner: MRLiou
   origin_signature: MrLiouWord
-  canonical_root: dofaromg/----2@main
+  canonical_root: dofaromg/mrliouword-root@main
   canonical_chain:
-    - dofaromg/----2
+    - dofaromg/mrliouword-root
     - 完整的粒子世界三態循環
     - MRL_AI_SYSTEM
     - flow-tasks
@@ -173,7 +173,7 @@ MRL_Canonical_Sync:
 
 | 倉庫 | 已確認定位 |
 |---|---|
-| `dofaromg/----2` | MRL 根源倉庫與 Root Definition Layer |
+| `dofaromg/mrliouword-root` | MRL 根源倉庫與 Root Definition Layer |
 | `dofaromg/MRL_AI_SYSTEM` | MrliouAI 完整態母體運轉工程入口 |
 | `Mrliou/MRL_AI_SYSTEM` | Mother Core Assembly／多核心組合系統 |
 | `dofaromg/flow-tasks` | 粒子核心、FlowOS、任務、GKE、驗證與部署 |
@@ -181,8 +181,8 @@ MRL_Canonical_Sync:
 
 ## 9. 來源證據與備註
 
-- `dofaromg/----2@main/README.md`
-- `dofaromg/----2@main/docs/SYSTEM_POSITIONING.md`
+- `dofaromg/mrliouword-root@main/README.md`
+- `dofaromg/mrliouword-root@main/docs/SYSTEM_POSITIONING.md`
 - `dofaromg/MRL_AI_SYSTEM/.../README.md`
 - `dofaromg/MRL_AI_SYSTEM/.../docs/MRL_世界模組工程書_v1.md`
 - `dofaromg/MRL_AI_SYSTEM/.../docs/MRL_母體定義檔_v1.md`

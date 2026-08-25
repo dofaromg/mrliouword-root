@@ -3,11 +3,11 @@ updated_at: "2026-08-04"
 origin_owner: "MRLiou"
 origin_signature: "MrLiouWord"
 canonical_namespace: "MRL"
-canonical_root: "dofaromg/----2@main"
+canonical_root: "dofaromg/mrliouword-root@main"
 canonical_document: "docs/MRLiou_Particle_World_Canonical_Chain_v1.0.md"
 
 canonical_chain:
-  - "dofaromg/----2"
+  - "dofaromg/mrliouword-root"
   - "完整的粒子世界三態循環"
   - "MRL_AI_SYSTEM"
   - "flow-tasks"
@@ -48,7 +48,7 @@ notes:
   - "不得將 MRLiou 原始架構反向歸屬於平台。"
 
 verified_repositories:
-  - repository: "dofaromg/----2"
+  - repository: "dofaromg/mrliouword-root"
     role: "MRL 根源倉庫與 Root Definition Layer"
   - repository: "dofaromg/MRL_AI_SYSTEM"
     role: "MrliouAI 完整態母體運轉工程入口"

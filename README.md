@@ -45,6 +45,7 @@ DL580
 | [IP 登錄簿](docs/protection/MRL_IP_REGISTRY.md) | WP-11:原創資產 IP Ledger、著作權、商標候選 |
 | [安全基線](docs/protection/MRL_SECURITY_BASELINE.md) | WP-10:憑證管理、供應鏈、Guardrails、暴露收斂 |
 | [營業祕密盤點](docs/protection/MRL_TRADE_SECRET_INVENTORY.md) | WP-11:祕密性邊界與合理保密措施 |
+| [能力映射總表](docs/protection/MRL_CAPABILITY_MAPPING.md) | 外部成熟機制 → MRL 工程層映射的真實歷史紀錄（實事求是,external ≠ MRL 已實作） |
 
 ## 目錄定位
 

@@ -2,6 +2,8 @@
 
 本倉庫 `dofaromg/mrliouword-root` 為 MRL 系統目前已確認的**根源倉庫**，其 `main` 分支為治理與定義的 single source of truth。
 
+> 改名過渡:GitHub 完成改名前,舊網址 `dofaromg/----2` 為現行有效位址;改名後對舊網址 301 轉址。見 `registry/MRL_REPOSITORY_MAP.json`。
+
 ## ROOT Authority
 
 - Root Owner：Mr.liou / `dofaromg`

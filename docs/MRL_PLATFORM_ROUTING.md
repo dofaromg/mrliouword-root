@@ -2,6 +2,10 @@
 
 ## 1. Canonical Endpoints
 
+> **改名過渡note**：`root_repository` 為改名後的目標名稱。GitHub 完成改名前,
+> 舊網址 `github.com/dofaromg/----2` 為現行有效位址;改名後 GitHub 對舊網址 301
+> 轉址,兩者皆可解析。詳見 `registry/MRL_REPOSITORY_MAP.json`（migration_status）。
+
 ```yaml
 mrl_platform:
   root_repository: https://github.com/dofaromg/mrliouword-root

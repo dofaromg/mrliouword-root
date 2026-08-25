@@ -6,7 +6,10 @@ const TARGETS = [
   { id: "backend", name: "mrliouhan.ai（後端 API）", url: "https://mrliouhan.ai/health", timeoutMs: 8000, latencyLimitMs: 3000, expectJsonStatus: "ok" },
 ];
 
-const HISTORY_LIMIT = 288; // 5 分鐘一筆 × 24 小時
+const HISTORY_LIMIT = 288; // 5 分鐘一筆 × 24 小時（次要上限）
+const INTERVAL_MS = 5 * 60 * 1000; // cron 間隔
+const STALE_MS = 2 * INTERVAL_MS; // 超過此時間未更新即視為 stale（無新證據）
+const WINDOW_MS = 24 * 60 * 60 * 1000; // uptime 計算的滾動視窗
 
 async function checkTarget(t) {
   const started = Date.now();
@@ -16,24 +19,38 @@ async function checkTarget(t) {
       signal: AbortSignal.timeout(t.timeoutMs),
       headers: { "user-agent": "mrl-status-worker/1.0" },
     });
-    const latencyMs = Date.now() - started;
     // 健康契約（見 docs/MRL_OPERATIONS.md 2.1）：恰為 200、延遲低於門檻，
-    // health 端點還須回 JSON 且 status 為 ok —— degraded 回應算檢查失敗
-    let ok = res.status === 200 && latencyMs < (t.latencyLimitMs || 3000);
+    // health 端點還須回 JSON 且 status 為 ok —— degraded 回應算檢查失敗。
+    // 延遲以「完整讀完 body」為準（非 TTFB），故先消費 body 再計時。
+    let ok = res.status === 200;
     let note;
-    if (ok && t.expectJsonStatus) {
-      try {
-        const body = await res.json();
-        if (!body || body.status !== t.expectJsonStatus) {
-          ok = false;
-          note = "health status is not '" + t.expectJsonStatus + "'";
+    let parsed;
+    let bodyErr;
+    try {
+      const text = await res.text();
+      if (t.expectJsonStatus) {
+        try {
+          parsed = JSON.parse(text);
+        } catch {
+          bodyErr = "health response is not valid JSON";
         }
-      } catch {
-        ok = false;
-        note = "health response is not valid JSON";
       }
-    } else if (res.status === 200 && !ok) {
+    } catch (e) {
+      bodyErr = "body read failed: " + String(e);
+    }
+    const latencyMs = Date.now() - started; // 含 body 消費的完整 GET 時間
+    if (ok && latencyMs >= (t.latencyLimitMs || 3000)) {
+      ok = false;
       note = "latency over " + (t.latencyLimitMs || 3000) + "ms";
+    }
+    if (ok && t.expectJsonStatus) {
+      if (bodyErr) {
+        ok = false;
+        note = bodyErr;
+      } else if (!parsed || parsed.status !== t.expectJsonStatus) {
+        ok = false;
+        note = "health status is not '" + t.expectJsonStatus + "'";
+      }
     }
     const result = { ok, status: res.status, latencyMs, at: new Date().toISOString() };
     if (note) result.note = note;
@@ -61,21 +78,30 @@ async function runChecks(env) {
 }
 
 async function readStatus(env) {
+  const now = Date.now();
   const services = [];
   for (const t of TARGETS) {
     const history = JSON.parse((await env.STATUS_KV.get(`history:${t.id}`)) || "[]");
     const latest = history[history.length - 1] || null;
-    const okCount = history.filter((h) => h.ok).length;
+    // uptime 只算滾動 24h 視窗內的樣本，避免用過期資料充數
+    const windowed = history.filter((h) => h.at && now - Date.parse(h.at) <= WINDOW_MS);
+    const okCount = windowed.filter((h) => h.ok).length;
+    // 陳舊判定：最後一筆超過 STALE_MS 未更新 → 視為 unknown（無新證據）
+    const stale = !latest || !latest.at || now - Date.parse(latest.at) > STALE_MS;
+    let up;
+    if (stale) up = null;
+    else up = latest.ok;
     services.push({
       id: t.id,
       name: t.name,
-      up: latest ? latest.ok : null,
+      up,
+      stale,
       latest,
-      uptime24h: history.length ? +(okCount / history.length * 100).toFixed(2) : null,
-      samples: history.length,
+      uptime24h: windowed.length ? +(okCount / windowed.length * 100).toFixed(2) : null,
+      samples: windowed.length,
     });
   }
-  // 缺資料不得謊報正常：任一服務 down → degraded；無 down 但有未檢查 → unknown
+  // 缺資料/陳舊不得謊報正常：任一 down → degraded；無 down 但有 unknown → unknown
   const anyDown = services.some((s) => s.up === false);
   const anyUnknown = services.some((s) => s.up === null);
   const overall = anyDown ? "degraded" : anyUnknown ? "unknown" : "operational";

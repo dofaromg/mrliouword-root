@@ -19,7 +19,7 @@
 |--------|------|----------|
 | **IP Ledger** | 擁有什麼（原創資產） | 本簿 |
 | **Product Ledger** | 販售什麼 | [MRL_COMMERCIALIZATION](../business/MRL_COMMERCIALIZATION.md) |
-| **Commercial Ledger** | 誰取得什麼權利／付了什麼 | 待建（第一個付費客戶時） |
+| **Commercial Ledger** | 誰取得什麼權利／付了什麼 | [MRL_COMMERCIAL_LEDGER](../business/MRL_COMMERCIAL_LEDGER.md)（模板就緒，尚無交易） |
 
 ## 2. 原創資產登錄
 

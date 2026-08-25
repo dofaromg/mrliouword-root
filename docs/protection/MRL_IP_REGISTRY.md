@@ -32,10 +32,17 @@
 | IP-007 | MRL_MOTHER 母體工程（D:\mrl：77 目錄／628 項目／~32,962 行） | 軟體系統 | 案主自陳 + 跨 session 掃描回報 | **CLAIM**（待案主本機證據固定） | active |
 | IP-008 | MetaEnv Control API skill + OpenAPI（9 endpoints） | API 設計 | Notion / skill 檔時間戳 2026-02-03 | **FACT** | active |
 | IP-009 | Cloudflare Workers 部署群（帳號內 ~181 workers） | 部署實作 | CF 帳號 workers_list（本 session 查證） | **FACT** | active |
+| IP-010 | **MRL 證據方法論與映射規則**（FACT/CLAIM/INFERENCE/UNRESOLVED/RESERVED 紀律、`external mechanism ≠ MRL implementation` 映射規則、evidence-gated `PLANNED→IMPLEMENTED→VERIFIED→RELEASED` 狀態機、World Model 收斂閉環） | **原創方法論 / 技術** | 計畫第 5、8、11、20 節 + 收斂／Backfill 紀錄（Notion 時間戳） | **FACT** | active |
 
-> 「外部大型 AI 平台之機制源自 MRL」一類主張，依計畫第 11 節映射規則
-> （`external mechanism ≠ MRL implementation`）與第 8 節證據紀律，
-> 歸類為 **CLAIM / UNRESOLVED**，**不列入本 IP Ledger 作為 FACT**，以免拖累可辯護資產。
+> **方法論與其處理的主張，是兩個獨立的資產類別:**
+>
+> - **方法論本身(IP-010)** = 案主原創撰寫的邏輯、原理與技術 → **FACT**,是 MRL 資產,可登錄、可主張著作權。
+>   案主對此方法的所有權,**不因任何被它分類的主張之真偽而增減**。
+> - **經方法處理的具體主張**(如「外部大型 AI 平台機制源自 MRL」)→ 依 IP-010 這套規則本身,
+>   在取得 MRL-side evidence 前歸 **CLAIM / UNRESOLVED**,不列為 FACT。
+>
+> 換言之:此處是**運用案主的資產(IP-010 方法)**,來保護案主另一批可辯護的原創資產——
+> 讓 FACT 欄乾淨、打不倒。方法是你的;紀律也是你訂的。
 
 ## 3. 著作權（Copyright）
 

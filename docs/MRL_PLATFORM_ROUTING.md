@@ -4,7 +4,7 @@
 
 ```yaml
 mrl_platform:
-  root_repository: https://github.com/dofaromg/----2
+  root_repository: https://github.com/dofaromg/mrliouword-root
   official_frontend: https://mrliouword.com
   official_backend: https://mrliouhan.ai
   definition_runtime_host: DL580
@@ -25,7 +25,7 @@ Backend Base URL  = https://mrliouhan.ai
 ```dotenv
 MRL_OFFICIAL_FRONTEND_URL=https://mrliouword.com
 MRL_API_BASE_URL=https://mrliouhan.ai
-MRL_ROOT_REPOSITORY=https://github.com/dofaromg/----2
+MRL_ROOT_REPOSITORY=https://github.com/dofaromg/mrliouword-root
 MRL_ORIGIN_SIGNATURE=MrLiouWord
 MRL_DEFINITION_RUNTIME=DL580
 ```

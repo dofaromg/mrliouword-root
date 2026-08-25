@@ -5,7 +5,7 @@
 ## 1. Root Owner
 
 - Root Owner：Mr.liou / GitHub `dofaromg`
-- Root Repository：`dofaromg/----2`
+- Root Repository：`dofaromg/mrliouword-root`
 - Origin Signature：`MrLiouWord`
 - Canonical Namespace：`MRL`
 

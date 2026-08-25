@@ -61,7 +61,7 @@
 
 - 新增衍生倉庫格式：`MRL-<用途>` 或 `Mrliou-<用途>`。
 - README 首段必須標明：
-  - `root_repository: dofaromg/----2`
+  - `root_repository: dofaromg/mrliouword-root`
   - `origin_signature: MrLiouWord`
   - `official_frontend: https://mrliouword.com`
   - `official_backend: https://mrliouhan.ai`

@@ -42,6 +42,9 @@ DL580
 | [授權條款](LICENSE.md) | 專有授權；商業授權洽 legal@mrliouword.com |
 | [商業化策略](docs/business/MRL_COMMERCIALIZATION.md) | 商業模式、定價、公司/商標/金流方向與 90 天路線圖 |
 | [SLA（草案）](docs/business/MRL_SLA.md) | 付費方案的可用率承諾與服務抵扣 |
+| [IP 登錄簿](docs/protection/MRL_IP_REGISTRY.md) | WP-11:原創資產 IP Ledger、著作權、商標候選 |
+| [安全基線](docs/protection/MRL_SECURITY_BASELINE.md) | WP-10:憑證管理、供應鏈、Guardrails、暴露收斂 |
+| [營業祕密盤點](docs/protection/MRL_TRADE_SECRET_INVENTORY.md) | WP-11:祕密性邊界與合理保密措施 |
 
 ## 目錄定位
 

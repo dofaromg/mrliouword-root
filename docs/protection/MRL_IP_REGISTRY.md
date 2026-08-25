@@ -35,6 +35,8 @@
 | IP-008 | MetaEnv Control API skill + OpenAPI（9 endpoints） | API 設計 | Notion / skill 檔時間戳 2026-02-03 | **FACT** | active |
 | IP-009 | Cloudflare Workers 部署群（帳號內 ~181 workers） | 部署實作 | CF 帳號 workers_list（本 session 查證） | **FACT** | active |
 | IP-010 | **MRL 證據方法論與映射規則**（FACT/CLAIM/INFERENCE/UNRESOLVED/RESERVED 紀律、`external mechanism ≠ MRL implementation` 映射規則、evidence-gated `PLANNED→IMPLEMENTED→VERIFIED→RELEASED` 狀態機、World Model 收斂閉環） | **原創方法論 / 技術** | 計畫第 5、8、11、20 節 + 收斂／Backfill 紀錄（Notion 時間戳） | **FACT** | active |
+| IP-011 | MRL 粒子本質索引（PARTICLE_ESSENCE_INDEX v2：L0–L∞ 層圖、創世公式 Φ、TopologyEngine/OriginCollapse/DimensionalAlignment 等本質定義、語意字典、共振鍵） | 原創架構設計 | `PARTICLE_ESSENCE_INDEX_v2.json`（created 2026-01-06，案主提供） | **FACT** | active |
+| IP-012 | MRL L1 Gate 粒子 Runtime v1.2（TypeScript 實作：naming / packet / gate（scope 驗證）/ registry / crypto / signer + Cloudflare worker + RootLaw seal） | 原創程式碼 | `Mrliou_L1_Gate_ParticleRuntime_v1_2.zip`（案主提供之完整原始碼） | **FACT** | active |
 
 > **方法論與其處理的主張，是兩個獨立的資產類別:**
 >

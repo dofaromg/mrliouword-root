@@ -1,0 +1,16 @@
+# MRL 根層部署設定(mrliouword-root Cloudflare Workers Build 用)
+# 讓 `npx wrangler deploy` 在專案根目錄 `/` 就能部署 Notion webhook worker,
+# 不必手動把 Cloudflare 專案根目錄改成 workers/notion-webhook。
+#
+# 機密請走 Secrets Store / `npx wrangler secret put`,勿寫在此檔:
+#   NOTION_WEBHOOK_SECRET  Notion 握手給的 verification_token
+#   FORWARD_URL            (可選) 事件轉發目的地
+name = "mrl-notion-webhook"
+main = "workers/notion-webhook/src/index.js"
+compatibility_date = "2026-08-01"
+
+# ── 可選:事件記錄 / 去重 / 死信 KV ──
+# 建立後把 id 填進來並取消註解(用連接器或 `npx wrangler kv namespace create EVENTS_KV`)
+# [[kv_namespaces]]
+# binding = "EVENTS_KV"
+# id = "REPLACE_WITH_KV_ID"

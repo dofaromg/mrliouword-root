@@ -1,0 +1,18 @@
+name = "mrl-notion-webhook"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# ── 可選:事件記錄 KV ──
+# 建立後把 id 填進來並取消註解(用連接器或 `npx wrangler kv namespace create EVENTS_KV`)
+# [[kv_namespaces]]
+# binding = "EVENTS_KV"
+# id = "REPLACE_WITH_KV_ID"
+
+# ── 可選:綁自訂網域路由 ──
+# [[routes]]
+# pattern = "notion-hook.mrliouword.com/*"
+# zone_name = "mrliouword.com"
+
+# 註:機密請用 Secrets Store / `wrangler secret put`，勿寫在此檔:
+#   NOTION_WEBHOOK_SECRET  Notion 握手給的 verification_token
+#   FORWARD_URL            (可選) 事件轉發目的地

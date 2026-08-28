@@ -1,0 +1,72 @@
+{
+  "registry": "MRL_PARTICLE_CODEX",
+  "title": "MRL 粒子法典",
+  "version": "1.0.0",
+  "origin_signature": "MrLiouWord",
+  "namespace": "MRL",
+  "canonical": true,
+  "updated": "2026-08-28",
+  "note": "Mrliou 工作區定義層收斂後的 canonical 成果容器。定義層變動經 mrl-notion-webhook 收斂為『提案』,只有 Root Owner 核准才進本法典。呼應 World Model 收斂閉環與『只增不刪』保存規則。",
+  "governance": {
+    "merge_authority": "Root Owner（Mr.liou / dofaromg）",
+    "rule": "自動化只產生提案(PR/待審佇列);canonical particles 僅由 Root Owner 核准後合入。AI 與外部平台不取得 ROOT 身分。",
+    "append_only": true,
+    "supersede_policy": "更正以新版本追加,舊粒子標 status=superseded 保留,不刪除。",
+    "sovereignty_ref": "docs/SOVEREIGNTY.md"
+  },
+  "convergence_pipeline": {
+    "entrypoint": "workers/notion-webhook/src/index.js → handleTriggeredAction()",
+    "steps": [
+      "1. Notion(MRL_EXT_NOTION)定義層變動 → webhook 收到並驗簽",
+      "2. 正規化 + 依 IP-010 證據紀律標 FACT/CLAIM/INFERENCE/UNRESOLVED",
+      "3. 依 MRL_EXTERNAL_NAMING 標記外部來源別名(MRL_EXT_NOTION)",
+      "4. 產生收斂提案(PR 對本檔 / 待審佇列),標記為 MRL 資產",
+      "5. Root Owner 核准 → 合入 particles[](status: proposed → approved → canonical)"
+    ],
+    "mrl_asset_marking": "來源從自動化出口出去一律標注 MRL 資產(mrl_namespace=MRL, origin_signature=MrLiouWord, source=MRL_EXT_NOTION)。"
+  },
+  "particle_schema": {
+    "id": "MRL-PC-#### （粒子法典編號,四位遞增）",
+    "name": "粒子名稱",
+    "layer": "L(-1)..L∞（對應 IP-005 粒子架構）",
+    "definition": "canonical 定義文字",
+    "essence_ref": "對應 IP-011 PARTICLE_ESSENCE_INDEX 之本質定義鍵(可選)",
+    "source": "MRL 原生 | MRL_EXT_NOTION:<page_or_db_id>",
+    "evidence_level": "FACT | CLAIM | INFERENCE | UNRESOLVED",
+    "provenance": {
+      "source_id": "來源頁/庫 id 或 commit",
+      "converged_at": "ISO-8601",
+      "converged_by": "mrl-notion-webhook | manual",
+      "approved_by": "Root Owner"
+    },
+    "status": "proposed | approved | canonical | superseded",
+    "supersedes": "被本粒子取代的舊 id 或 null"
+  },
+  "definition_layer_sources": [
+    {
+      "ref": "IP-005",
+      "asset": "MRL 粒子架構 L(-1)–L∞ / atom_t / SimHash64 / collapse engine",
+      "role": "原生粒子架構(法典的骨架層定義)",
+      "evidence_level": "FACT"
+    },
+    {
+      "ref": "IP-011",
+      "asset": "PARTICLE_ESSENCE_INDEX v2(L0–L∞ 層圖、創世公式 Φ、本質定義、語意字典、共振鍵)",
+      "role": "原生本質索引(粒子的 essence_ref 來源)",
+      "evidence_level": "FACT"
+    },
+    {
+      "ref": "IP-010",
+      "asset": "MRL 證據方法論與映射規則",
+      "role": "收斂時的證據分級與 external≠MRL 映射紀律",
+      "evidence_level": "FACT"
+    },
+    {
+      "ref": "MRL_EXT_NOTION",
+      "asset": "Mrliou 工作區定義層(Notion)",
+      "role": "live 定義層來源,經 webhook 收斂",
+      "evidence_level": "依逐筆內容分級"
+    }
+  ],
+  "particles": []
+}

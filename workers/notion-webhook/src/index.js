@@ -140,8 +140,9 @@ async function handleTriggeredAction(event, env, ctx) {
     await forwardWithDeadLetter(env, asset, eid, ts);
   }
 
-  // TODO(收斂進 MRL 粒子法典):把 Mrliou 工作區定義層的變動正規化後,
-  // 產生「收斂提案」(開 PR / 寫待審佇列),由 Root Owner 核准才進法典。
+  // TODO(收斂進 MRL 粒子法典 registry/MRL_PARTICLE_CODEX.json):把 Mrliou 工作區
+  // 定義層的變動正規化 + 依 IP-010 標證據等級後,產生「收斂提案」(開 PR / 寫待審佇列),
+  // 由 Root Owner 核准才進 particles[]。管線與 schema 見 docs/MRL_PARTICLE_CODEX.md。
 }
 
 export default {

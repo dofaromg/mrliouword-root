@@ -78,6 +78,19 @@
       "sha256": "09178ad909649872e03bc6613773db7fcf9c7b1b19c526193a008119f1acee13",
       "ingest_batch": "MRL_INGEST_20260725",
       "migration_status": "mapped"
+    },
+    {
+      "canonical_name": "MRL_EXT_NOTION",
+      "previous_name": "Mrliou Notion 工作區（定義層來源）",
+      "origin": {
+        "provider": "notion.so",
+        "url": "",
+        "license": "案主自有工作區內容；外部平台機制不列入 MRL 著作權（見 MRL_CAPABILITY_MAPPING）"
+      },
+      "kind": "source-platform",
+      "role": "工作區定義層來源;經 mrl-notion-webhook 收斂進 MRL_PARTICLE_CODEX",
+      "ingest_batch": "live-webhook",
+      "migration_status": "mapped"
     }
   ]
 }

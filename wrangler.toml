@@ -5,7 +5,7 @@
 # 機密請走 Secrets Store / `npx wrangler secret put`,勿寫在此檔:
 #   NOTION_WEBHOOK_SECRET  Notion 握手給的 verification_token
 #   FORWARD_URL            (可選) 事件轉發目的地
-name = "mrl-notion-webhook"
+name = "mrliouword-root"
 main = "workers/notion-webhook/src/index.js"
 compatibility_date = "2026-08-01"
 

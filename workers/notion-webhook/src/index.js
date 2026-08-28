@@ -21,7 +21,7 @@ const enc = new TextEncoder();
 const MRL = {
   namespace: "MRL",
   origin_signature: "MrLiouWord",
-  emitted_by: "mrl-notion-webhook",
+  emitted_by: "mrliouword-root",
   ext_source: "MRL_EXT_NOTION", // 外部來源 Notion 的 MRL 品牌別名
 };
 
@@ -151,7 +151,7 @@ export default {
 
     if (url.pathname === "/health" && request.method === "GET") {
       return json({
-        service: "mrl-notion-webhook",
+        service: "mrliouword-root",
         mrl_asset: true,
         mrl_namespace: MRL.namespace,
         origin_signature: MRL.origin_signature,

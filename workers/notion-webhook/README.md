@@ -16,10 +16,10 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 
 **已修好:** repo 根目錄現在有一份 `wrangler.toml`,指向本 worker 的原始碼,所以
 `npx wrangler deploy` 在根目錄 `/` 就能部署——**不必再手動改 Cloudflare 專案根目錄**。
-直接重試組建即可,會部署出 `mrl-notion-webhook` 這個 Worker。
+直接重試組建即可,會部署出 `mrliouword-root` 這個 Worker(與 Cloudflare 專案同名)。
 
 > (替代作法)也可把專案 **根目錄** 改成 `workers/notion-webhook`,用這裡的 `wrangler.toml`;
-> 兩份設定的 `name` 都是 `mrl-notion-webhook`,部署到同一個 Worker。
+> 兩份設定的 `name` 都是 `mrliouword-root`(與 Cloudflare 服務同名,消除設定不一致警告),部署到同一個 Worker。
 > 部署後的 Worker 名稱由 `wrangler.toml` 的 `name` 決定。
 
 ## 設定機密(勿寫進程式/勿貼聊天)

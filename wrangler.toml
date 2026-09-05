@@ -9,6 +9,10 @@ name = "mrliouword-root"
 main = "workers/notion-webhook/src/index.js"
 compatibility_date = "2026-08-01"
 
+# 開啟 Workers Logs(存留日誌),方便讀 Notion 握手 token / 除錯
+[observability]
+enabled = true
+
 # ── 可選:事件記錄 / 去重 / 死信 KV ──
 # 建立後把 id 填進來並取消註解(用連接器或 `npx wrangler kv namespace create EVENTS_KV`)
 # [[kv_namespaces]]

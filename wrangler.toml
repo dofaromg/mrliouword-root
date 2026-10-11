@@ -13,8 +13,7 @@ compatibility_date = "2026-08-01"
 [observability]
 enabled = true
 
-# ── 可選:事件記錄 / 去重 / 死信 KV ──
-# 建立後把 id 填進來並取消註解(用連接器或 `npx wrangler kv namespace create EVENTS_KV`)
-# [[kv_namespaces]]
-# binding = "EVENTS_KV"
-# id = "REPLACE_WITH_KV_ID"
+# ── 事件記錄 / 去重 / 死信 / 握手 token 暫存 KV(MRL_EVENTS)──
+[[kv_namespaces]]
+binding = "EVENTS_KV"
+id = "b907464a6f7f47229b844fe95f442e03"

@@ -8,7 +8,8 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 | 路徑 | 說明 |
 |------|------|
 | `POST /notion/webhook` | 接收 Notion 事件(含首次驗證握手) |
-| `GET /health` | 健康 + 設定狀態(secret/kv/forward 是否已設) |
+| `GET /health` | 健康 + 設定狀態(secret/kv/handshake-key/forward 是否已設) |
+| `GET /notion/handshake?k=<MRL_HANDSHAKE_KEY>` | 一次性取出 Notion 握手 token(取出即刪,重放無效) |
 
 ## 部署(用你既有的 `mrliouword-root` 專案)
 
@@ -26,11 +27,14 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 
 1. **建立 Notion integration**(Notion → Settings → Integrations → 新增),取得能存取目標資料庫的權限。
 2. **建立 webhook 訂閱**,URL 指向部署後的 `.../notion/webhook`。
-3. Notion 首次會送一個 `verification_token`:
-   - 本 Worker 會把它印進 **Worker 日誌**(Observability / `wrangler tail`)。
-   - 把它 (a) 貼回 Notion 完成訂閱驗證,並 (b) 設成本 Worker 的機密 **`NOTION_WEBHOOK_SECRET`**(Secrets Store binding 或 `npx wrangler secret put NOTION_WEBHOOK_SECRET`)——這是之後驗證事件簽章的金鑰。
-4. (可選)`FORWARD_URL`:驗證通過的事件要轉發到哪個「動作」端點。
-5. (可選)`EVENTS_KV`:建 KV、填進 `wrangler.toml`,事件會記 30 天。
+3. **先設一把開機金鑰** `MRL_HANDSHAKE_KEY`(你自己隨便產一串長亂數,設進本 Worker 機密)。這把鑰匙只用來安全取出握手 token。
+4. Notion 首次會送一個 `verification_token`。**它就是之後驗簽的 HMAC 金鑰,本 Worker 絕不把它整串印進日誌**(日誌只留遮罩指紋):
+   - Worker 把它存進 KV(10 分鐘後自動消失)。
+   - 你在瀏覽器開 `https://<worker>/notion/handshake?k=<MRL_HANDSHAKE_KEY>` → **只會顯示一次**,顯示後即從 KV 刪除。
+   - 把它 (a) 貼回 Notion 完成訂閱驗證,並 (b) 設成本 Worker 的機密 **`NOTION_WEBHOOK_SECRET`**(Secrets Store binding 或 `npx wrangler secret put NOTION_WEBHOOK_SECRET`)。
+   - 取完可把 `MRL_HANDSHAKE_KEY` 換掉或刪除。
+5. (可選)`FORWARD_URL`:驗證通過的事件要轉發到哪個「動作」端點。
+6. `EVENTS_KV`:已綁 `MRL_EVENTS`(事件記 30 天、去重、死信、握手暫存)。
 
 ## 安全設計
 

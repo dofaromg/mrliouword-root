@@ -2,11 +2,16 @@ name = "mrliouword-root"
 main = "src/index.js"
 compatibility_date = "2026-08-01"
 
-# ── 可選:事件記錄 KV ──
-# 建立後把 id 填進來並取消註解(用連接器或 `npx wrangler kv namespace create EVENTS_KV`)
-# [[kv_namespaces]]
-# binding = "EVENTS_KV"
-# id = "REPLACE_WITH_KV_ID"
+# 開啟 Workers Logs(存留日誌),方便讀 Notion 握手 token / 除錯
+[observability]
+enabled = true
+
+# ── 事件記錄 / 去重 / 死信 / 握手 token 暫存 KV ──
+# 不填 id:由 wrangler 自動佈建(wrangler ≥4.45),部署時在「部署所用的帳號」建立並綁定,
+# 之後的部署會沿用同一個 namespace。這避免在別的帳號手動建 KV 造成 10041 not found。
+# 建好的 id 可在 Cloudflare 儀表板 → 儲存 → KV 查看;要固定下來時再回填 id。
+[[kv_namespaces]]
+binding = "EVENTS_KV"
 
 # ── 可選:綁自訂網域路由 ──
 # [[routes]]

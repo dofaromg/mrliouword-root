@@ -13,7 +13,8 @@
 // 環境變數 / 綁定(都不寫死在程式,見 wrangler.toml / Secrets Store):
 //   NOTION_WEBHOOK_SECRET  Notion 首次握手給的 verification_token(HMAC 簽章金鑰)——放 Secrets Store
 //   FORWARD_URL (可選)     驗證通過的事件要轉發到哪(你的「動作」端點)
-//   EVENTS_KV  (可選)      事件記錄 / 去重 / 死信佇列用 KV(有綁才用,沒有就略過)
+//   EVENTS_KV  (可選)      事件記錄 / 去重 / 死信佇列 / 握手 token 暫存用 KV(有綁才用,沒有就略過)
+//   MRL_HANDSHAKE_KEY      你自設的一次性開機金鑰,用來安全取出 Notion 握手 token——放 Secrets Store
 
 const enc = new TextEncoder();
 
@@ -76,6 +77,18 @@ async function verifySignature(secret, rawBody, header) {
   const provided = header.replace(/^sha256=/i, "").trim().toLowerCase();
   const expected = (await hmacHex(secret, rawBody)).toLowerCase();
   return timingSafeEqual(provided, expected);
+}
+
+// ── Notion 握手 token 的安全處理 ──
+// token 本體就是之後驗簽的 HMAC 金鑰,絕不可整串進日誌(CWE-532)。
+// 作法:日誌只留遮罩指紋;token 存 KV(10 分鐘 TTL),由持有 MRL_HANDSHAKE_KEY 的
+// 操作者透過 GET /notion/handshake 一次性取出,取出即刪、重放無效。
+const HANDSHAKE_KV_KEY = "MRL:handshake:token";
+
+async function fingerprint(value) {
+  const digest = await crypto.subtle.digest("SHA-256", enc.encode(value));
+  const hex = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  return `${value.slice(0, 7)}…(sha256:${hex.slice(0, 8)}, len ${value.length})`;
 }
 
 // 轉發到動作端點,並保存失敗結果(不吞掉)。
@@ -157,7 +170,23 @@ export default {
         origin_signature: MRL.origin_signature,
         secret_configured: !!env.NOTION_WEBHOOK_SECRET,
         kv_bound: !!env.EVENTS_KV,
+        handshake_key_configured: !!env.MRL_HANDSHAKE_KEY,
         forward_configured: !!env.FORWARD_URL,
+      });
+    }
+
+    // 一次性取出握手 token:需 MRL_HANDSHAKE_KEY(你自設的開機金鑰)。取出即刪,重放無效。
+    if (url.pathname === "/notion/handshake" && request.method === "GET") {
+      const key = url.searchParams.get("k") || "";
+      if (!env.MRL_HANDSHAKE_KEY || !env.EVENTS_KV) return json({ ok: false, error: "not found" }, 404);
+      if (!timingSafeEqual(key, env.MRL_HANDSHAKE_KEY)) return json({ ok: false, error: "not found" }, 404);
+      const token = await env.EVENTS_KV.get(HANDSHAKE_KV_KEY);
+      if (!token) return json({ ok: false, error: "no pending handshake token" }, 404);
+      await env.EVENTS_KV.delete(HANDSHAKE_KV_KEY);
+      return json({
+        ok: true,
+        verification_token: token,
+        note: "shown once and now deleted. Paste into Notion, then set as NOTION_WEBHOOK_SECRET.",
       });
     }
 
@@ -169,9 +198,15 @@ export default {
       // 首次驗證握手:Notion 送 { verification_token } 且沒有簽章
       const sig = request.headers.get("x-notion-signature");
       if (body && body.verification_token && !sig) {
-        // 把 token 印進 Worker 日誌,方便你複製去 (a) 在 Notion 完成訂閱 (b) 設進 Secrets Store 當 NOTION_WEBHOOK_SECRET
-        console.log("[notion-webhook] verification_token received — copy it to Notion & set as NOTION_WEBHOOK_SECRET:", body.verification_token);
-        return json({ ok: true, note: "verification_token received; check Worker logs" });
+        const token = String(body.verification_token);
+        // 絕不印整串 token(它就是 HMAC 金鑰);日誌只留遮罩指紋
+        console.log("[notion-webhook] verification_token received:", await fingerprint(token));
+        if (env.EVENTS_KV) {
+          await env.EVENTS_KV.put(HANDSHAKE_KV_KEY, token, { expirationTtl: 600 });
+          return json({ ok: true, note: "verification_token stored; retrieve once via GET /notion/handshake" });
+        }
+        console.warn("[notion-webhook] EVENTS_KV not bound — token not stored; bind KV to enable secure retrieval");
+        return json({ ok: true, note: "verification_token received but not stored (bind EVENTS_KV)" });
       }
 
       // 一般事件:必須驗簽

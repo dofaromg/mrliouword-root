@@ -6,10 +6,12 @@ compatibility_date = "2026-08-01"
 [observability]
 enabled = true
 
-# ── 事件記錄 / 去重 / 死信 / 握手 token 暫存 KV(MRL_EVENTS)──
+# ── 事件記錄 / 去重 / 死信 / 握手 token 暫存 KV ──
+# 不填 id:由 wrangler 自動佈建(wrangler ≥4.45),部署時在「部署所用的帳號」建立並綁定,
+# 之後的部署會沿用同一個 namespace。這避免在別的帳號手動建 KV 造成 10041 not found。
+# 建好的 id 可在 Cloudflare 儀表板 → 儲存 → KV 查看;要固定下來時再回填 id。
 [[kv_namespaces]]
 binding = "EVENTS_KV"
-id = "b907464a6f7f47229b844fe95f442e03"
 
 # ── 可選:綁自訂網域路由 ──
 # [[routes]]

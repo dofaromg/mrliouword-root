@@ -34,7 +34,7 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
    - 把它 (a) 貼回 Notion 完成訂閱驗證,並 (b) 設成本 Worker 的機密 **`NOTION_WEBHOOK_SECRET`**(Secrets Store binding 或 `npx wrangler secret put NOTION_WEBHOOK_SECRET`)。
    - 取完可把 `MRL_HANDSHAKE_KEY` 換掉或刪除。
 5. (可選)`FORWARD_URL`:驗證通過的事件要轉發到哪個「動作」端點。
-6. `EVENTS_KV`:已綁 `MRL_EVENTS`(事件記 30 天、去重、死信、握手暫存)。
+6. `EVENTS_KV`:部署時由 wrangler 自動佈建(id 在 Cloudflare 儀表板 → 儲存 → KV 可查);事件記 30 天、去重、死信、握手暫存。
 
 ## 安全設計
 

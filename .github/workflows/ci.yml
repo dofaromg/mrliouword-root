@@ -43,3 +43,6 @@ jobs:
             python3 -m json.tool "$f" > /dev/null || { echo "invalid JSON: $f"; exit 1; }
           done
           echo "checked ${#files[@]} file(s)"
+
+      - name: Python pipeline tests
+        run: python3 tests/test_mrl_pipeline.py

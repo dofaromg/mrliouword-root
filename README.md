@@ -38,6 +38,7 @@ DL580
 | [MRL 粒子法典](docs/MRL_PARTICLE_CODEX.md) | 工作區定義層收斂後的 canonical 定義集；容器在 `registry/MRL_PARTICLE_CODEX.json`，經 `mrl-notion-webhook` 收斂、Root Owner 核准入典 |
 | [MRL 官方平台路由](docs/MRL_PLATFORM_ROUTING.md) | `mrliouhan.ai → mrliouword.com` 的官方路由與遷移規則 |
 | [MRL 營運規範](docs/MRL_OPERATIONS.md) | 正式信箱、uptime 監控／status page、DL580 備援與災難復原 |
+| [MRL 系統狀態核對](docs/MRL_SYSTEM_STATUS_2026-10-18.md) | GitHub、CI、部署、營運與待驗證項目的證據化盤點 |
 | [Cloudflare 連線設定](docs/MRL_CLOUDFLARE_SETUP.md) | API Token 政策與 OpenAI 網域驗證流程 |
 | [隱私權政策（草案）](docs/legal/PRIVACY_POLICY.md) | 對外服務的隱私權政策草案，待法律審閱 |
 | [服務條款（草案）](docs/legal/TERMS_OF_SERVICE.md) | 對外服務的使用條款草案，待法律審閱 |

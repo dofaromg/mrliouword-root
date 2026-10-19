@@ -31,7 +31,7 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 4. Notion 首次會送一個 `verification_token`。**它就是之後驗簽的 HMAC 金鑰,本 Worker 絕不把它整串印進日誌**(日誌只留遮罩指紋):
    - Worker 把它存進 KV(10 分鐘後自動消失)。
    - 你在瀏覽器開 `https://<worker>/notion/handshake?k=<MRL_HANDSHAKE_KEY>` → **只會顯示一次**,顯示後即從 KV 刪除。
-   - 把它 (a) 貼回 Notion 完成訂閱驗證,並 (b) 設成本 Worker 的機密 **`NOTION_WEBHOOK_SECRET`**(Secrets Store binding 或 `npx wrangler secret put NOTION_WEBHOOK_SECRET`)。
+   - 把它貼回 Notion 完成訂閱驗證。**取出的同時它已自動設為驗簽金鑰(存於 KV),不必再手動設機密。**(可選加嚴:另設 Secrets Store 機密 `NOTION_WEBHOOK_SECRET`,有設會優先。)
    - 取完可把 `MRL_HANDSHAKE_KEY` 換掉或刪除。
 5. (可選)`FORWARD_URL`:驗證通過的事件要轉發到哪個「動作」端點。
 6. `EVENTS_KV`:部署時由 wrangler 自動佈建(id 在 Cloudflare 儀表板 → 儲存 → KV 可查);事件記 30 天、去重、死信、握手暫存。

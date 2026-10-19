@@ -1,0 +1,29 @@
+name: MRL health probe
+
+# 從 GitHub 的網路讀 worker 的 /health(公開端點,只回布林值,不含任何機密),
+# 讓維護者/代理不必人工開網址截圖就能看到部署狀態。
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["workers/**", "wrangler.toml"]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe /health
+        run: |
+          set -euo pipefail
+          url="https://mrliouword-root.z814241.workers.dev/health"
+          for i in 1 2 3 4 5 6; do
+            if out=$(curl -sS --max-time 15 "$url"); then
+              echo "$out" | python3 -m json.tool
+              exit 0
+            fi
+            echo "attempt $i failed; retrying in 10s"; sleep 10
+          done
+          echo "health endpoint unreachable"; exit 1

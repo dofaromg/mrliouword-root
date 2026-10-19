@@ -11,7 +11,7 @@
 //   外部來源(Notion)一律轉 MRL_EXT_ 品牌別名(見 docs/MRL_EXTERNAL_NAMING.md)。
 //
 // 環境變數 / 綁定(都不寫死在程式,見 wrangler.toml / Secrets Store):
-//   NOTION_WEBHOOK_SECRET  Notion 首次握手給的 verification_token(HMAC 簽章金鑰)——放 Secrets Store
+//   NOTION_WEBHOOK_SECRET  (可選)驗簽金鑰;未設時使用握手取出時自動存進 KV 的 token——設在 Secrets Store 會優先
 //   FORWARD_URL (可選)     驗證通過的事件要轉發到哪(你的「動作」端點)
 //   EVENTS_KV  (可選)      事件記錄 / 去重 / 死信佇列 / 握手 token 暫存用 KV(有綁才用,沒有就略過)
 //   MRL_HANDSHAKE_KEY      你自設的一次性開機金鑰,用來安全取出 Notion 握手 token——放 Secrets Store
@@ -84,6 +84,14 @@ async function verifySignature(secret, rawBody, header) {
 // 作法:日誌只留遮罩指紋;token 存 KV(10 分鐘 TTL),由持有 MRL_HANDSHAKE_KEY 的
 // 操作者透過 GET /notion/handshake 一次性取出,取出即刪、重放無效。
 const HANDSHAKE_KV_KEY = "MRL:handshake:token";
+// 驗簽金鑰:優先 Secrets Store(NOTION_WEBHOOK_SECRET);未設時退回 KV 中「操作者持金鑰取出時」寫入的 token。
+// 只在持 MRL_HANDSHAKE_KEY 的一次性取出時才寫入,未經授權的假握手 POST 無法覆蓋驗簽金鑰。
+const SIGNING_KV_KEY = "MRL:notion:signing_secret";
+async function getSigningSecret(env) {
+  if (env.NOTION_WEBHOOK_SECRET) return env.NOTION_WEBHOOK_SECRET;
+  if (env.EVENTS_KV) return (await env.EVENTS_KV.get(SIGNING_KV_KEY)) || "";
+  return "";
+}
 
 async function fingerprint(value) {
   const digest = await crypto.subtle.digest("SHA-256", enc.encode(value));
@@ -163,12 +171,14 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/health" && request.method === "GET") {
+      const signingSecret = await getSigningSecret(env);
       return json({
         service: "mrliouword-root",
         mrl_asset: true,
         mrl_namespace: MRL.namespace,
         origin_signature: MRL.origin_signature,
-        secret_configured: !!env.NOTION_WEBHOOK_SECRET,
+        secret_configured: !!signingSecret,
+        signing_secret_source: env.NOTION_WEBHOOK_SECRET ? "secrets_store" : (signingSecret ? "kv" : "none"),
         kv_bound: !!env.EVENTS_KV,
         handshake_key_configured: !!env.MRL_HANDSHAKE_KEY,
         forward_configured: !!env.FORWARD_URL,
@@ -183,10 +193,12 @@ export default {
       const token = await env.EVENTS_KV.get(HANDSHAKE_KV_KEY);
       if (!token) return json({ ok: false, error: "no pending handshake token" }, 404);
       await env.EVENTS_KV.delete(HANDSHAKE_KV_KEY);
+      // 操作者已以開機金鑰授權取出 → 同時把它設為驗簽金鑰(不必再手動設機密)
+      await env.EVENTS_KV.put(SIGNING_KV_KEY, token);
       return json({
         ok: true,
         verification_token: token,
-        note: "shown once and now deleted. Paste into Notion, then set as NOTION_WEBHOOK_SECRET.",
+        note: "shown once and now deleted. Paste into Notion. It is now the signing secret (stored in KV); setting NOTION_WEBHOOK_SECRET in Secrets Store is optional and takes precedence.",
       });
     }
 
@@ -210,7 +222,8 @@ export default {
       }
 
       // 一般事件:必須驗簽
-      const valid = await verifySignature(env.NOTION_WEBHOOK_SECRET, raw, sig);
+      const signingSecret = await getSigningSecret(env);
+      const valid = await verifySignature(signingSecret, raw, sig);
       if (!valid) {
         return json({ ok: false, error: "invalid signature" }, 401);
       }

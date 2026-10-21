@@ -45,4 +45,7 @@ jobs:
           echo "checked ${#files[@]} file(s)"
 
       - name: Python pipeline tests
-        run: python3 tests/test_mrl_pipeline.py
+        run: |
+          python3 tests/test_mrl_pipeline.py
+          python3 tests/test_mrl_language.py
+          python3 tests/test_mrl_runtime.py

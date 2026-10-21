@@ -37,6 +37,8 @@
 | IP-010 | **MRL 證據方法論與映射規則**（FACT/CLAIM/INFERENCE/UNRESOLVED/RESERVED 紀律、`external mechanism ≠ MRL implementation` 映射規則、evidence-gated `PLANNED→IMPLEMENTED→VERIFIED→RELEASED` 狀態機、World Model 收斂閉環） | **原創方法論 / 技術** | 計畫第 5、8、11、20 節 + 收斂／Backfill 紀錄（Notion 時間戳） | **FACT** | active |
 | IP-011 | MRL 粒子本質索引（PARTICLE_ESSENCE_INDEX v2：L0–L∞ 層圖、創世公式 Φ、TopologyEngine/OriginCollapse/DimensionalAlignment 等本質定義、語意字典、共振鍵） | 原創架構設計 | `PARTICLE_ESSENCE_INDEX_v2.json`（created 2026-01-06，案主提供） | **FACT** | active |
 | IP-012 | MRL L1 Gate 粒子 Runtime v1.2（TypeScript 實作：naming / packet / gate（scope 驗證）/ registry / crypto / signer + Cloudflare worker + RootLaw seal） | 原創程式碼 | `Mrliou_L1_Gate_ParticleRuntime_v1_2.zip`（案主提供之完整原始碼） | **FACT** | active |
+| IP-013 | **MR.LIOU 粒子宇宙 · 私人伺服器網站架構藍圖 v1.0**(L∞ 哲學根基/莫比斯環、L0 Seed→Persona 結構、L1 FlowAgent 模組宇宙、L2 架構連線圖 v2k7、L7 3D 粒子層;附硬體/部署路線圖/iOS 工作流) | 原創架構著作 | docx `dcterms:created 2026-02-10T02:00Z`;sha256 `b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20`(`ingest/2026-10-21/MANIFEST.json`);原檔含個人地理資訊,由案主持有、**不入公開庫**;去識別大綱見 `ingest/2026-10-21/extracts/` | **FACT** | active |
+| IP-014 | **MRL 可逆核心／吸收層 形式化**(M = R ⊎ A、route ρ / lift λ、Ĥ = λ∘H∘ρ、強/弱 🔄 與不可能性、Φ 單拍閉環、Their := H ∈ End(A)、堆疊不刪除、U/G/V 載體綁定與 Merkle 稽核;約 240 節) | 原創方法論 / 符號化形式系統 | docx sha256 `f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f`;無 `core.xml`(創作日期**待找回**);全文**不入公開庫**(營業祕密候選,待案主決定);章節骨架見 `ingest/2026-10-21/extracts/` | **FACT**(檔案存在、內容已逐節核對) | active |
 
 > **方法論與其處理的主張，是兩個獨立的資產類別:**
 >
@@ -47,6 +49,17 @@
 >
 > 換言之:此處是**運用案主的資產(IP-010 方法)**,來保護案主另一批可辯護的原創資產——
 > 讓 FACT 欄乾淨、打不倒。方法是你的;紀律也是你訂的。
+
+### 2.1 證據補充(2026-10-21 入庫批次 `MRL_INGEST_20261021`)
+
+| 資產 | 證據補充 |
+|------|----------|
+| IP-011 | 本質索引 v2 原檔兩份上傳**位元組相同**,sha256 `1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870`;原封保存於 `ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json`;13 則 essence 已機械收斂為法典粒子 `MRL-PC-0001`–`0013`。 |
+| IP-012 | L1 Gate 粒子 Runtime 四個版本:1.1.0 `bfb241824ee2dec4500f1239f6ef40a060c9ecd241fc5578bf2ff5976c34efa5`;1.2.0 `67b1a468e07f07219c896f8d610b51ab26d821f21ff79d78afd810a36729ef31`;1.3.0 `2e2a55980b642e774db6a3655eb8b431fa2ef0ff6266d58be45569e1d46c46ed`;1.2.2(2026-06-13)`67b087e51ed68e6cf405e8dd3c9038b9efee08a92090e74ff8e60582c27ed4e1`。血緣 `1.1.0 → 1.2.0 → {1.3.0 ; 1.2.2}`(並行分支,待合流)。原始碼依作者指示私有封存、不入公開庫;定義性萃取收斂為 `MRL-PC-0014`–`0020`。 |
+| IP-013 | 本體層定義收斂為 `MRL-PC-0021`–`0025`(layer_scheme `blueprint_v1.0`,與本質索引分層**未調和**,見法典 `unresolved` UNR-001)。 |
+| IP-014 | 定義骨架收斂為 `MRL-PC-0026`–`0031`(layer `META`,scheme `formal_core`)。 |
+
+> 以上為**只增不改**:原列 IP-011/IP-012 之內容保留,補充以本節追加。
 
 ## 3. 著作權（Copyright）
 

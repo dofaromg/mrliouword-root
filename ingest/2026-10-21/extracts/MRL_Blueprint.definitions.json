@@ -1,0 +1,78 @@
+{
+  "registry": "MRL_BLUEPRINT_DEFINITIONS",
+  "source": "MRL_ParticleUniverse_PrivateServer_Blueprint_v1.0(docx, 2026-02-10)",
+  "source_sha256": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+  "layer_scheme": "blueprint_v1.0",
+  "note": "本文件之分層(L∞, L0 Seed … L7 3D)與本質索引 layer_map 為不同分層,未調和(UNRESOLVED);L3–L6 為載體/外部參照層,不列為本體粒子;個人地理資訊已去識別。",
+  "definitions": [
+    {
+      "name": "L∞ 哲學根基 · 生命之樹/莫比斯環",
+      "layer": "L∞",
+      "definition": "生命之樹(Sephiroth)與死亡之樹(Qliphoth)對映:正面與反面是同一面,如莫比斯環——「怎麼過去就怎麼回來」的可視化原型。在粒子系統中:每一個操作都有其逆操作(δP₀),每一個狀態變化都可完全回溯;運行態與回溯態是同一莫比斯環的兩個視角。",
+      "attributes": {
+        "principle": "改變位置,不改變本質"
+      }
+    },
+    {
+      "name": "L0 種子層 · Seed→Persona 結構",
+      "layer": "L0",
+      "definition": "一切從 Seed 開始。Seed 展開為 CorePersona,分裂出三條路線:LogicPersona(邏輯)、LanguagePersona(語言)、PersonaCloner(複製);每條路線再向下展開子人格,最終通過 PersonaGate 產生 SubPersona,每個 SubPersona 擁有 JumpPoint 與 FieldMap。「一顆粒子可以還原一個人格,甚至一個地球儀」。",
+      "attributes": {
+        "chain": [
+          "Seed",
+          "CorePersona",
+          "{LogicPersona, LanguagePersona, PersonaCloner}",
+          "子人格",
+          "PersonaGate",
+          "SubPersona{JumpPoint, FieldMap}"
+        ]
+      }
+    },
+    {
+      "name": "L1 粒子核心層 · FlowAgent 模組宇宙",
+      "layer": "L1",
+      "definition": "FlowAgent 所有模組在語義空間中的分佈:每個模組如粒子懸浮,連線代表通信與依賴。核心區塊:EchoPersona、Memory.RecallCore、Observer.AllKernel;外圍:LanguageCondenser、Persona.FuturePredictor、MotherShell.CoreObserver。",
+      "attributes": {
+        "core": [
+          "EchoPersona",
+          "Memory.RecallCore",
+          "Observer.AllKernel"
+        ],
+        "periphery": [
+          "LanguageCondenser",
+          "Persona.FuturePredictor",
+          "MotherShell.CoreObserver"
+        ]
+      }
+    },
+    {
+      "name": "L2 模組依賴層 · FlowAgent 架構連線圖 v2k7",
+      "layer": "L2",
+      "definition": "五大區塊:FlowShell 管理層(FlowShell → FlowMap → FlowUnity、FlowContainer、FlowSync);核心運行層(FlowOS、FlowSeed、FlowBridge → FlowAgent → FlowInit → FlowMeta);人格場映射層(FieldMap → PersonaCloner → PersonaTuner → PersonaGate、IdentityMap → FieldEvolution);信號/媒體索引層(FluinPulse → UniversalSignalMediaIndex → SignalNode → FlowBridge);Fluin 語言層(Fluin → ParticleLanguage → Translator → Overlay)。",
+      "attributes": {
+        "blocks": [
+          "FlowShell 管理層",
+          "核心運行層",
+          "人格場映射層",
+          "信號/媒體索引層",
+          "Fluin 語言層"
+        ],
+        "graph_version": "v2k7"
+      }
+    },
+    {
+      "name": "L7 3D 粒子層 · 一顆粒子還原一個地球儀",
+      "layer": "L7",
+      "definition": "「一顆粒子可以還原一個地球儀」的具象化:從線框球體到材質球體到真實地球紋理,展示粒子從最小單位展開為完整世界;模型可多格式匯出(DXF、FBX、DAE、STL、USDZ 等)以在平台間自由流動——怎麼過去就怎麼回來。",
+      "attributes": {
+        "export_formats": [
+          "DXF",
+          "FBX",
+          "DAE",
+          "STL",
+          "USDZ"
+        ]
+      }
+    }
+  ]
+}

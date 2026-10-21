@@ -36,6 +36,7 @@ DL580
 | [MRL 命名規則](docs/NAMING.md) | `MRL` 前綴、檔案、模組、倉庫、分支與版本規範 |
 | [MRL 外部材料命名規則](docs/MRL_EXTERNAL_NAMING.md) | 外部來源一律轉 `MRL_EXT_` 品牌別名；映射表在 `registry/MRL_EXTERNAL_NAME_MAP.json` |
 | [MRL 粒子法典](docs/MRL_PARTICLE_CODEX.md) | 工作區定義層收斂後的 canonical 定義集；容器在 `registry/MRL_PARTICLE_CODEX.json`，經 `mrl-notion-webhook` 收斂、Root Owner 核准入典 |
+| [MRL 粒子語言模組](docs/MRL_PARTICLE_LANGUAGE.md) | 三世界粒子循環的可執行封包與可逆狀態轉換基礎 |
 | [MRL 官方平台路由](docs/MRL_PLATFORM_ROUTING.md) | `mrliouhan.ai → mrliouword.com` 的官方路由與遷移規則 |
 | [MRL 營運規範](docs/MRL_OPERATIONS.md) | 正式信箱、uptime 監控／status page、DL580 備援與災難復原 |
 | [MRL 系統狀態核對](docs/MRL_SYSTEM_STATUS_2026-10-18.md) | GitHub、CI、部署、營運與待驗證項目的證據化盤點 |

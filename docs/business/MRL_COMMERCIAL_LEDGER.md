@@ -103,7 +103,7 @@ Schema:
 
 第一筆交易發生前需先完成:
 - [ ] gateway 用量計量落地（否則 Usage/Revenue 無法舉證）
-- [ ] 金流商串接（建議先 MoR：Paddle / Lemon Squeezy）
+- [ ] 金流商串接 → **2026-10-21 更新**:Stripe(Mrliouword, LLC)帳戶已 live、收帳入口已建(§9);「建議先 MoR」已取代。仍待:綁撥款銀行、webhook 密鑰、測試投遞(§9.5)
 - [ ] ToS / SLA / Privacy 經律師審後正式發布並版本化
 - [ ] 定價頁上線
 
@@ -158,6 +158,6 @@ Schema:
 
 1. **綁撥款銀行帳戶**:Stripe 儀表板 → 設定 → 銀行帳戶與排程 → 新增 LLC 可收 USD 的帳戶(美國銀行或支援 USD 的台灣外幣帳戶,依 Stripe 支援清單),並決定撥款排程(目前 manual)。沒有這步,收到的錢只會停在 Stripe 餘額。
 2. **清掉逾期要求**:補代表人美國地址,或改由符合條件者擔任代表人(Atlas 客戶可洽 Stripe 支援)。
-3. **接上收帳入口**:Stripe → Developers → Webhooks → 新增端點 `…/stripe/webhook`、勾第 9.3 節七個事件 → 端點簽章密鑰放進 Worker 機密 `STRIPE_WEBHOOK_SECRET`(值進金庫,名字進程式;不貼聊天)。`GET /health` 的 `stripe_webhook_configured: true` 即完成。
+3. **接上收帳入口**:Stripe → Developers → Webhooks → 新增端點 `…/stripe/webhook`、勾第 9.3 節七個事件 → 端點簽章密鑰放進 Worker 機密 `STRIPE_WEBHOOK_SECRET`(值進金庫,名字進程式;不貼聊天)。`GET /health` 的 `stripe_webhook_configured: true` **只代表密鑰已設,不代表 Stripe 會送事件過來**;完成的判準是:在 Stripe 該端點頁按「傳送測試事件」(`checkout.session.completed`)回 200,且 `GET /ledger/payments`(帶 `Authorization: Bearer <MRL_HANDSHAKE_KEY>`)看得到對應登錄。
 
 完成 1–3 後,第一筆付款會自動出現在 `GET /ledger/payments`,並依第 8 節規則同步補登第 4/5 節表格。

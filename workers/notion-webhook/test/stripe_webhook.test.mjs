@@ -127,6 +127,26 @@ test("POST /stripe/webhook: 503 without secret, 400 bad signature, 200 + ledger 
   const page = await r.json();
   assert.equal(page.count, 1);
   assert.equal(page.entries[0].entry.Order_ID, "cs_live_1");
+  // 標頭優先:Bearer 正確 → 200;Bearer 錯誤即使 ?k= 正確也 404(標頭存在時不退回查詢字串)
+  r = await worker.fetch(new Request("https://x/ledger/payments", { headers: { authorization: "Bearer op-key" } }), env, ctx);
+  assert.equal(r.status, 200);
+  r = await worker.fetch(new Request("https://x/ledger/payments?k=op-key", { headers: { authorization: "Bearer nope" } }), env, ctx);
+  assert.equal(r.status, 404);
+});
+
+test("POST /stripe/webhook: ledger write failure leaves no dedup key, so Stripe's retry still records", async () => {
+  const kv = new MemKV();
+  let failNext = true;
+  const realPut = kv.put.bind(kv);
+  kv.put = async (k, v, o) => { if (failNext && k.startsWith("MRL:ledger:payment:")) { failNext = false; throw new Error("kv transient"); } return realPut(k, v, o); };
+  const env = { EVENTS_KV: kv, STRIPE_WEBHOOK_SECRET: SECRET };
+  const body = JSON.stringify(checkoutEvent("evt_retry"));
+  await assert.rejects(worker.fetch(post("/stripe/webhook", body, { "stripe-signature": sign(body) }), env, ctx));
+  assert.equal(await kv.get("MRL:dedup:stripe:evt_retry"), null);
+  const r = await worker.fetch(post("/stripe/webhook", body, { "stripe-signature": sign(body) }), env, ctx);
+  assert.deepEqual(await r.json(), { ok: true, duplicate: false, recorded: true, status: "paid" });
+  assert.ok(await kv.get("MRL:ledger:payment:pi_1:evt_retry"));
+  assert.ok(await kv.get("MRL:dedup:stripe:evt_retry"));
 });
 
 test("GET /health reports stripe_webhook_configured", async () => {

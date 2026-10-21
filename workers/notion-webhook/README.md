@@ -69,11 +69,11 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 | 路徑 | 說明 |
 |------|------|
 | `POST /stripe/webhook` | 接收 Stripe 事件,驗 `Stripe-Signature`(HMAC-SHA256、±300 秒防重放)後**同步**寫入帳本;未設 `STRIPE_WEBHOOK_SECRET` 回 503、驗簽失敗回 400、KV 寫入失敗回 5xx 讓 Stripe 重送 |
-| `GET /ledger/payments?k=<MRL_HANDSHAKE_KEY>` | 操作者讀取帳本登錄(每頁 100 筆,`?cursor=` 續頁) |
+| `GET /ledger/payments` | 操作者讀取帳本登錄,金鑰走標頭 `Authorization: Bearer <MRL_HANDSHAKE_KEY>`(`?k=` 只保留給瀏覽器手動操作,會進存取日誌,不建議);每頁 100 筆,`?cursor=` 續頁 |
 
 - **登錄哪些事件**:`checkout.session.completed / async_payment_succeeded / async_payment_failed`、`invoice.paid / payment_failed`、`charge.refunded`、`charge.dispute.created`;其他事件只留 30 天事件紀錄(`MRL:evt:stripe:*`),不進帳本。
 - **KV key**:`MRL:ledger:payment:<Payment_ID>:<event_id>`,**永久保存、每事件一 key、不覆寫**(帳本只增不刪);去重鍵 `MRL:dedup:stripe:<event_id>`。
 - **登錄內容**:`Order_ID / Payment_ID / Customer_ID / amount / currency / status(paid|pending|failed|refunded|disputed) / processor=stripe / refs / evidence(event id・type・created・livemode)`,外包 MRL 資產信封(`source=MRL_EXT_STRIPE`)。
 - **最小蒐集**:不存 email 原文,只存不可逆指紋 `email_fp`;客戶細節留在 Stripe。
-- **設定**:Stripe 儀表板 → Developers → Webhooks → 新增端點 `https://mrliouword-root.<子網域>.workers.dev/stripe/webhook`、勾上列事件 → 把端點的簽章密鑰放進本 Worker 機密 `STRIPE_WEBHOOK_SECRET`(勿貼聊天、勿進 repo)。`GET /health` 的 `stripe_webhook_configured` 轉 `true` 即生效。
+- **設定**:Stripe 儀表板 → Developers → Webhooks → 新增端點 `https://mrliouword-root.<子網域>.workers.dev/stripe/webhook`、勾上列事件 → 把端點的簽章密鑰放進本 Worker 機密 `STRIPE_WEBHOOK_SECRET`(勿貼聊天、勿進 repo)。`GET /health` 的 `stripe_webhook_configured` 轉 `true` 只代表密鑰已設;**接通的判準**是 Stripe 端點頁「傳送測試事件」回 200,且 `GET /ledger/payments` 看得到對應登錄。
 - **測試**:`node --test workers/notion-webhook/test/*.test.mjs`(CI 同步跑)。

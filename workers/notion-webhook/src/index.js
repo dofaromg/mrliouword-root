@@ -6,7 +6,7 @@
 //   POST /notion/webhook     接收 Notion 事件(含首次驗證握手)
 //   GET  /notion/handshake   一次性取出 Notion 握手 token(需 MRL_HANDSHAKE_KEY)
 //   POST /stripe/webhook     接收 Stripe 事件 → 驗簽 → 商業帳本登錄(docs/business/MRL_COMMERCIAL_LEDGER.md §4)
-//   GET  /ledger/payments    操作者讀取帳本登錄(需 MRL_HANDSHAKE_KEY)
+//   GET  /ledger/payments    操作者讀取帳本登錄(需 MRL_HANDSHAKE_KEY,走 Authorization: Bearer 標頭)
 //   GET  /health             健康 + 設定狀態
 //
 // MRL 資產標記原則(治理):
@@ -133,9 +133,11 @@ async function fingerprint(value) {
   return `${value.slice(0, 7)}…(sha256:${hex.slice(0, 8)}, len ${value.length})`;
 }
 
-// 操作者金鑰檢查(MRL_HANDSHAKE_KEY):查詢字串 ?k=;常數時間比較;未設或不符一律 404(不洩漏端點存在)。
-function operatorAuthorized(url, env) {
-  const key = url.searchParams.get("k") || "";
+// 操作者金鑰檢查(MRL_HANDSHAKE_KEY):優先 `Authorization: Bearer <key>` 標頭(不進存取日誌 / 瀏覽紀錄 / Referer);
+// 查詢字串 ?k= 只保留給瀏覽器手動操作的退路。常數時間比較;未設或不符一律 404(不洩漏端點存在)。
+function operatorAuthorized(url, env, request) {
+  const auth = request?.headers?.get("authorization") || "";
+  const key = /^bearer\s+/i.test(auth) ? auth.replace(/^bearer\s+/i, "").trim() : (url.searchParams.get("k") || "");
   return !!env.MRL_HANDSHAKE_KEY && timingSafeEqual(key, env.MRL_HANDSHAKE_KEY);
 }
 
@@ -294,14 +296,14 @@ async function ledgerEntryFromEvent(event) {
   return base;
 }
 
-// 收帳處理:去重 → 正規化 → 寫入 KV(同步完成;失敗讓 Stripe 重送,帳本不能漏)。
+// 收帳處理:查重 → 正規化 → 寫入 KV → 最後才寫去重鍵(同步完成;失敗讓 Stripe 重送,帳本不能漏)。
+// 去重鍵一定在帳本 / 事件紀錄寫成功之後才寫:若先寫去重鍵、帳本寫入失敗,Stripe 重送會被當重複吞掉,那筆付款就永遠漏帳。
+// 帳本 key 含 event id,部分失敗後的重送會寫到同一把 key、同樣內容,所以晚寫去重鍵不會造成重複登錄。
 async function handleStripeEvent(event, env) {
   const eid = event?.id || "unknown";
-  if (env.EVENTS_KV && eid !== "unknown") {
-    const dedupK = kvKey("dedup:stripe", eid);
-    if (await env.EVENTS_KV.get(dedupK)) return { duplicate: true, recorded: false };
-    await env.EVENTS_KV.put(dedupK, String(event?.created || "1"), { expirationTtl: 30 * DAY });
-  }
+  const dedupK = kvKey("dedup:stripe", eid);
+  const useDedup = !!env.EVENTS_KV && eid !== "unknown";
+  if (useDedup && (await env.EVENTS_KV.get(dedupK))) return { duplicate: true, recorded: false };
 
   const entry = await ledgerEntryFromEvent(event);
   const summary = { id: eid, type: event?.type || null, created: event?.created || null, livemode: !!event?.livemode };
@@ -314,6 +316,7 @@ async function handleStripeEvent(event, env) {
       await env.EVENTS_KV.put(kvKey("evt:stripe", eid), JSON.stringify(toMrlAsset(summary, MRL.stripe_source)), { expirationTtl: 30 * DAY });
     }
   }
+  if (useDedup) await env.EVENTS_KV.put(dedupK, String(event?.created || "1"), { expirationTtl: 30 * DAY });
   return { duplicate: false, recorded: !!entry, status: entry?.status || null };
 }
 
@@ -353,7 +356,7 @@ export default {
 
     // 一次性取出握手 token:需 MRL_HANDSHAKE_KEY(你自設的開機金鑰)。取出即刪,重放無效。
     if (url.pathname === "/notion/handshake" && request.method === "GET") {
-      if (!env.EVENTS_KV || !operatorAuthorized(url, env)) return json({ ok: false, error: "not found" }, 404);
+      if (!env.EVENTS_KV || !operatorAuthorized(url, env, request)) return json({ ok: false, error: "not found" }, 404);
       const token = await env.EVENTS_KV.get(HANDSHAKE_KV_KEY);
       if (!token) return json({ ok: false, error: "no pending handshake token" }, 404);
       await env.EVENTS_KV.delete(HANDSHAKE_KV_KEY);
@@ -410,7 +413,7 @@ export default {
     }
 
     if (url.pathname === "/ledger/payments" && request.method === "GET") {
-      if (!env.EVENTS_KV || !operatorAuthorized(url, env)) return json({ ok: false, error: "not found" }, 404);
+      if (!env.EVENTS_KV || !operatorAuthorized(url, env, request)) return json({ ok: false, error: "not found" }, 404);
       const page = await listLedgerPayments(env, url.searchParams.get("cursor"));
       return json({ ok: true, mrl_asset: true, ledger: "commercial", schema: LEDGER_SCHEMA, ...page });
     }

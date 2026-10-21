@@ -33,7 +33,29 @@ assert packet.completed_round_trip
 assert packet.payload == {"message": "hello"}
 ```
 
-執行測試：
+## 執行驗證
+
+準備一個 JSON 檔案，例如 `payload.json`：
+
+```json
+{"message": "hello"}
+```
+
+執行模組驗證器：
+
+```sh
+python3 -m mrl_language payload.json
+```
+
+也可以由標準輸入傳入 JSON：
+
+```sh
+printf '%s\n' '{"message":"hello"}' | python3 -m mrl_language -
+```
+
+驗證器會實際從三種起始世界各走完一輪循環，檢查資料與雜湊保持一致，並確認跳過狀態及遭竄改的封包會被拒絕。成功時輸出 JSON `status: PASS` 並回傳 exit code `0`；輸入無效或檢查失敗時輸出 `status: FAIL` 並回傳非零 exit code。
+
+單元測試：
 
 ```sh
 python3 tests/test_mrl_language.py

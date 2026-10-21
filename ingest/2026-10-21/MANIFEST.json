@@ -1,0 +1,96 @@
+{
+  "registry": "MRL_INGEST_MANIFEST",
+  "batch": "MRL_INGEST_20261021",
+  "origin_signature": "MrLiouWord",
+  "root_repository": "dofaromg/mrliouword-root",
+  "ingested_at": "2026-10-21",
+  "ingested_by": "session agent (delegated by Root Owner, 2026-10-19)",
+  "policy": {
+    "verbatim": "raw/ 內檔案為原封位元組,永不改寫(歷史證據不重寫)。",
+    "privacy": "含個人地理資訊或作者標示私有封存之材料,僅入雜湊與去識別萃取;原檔由 Root Owner 持有。",
+    "trade_secret": "核心形式化全文不入公開庫,待 Root Owner 決定;公開即喪失祕密性(見 MRL_TRADE_SECRET_INVENTORY)。",
+    "reversibility": "法典粒子皆可由本批次 raw/ 與 extracts/*.definitions.json 機械重生(tests/test_mrl_codex.py 驗證)。"
+  },
+  "entries": [
+    {
+      "original_filename": "30c9a5e9-PARTICLE_ESSENCE_INDEX_v2.json",
+      "sha256": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+      "size_bytes": 7679,
+      "kind": "essence-index(json-like, 含裸 ∞)",
+      "canonical_name": "MRL_PARTICLE_ESSENCE_INDEX_v2",
+      "ip_ref": "IP-011",
+      "storage": "raw/verbatim",
+      "note": "本質索引 v2(created 2026-01-06, signature ∴≡Φ·MrLiouWord·ESSENCE_INDEX_v2);原檔非嚴格 JSON,保存原封;CI JSON 驗證略過 raw/"
+    },
+    {
+      "original_filename": "a7a3af3b-PARTICLE_ESSENCE_INDEX_v2.json",
+      "sha256": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+      "size_bytes": 7679,
+      "kind": "essence-index(duplicate upload)",
+      "canonical_name": "MRL_PARTICLE_ESSENCE_INDEX_v2",
+      "ip_ref": "IP-011",
+      "storage": "hash-only(與上檔位元組相同)",
+      "note": "重複上傳,sha256 相同,不另存"
+    },
+    {
+      "original_filename": "c82e68bc-Mrliou_L1_Gate_ParticleRuntime_v1_1.zip",
+      "sha256": "bfb241824ee2dec4500f1239f6ef40a060c9ecd241fc5578bf2ff5976c34efa5",
+      "size_bytes": 9447,
+      "kind": "source-archive",
+      "canonical_name": "MRL_L1_Gate_ParticleRuntime_v1.1.0",
+      "ip_ref": "IP-012",
+      "storage": "hash-only(原始碼依作者 README「GitHub: Private Repo 上傳封存」不入公開庫)",
+      "note": "package version 1.1.0;19 files"
+    },
+    {
+      "original_filename": "d2cc2953-Mrliou_L1_Gate_ParticleRuntime_v1_2.zip",
+      "sha256": "67b1a468e07f07219c896f8d610b51ab26d821f21ff79d78afd810a36729ef31",
+      "size_bytes": 9757,
+      "kind": "source-archive",
+      "canonical_name": "MRL_L1_Gate_ParticleRuntime_v1.2.0",
+      "ip_ref": "IP-012",
+      "storage": "hash-only(同上)",
+      "note": "package version 1.2.0;19 files;upstreams.v1.json 擴充 github 介面"
+    },
+    {
+      "original_filename": "e7a69645-Mrliou_L1_Gate_____ParticleRuntime_v1_3.zip",
+      "sha256": "2e2a55980b642e774db6a3655eb8b431fa2ef0ff6266d58be45569e1d46c46ed",
+      "size_bytes": 12454,
+      "kind": "source-archive",
+      "canonical_name": "MRL_L1_Gate_ParticleRuntime_v1.3.0",
+      "ip_ref": "IP-012",
+      "storage": "hash-only(同上)",
+      "note": "package version 1.3.0;22 files;新增 motherbody_store/ParticleMeta.schema.json、tools/index_particles.ts、notion/HOWTO_INDEX.md(README 標題仍寫 v1.2)"
+    },
+    {
+      "original_filename": "19fc2f2c-MRL_Mrliou_L1_Gate_Particleruntime_V1_2_2_1_2026-06-13_2026-06-13.zip",
+      "sha256": "67b087e51ed68e6cf405e8dd3c9038b9efee08a92090e74ff8e60582c27ed4e1",
+      "size_bytes": 14848,
+      "kind": "source-archive",
+      "canonical_name": "MRL_L1_Gate_ParticleRuntime_v1.2.2",
+      "ip_ref": "IP-012",
+      "storage": "hash-only(同上)",
+      "note": "package version 1.2.2(2026-06-13 封裝);20 files;crypto.ts ArrayBuffer 修正、worker.ts 名稱 v1.2.2、含 package-lock.json;分支於 1.2(非 1.3 之後)"
+    },
+    {
+      "original_filename": "7cfc9959-particle-universe-blueprint_-____-___.docx",
+      "sha256": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+      "size_bytes": 17120159,
+      "kind": "design-document(docx, 17MB 含影像)",
+      "canonical_name": "MRL_ParticleUniverse_PrivateServer_Blueprint_v1.0",
+      "ip_ref": "IP-013",
+      "storage": "hash-only + 去識別大綱(extracts/)",
+      "note": "created/modified 2026-02-10T02:00Z;含個人地理座標與街道資訊,原檔不入公開庫"
+    },
+    {
+      "original_filename": "1a7a68bd-Mrliou______.docx",
+      "sha256": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+      "size_bytes": 2096760,
+      "kind": "formal-specification(docx, 2MB)",
+      "canonical_name": "MRL_ReversibleCore_AbsorbLayer_Formalization",
+      "ip_ref": "IP-014",
+      "storage": "hash-only + 章節大綱(extracts/)",
+      "note": "無 core.xml(日期待找回);240 節符號化形式系統;全文屬核心,是否公開入庫待 Root Owner 決定(營業祕密候選)"
+    }
+  ]
+}

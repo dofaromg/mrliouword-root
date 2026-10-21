@@ -16,6 +16,7 @@ from typing import Callable, Dict
 
 from ..context import Context
 from . import audit as _audit
+from . import converge as _converge
 from . import rebuild as _rebuild
 from . import repair as _repair
 
@@ -24,6 +25,7 @@ REGISTRY: Dict[str, Callable[[Context], Dict]] = {
     "audit": _audit.run,
     "rebuild": _rebuild.run,
     "repair": _repair.run,
+    "converge": _converge.run,
 }
 
 

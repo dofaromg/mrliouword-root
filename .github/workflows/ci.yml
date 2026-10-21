@@ -35,6 +35,9 @@ jobs:
           done
           echo "checked ${#files[@]} file(s)"
 
+      - name: Worker unit tests (Stripe 驗簽 / MRL 商業帳本登錄)
+        run: node --test workers/notion-webhook/test/*.test.mjs
+
       - name: Validate JSON files
         run: |
           set -euo pipefail

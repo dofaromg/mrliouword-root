@@ -76,6 +76,8 @@ Enterprise 年約議價   專屬額度、SLA 保證、DPA、發票/合約 ——
 
 **建議起步用 MoR（Paddle/Lemon Squeezy）**：一人營運不該把時間花在各國稅務。
 
+> **2026-10-21 更新**:現況已有美國 LLC(Mrliouword, LLC)的 Stripe live 帳戶、66 項商品、8 條付款連結(0 筆交易)。收帳主體改以 **Stripe** 為準,MoR 不再列為起步選項;錢流、待辦與收帳入口見 [商業帳本 §9](MRL_COMMERCIAL_LEDGER.md#9-收帳現況與收帳入口2026-10-21-查核只增不改)。
+
 ## 6. B2B 銷售必備文件（依需求順序準備）
 
 1. ✅ 服務條款、隱私政策（草案已在 `docs/legal/`）

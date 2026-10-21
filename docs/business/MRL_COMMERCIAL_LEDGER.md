@@ -112,3 +112,52 @@ Schema:
 - 交易發生**當下即登錄**,不事後補記;每筆保留可查證證據（金流回傳、發票、對帳）。
 - 本帳本**只增不改**;更正以新列/新版本追加，保留原紀錄（呼應計畫第 10 節）。
 - 每筆 Customer 應能回溯到其 License → Product → IP 資產,形成完整血緣。
+
+## 9. 收帳現況與收帳入口(2026-10-21 查核,只增不改)
+
+> 回答 Root Owner 的提問:「收費盈利跑到誰那裡?」並建立收帳入口。
+> 證據來源:Stripe API 即時查核(2026-10-21),除另註 INFERENCE/UNRESOLVED 外皆為 **FACT**。
+> 不登錄任何個資(地址、電話、IP);帳戶細節以 Stripe 儀表板為準。
+
+### 9.1 錢進哪裡(FACT)
+
+| 項目 | 現況 |
+|------|------|
+| 收款主體 | **Mrliouword, LLC**(美國德拉瓦州單一成員 LLC;Stripe Standard 帳戶,國別 US,預設幣別 USD;主要營業地登記為台灣) |
+| 收費流向 | 客戶付款 → **該 LLC 的 Stripe 餘額**。Stripe 餘額屬 LLC,LLC 屬 Root Owner;**目前不會自動進任何人的銀行**:帳戶**尚未綁定任何撥款銀行帳戶**(external_accounts = 0),撥款排程為 **manual** |
+| 收款能力 | `charges_enabled = true`、`payouts_enabled = true`;capabilities:card_payments / link_payments / transfers 皆 active |
+| 帳戶待辦(past_due) | Stripe 要求**帳戶代表人提供美國地址**(錯誤碼 `invalid_value_other`:目前代表人所在國別不被接受);尚未停用,但屬逾期要求,不處理有日後受限風險 |
+| Treasury 財務帳戶 | 一個 USD storage 財務帳戶,狀態 **pending**(Atlas 開戶流程中) |
+| 餘額 | USD 0.00(available / pending 皆 0) |
+
+### 9.2 商品與交易(FACT)— `Payment Config ≠ Transaction`
+
+| 指標 | 值 |
+|------|----|
+| Products | 66(64 active、2 inactive,含 `MRL-APIWORKS-BYOH-DEPLOY-V1` 未發布) |
+| Prices | 61,全部 TWD 計價(一次性 + 月繳/年繳) |
+| Payment Links(live) | 8 個 active |
+| Customers | 1(創辦人通行證,永久免費) |
+| Checkout Sessions | 11,**全部 expired / unpaid** |
+| Charges / PaymentIntents / Invoices / Subscriptions / Payouts / Balance Transactions | **0 / 0 / 0 / 0 / 0 / 0** |
+| 既有 Webhook 端點 | 2:`app.mrliouword.com/webhook/stripe`(checkout.session.completed)、`mrl-zhizhang-apiworks.mr-liou.chatgpt.site/api/webhooks/stripe`(7 個事件);兩者**是否仍在線並落帳:UNRESOLVED** |
+
+**結論(FACT)**:商品目錄與付款連結已 live,但**至今 0 筆交易、0 收入**;第 6 節「已實現收入 0」維持不變。
+
+### 9.3 收帳入口(本次建立)
+
+- 根源倉庫 worker `mrliouword-root` 新增 **`POST /stripe/webhook`**:驗 Stripe 簽章 → 正規化為第 4 節 schema → 寫入 KV `MRL:ledger:payment:<Payment_ID>:<event_id>`(永久、只增、不覆寫、外包 MRL 資產信封 `source=MRL_EXT_STRIPE`),以及 **`GET /ledger/payments?k=`** 供操作者讀取。細節見 `workers/notion-webhook/README.md`「收帳入口」。
+- 單元測試 `workers/notion-webhook/test/stripe_webhook.test.mjs`(CI 守門):驗簽(正確 / 竄改 / 過期 / 缺漏 / 多重 v1)、schema 映射、不存 email 原文、去重、操作者讀取、未設密鑰 503。
+- 外部來源別名:`MRL_EXT_STRIPE` 已登錄 `registry/MRL_EXTERNAL_NAME_MAP.json`。
+
+### 9.4 金流路線決定(INFERENCE,供 Root Owner 核准)
+
+第 5 節商業化策略建議「起步用 MoR」,寫於尚無公司主體時。**現況已有美國 LLC + Stripe live 帳戶 + 完整目錄**,另起 Paddle/Lemon Squeezy 只會分散帳本;建議**以 Stripe(Mrliouword, LLC)為正式收帳主體**,MoR 不再列為起步選項。台灣客戶需統一發票者,日後另評估綠界/藍新並回寫本節。
+
+### 9.5 只有 Root Owner 能親辦的三件事(KYC / 銀行 / 機密)
+
+1. **綁撥款銀行帳戶**:Stripe 儀表板 → 設定 → 銀行帳戶與排程 → 新增 LLC 可收 USD 的帳戶(美國銀行或支援 USD 的台灣外幣帳戶,依 Stripe 支援清單),並決定撥款排程(目前 manual)。沒有這步,收到的錢只會停在 Stripe 餘額。
+2. **清掉逾期要求**:補代表人美國地址,或改由符合條件者擔任代表人(Atlas 客戶可洽 Stripe 支援)。
+3. **接上收帳入口**:Stripe → Developers → Webhooks → 新增端點 `…/stripe/webhook`、勾第 9.3 節七個事件 → 端點簽章密鑰放進 Worker 機密 `STRIPE_WEBHOOK_SECRET`(值進金庫,名字進程式;不貼聊天)。`GET /health` 的 `stripe_webhook_configured: true` 即完成。
+
+完成 1–3 後,第一筆付款會自動出現在 `GET /ledger/payments`,並依第 8 節規則同步補登第 4/5 節表格。

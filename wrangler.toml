@@ -5,6 +5,8 @@
 # 機密請走 Secrets Store / `npx wrangler secret put`,勿寫在此檔:
 #   NOTION_WEBHOOK_SECRET  Notion 握手給的 verification_token
 #   FORWARD_URL            (可選) 事件轉發目的地
+#   STRIPE_WEBHOOK_SECRET  Stripe webhook 端點簽章密鑰(whsec_…),收帳入口 POST /stripe/webhook 用
+#   MRL_HANDSHAKE_KEY      操作者金鑰:一次性取 Notion 握手 token、讀帳本 GET /ledger/payments
 name = "mrliouword-root"
 main = "workers/notion-webhook/src/index.js"
 compatibility_date = "2026-08-01"

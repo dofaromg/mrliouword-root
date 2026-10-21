@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "origin_signature": "MrLiouWord",
   "root_repository": "dofaromg/mrliouword-root",
-  "updated": "2026-08-24",
+  "updated": "2026-10-21",
   "entries": [
     {
       "canonical_name": "MRL_EXT_Vision_Spatial3D_v1.ipynb",
@@ -89,6 +89,19 @@
       },
       "kind": "source-platform",
       "role": "工作區定義層來源;經 mrl-notion-webhook 收斂進 MRL_PARTICLE_CODEX",
+      "ingest_batch": "live-webhook",
+      "migration_status": "mapped"
+    },
+    {
+      "canonical_name": "MRL_EXT_STRIPE",
+      "previous_name": "Stripe（Mrliouword, LLC 收款帳戶）",
+      "origin": {
+        "provider": "stripe.com",
+        "url": "",
+        "license": "金流商平台機制不列入 MRL 著作權；交易紀錄為 MRL 商業帳本證據（見 MRL_COMMERCIAL_LEDGER §4/§9）"
+      },
+      "kind": "payment-processor",
+      "role": "收帳來源;事件經 mrliouword-root `POST /stripe/webhook` 驗簽後寫入 MRL 商業帳本(KV `MRL:ledger:payment:*`)",
       "ingest_batch": "live-webhook",
       "migration_status": "mapped"
     }

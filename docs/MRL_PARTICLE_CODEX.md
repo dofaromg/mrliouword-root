@@ -78,3 +78,15 @@ Notion 定義層變動 (MRL_EXT_NOTION)
 - 容器與 schema:**就緒**(`particles: []`,尚無收斂粒子)。
 - 待 Notion 訂閱接上(`NOTION_WEBHOOK_SECRET`)+ `handleTriggeredAction()` 補上收斂提案邏輯後,
   定義層變動即可開始產生提案,由 Root Owner 核准入典。
+
+### 8.1 更新(2026-10-21):本體入典・創世批次
+
+- 法典 **v1.1.0**:`particles` 由 0 → **31**,全部 `evidence_level: FACT`、`status: canonical`(Root Owner 2026-10-19 授權 session agent 代為合入;`genesis.approved_by` 載明)。
+- 來源(入庫批次 `ingest/2026-10-21/`,雜湊見 `MANIFEST.json`):
+  - `MRL-PC-0001`–`0013` ← 本質索引 v2 原檔(IP-011,sha256 `1a7b38c1fa99018a…`),含 λ/f/τ/↔/Ψ/modules/ops 等屬性與 `files_index` 來源。
+  - `MRL-PC-0014`–`0020` ← L1 Gate 粒子 Runtime 定義性萃取(IP-012:命名律、封包、Gate v1、Registry、RootLaw 封存、ParticleMeta schema、L1 入口原則)。
+  - `MRL-PC-0021`–`0025` ← 粒子宇宙藍圖 v1.0 本體層(IP-013;`layer_scheme: blueprint_v1.0`)。
+  - `MRL-PC-0026`–`0031` ← 可逆核心／吸收層形式化(IP-014;`layer: META`)。
+- **可重生(怎麼過去,就怎麼回來)**:`python3 -m mrl_pipeline.runners.converge` 由 ingest 重生並比對(漂移 0);`tests/test_mrl_codex.py` 在 CI 守門(逐欄相等、驗證器、隱私/憑證守門)。
+- `genesis.sources.essence_meta` 保留本質索引的 Φ、≡、layer_map、vectors、resonance_keys、files_index。
+- `unresolved`:UNR-001 兩套分層未調和;UNR-002 形式化文件日期待找回;UNR-003 L1 Gate 1.3.0/1.2.2 待合流;UNR-004 公開邊界(私有封存 repo)待決。

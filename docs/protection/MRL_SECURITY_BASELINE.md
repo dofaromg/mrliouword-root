@@ -60,3 +60,13 @@
 - [ ] 對外 chat worker 加驗證閘門 + rate limiting;關閉不必要的 `workers.dev` 公開路由
 - [ ] `mrliouhan.ai` 刪除內網 A 記錄 + 補 SPF/DMARC/DKIM(見 MRL_OPERATIONS)
 - [ ] 全帳號啟用硬體金鑰 2FA(GitHub / Cloudflare)
+
+## 事件補錄(2026-10-21)
+
+| 事件 | 日期 | 內容(僅前綴,不含值) | 處置 |
+|------|------|----------------------|------|
+| EXP-006 | 2026-10-19 | Cloudflare 使用者 API 權杖(`cfut_`)貼入對話;該權杖設有 Client IP 過濾,於 session 出口 IP 回 `9109`,**未能使用** | 應作廢 |
+| EXP-007 | 2026-10-20 | 第二顆 Cloudflare 使用者 API 權杖(`cfut_`)貼入對話;**已用於**以 API 設定 Worker 機密 `MRL_HANDSHAKE_KEY`(值不印、不落檔) | 任務完成後**立即作廢**;改以環境機密變數供應 |
+
+> 原則重申:憑證貼入對話即視為外洩(對話紀錄可被讀取);正確通道為雲端環境機密變數或 Secrets Store。
+

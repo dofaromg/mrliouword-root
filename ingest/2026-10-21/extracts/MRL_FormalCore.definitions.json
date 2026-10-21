@@ -1,0 +1,83 @@
+{
+  "registry": "MRL_FORMAL_CORE_DEFINITIONS",
+  "source": "MRL_ReversibleCore_AbsorbLayer_Formalization(docx;日期待找回;240 節)",
+  "source_sha256": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+  "layer_scheme": "formal_core",
+  "note": "僅收錄定義骨架;全文不入公開庫(營業祕密候選,待 Root Owner 決定)。",
+  "definitions": [
+    {
+      "name": "分域與分割 M = R ⊎ A",
+      "layer": "META",
+      "definition": "O := origin;M := system;R := reversible_core;A := absorb_layer(可容納不可逆元,但不參與逆運算);H := collapse_engine ≡ C(H),H ∈ End(A);M := R ⊎ A,R ∩ A = ∅;reversible(M) := reversible(R);authority = O。",
+      "attributes": {
+        "symbols": [
+          "O",
+          "M",
+          "R",
+          "A",
+          "H"
+        ],
+        "invariant": "authority = O; ¬invertible(H) allowed"
+      }
+    },
+    {
+      "name": "route ρ / lift λ 與提升崩塌 Ĥ",
+      "layer": "META",
+      "definition": "route ρ : R → A;lift λ : A → R;Ĥ := λ ∘ H ∘ ρ : R → R(把不可逆的 H 提升為 R 上的算子);P := λ∘ρ、Q := ρ∘λ(投影/重建,可選冪等);Galois 式伴隨 ρ ⊣ λ:ρ(r) ⪯ a ⇔ r ⪯ λ(a);a ~ b ⇔ λ(a) = λ(b)(同提升類)。",
+      "attributes": {
+        "maps": {
+          "ρ": "R→A",
+          "λ": "A→R",
+          "Ĥ": "λ∘H∘ρ"
+        }
+      }
+    },
+    {
+      "name": "🔄 的條件(強/弱)與不可能性",
+      "layer": "META",
+      "definition": "🔄 不在 M 與 H 之間;🔄 在 R 與 H' = lifted(H) ∈ R 之間。RT_R := λ∘H∘ρ;強 🔄:∀r∈R,RT_R(r) ≈_R r(至等價的同構);弱 🔄:RT_R^n(r) → Fix,Fix := {r | RT_R(r) ≈_R r}。不可能性:若 H 在 A 上不可逆,則 A 上不存在雙射 🔄;以限制定義域或商集(等價類)使 🔄 成立。",
+      "attributes": {
+        "strong": "RT_R(r) ≈_R r",
+        "weak": "RT_R^n(r) → Fix"
+      }
+    },
+    {
+      "name": "單拍閉環 Φ",
+      "layer": "META",
+      "definition": "R 上算子:E(expand)、K(constrain)、C(collapse_in_R)、R0(reflect/return);Φ := R0 ∘ Ĥ ∘ K ∘ E : R → R;tick:r_{t+1} = Φ(r_t)。互動嵌入:r → a := ρ(r) → a' := H(a) → r' := λ(a') → r_next := E(K(r'))。",
+      "attributes": {
+        "operators": [
+          "E",
+          "K",
+          "C",
+          "R0"
+        ],
+        "tick": "r_{t+1} = Φ(r_t)"
+      }
+    },
+    {
+      "name": "外部系統僅為態射 Their := H ∈ End(A);堆疊不刪除",
+      "layer": "META",
+      "definition": "「their system」只作為 A 上的自同態 H,不進入可逆核心 R;堆疊不刪除:H 保留為模組、不被取代,M := (R ⊎ A, ρ, λ, H, ≈_R, Ξ);隱藏設定 Ξ 必須在 R 中顯式化,否則映射斷裂。",
+      "attributes": {
+        "principle": "stack not delete",
+        "hidden_config": "Ξ must be explicit in R"
+      }
+    },
+    {
+      "name": "載體綁定實例 U/G/V 與稽核",
+      "layer": "META",
+      "definition": "U := Mr.liou;G := GitHub_state_space(R 落在 repo 狀態);V := Vercel_state_space(A 落在平台狀態);H := deploy(V→V,可不可逆);ρ := push(G→V);λ := pull_mirror(V→G);RT_G := λ∘H∘ρ;🔄 存在於 G(經 RT_G),不單獨存在於 V。Σ:最小可觀測集(不含機密,secrets_ref 僅為參照);稽核 log_t 與 merkle_root := Merkle({log_t});失敗模式分類與 FixAndClose 修復算子(含 pin/lockfile 決定論化)。",
+      "attributes": {
+        "binding": {
+          "R": "G",
+          "A": "V",
+          "H": "deploy",
+          "ρ": "push",
+          "λ": "pull_mirror"
+        },
+        "audit": "merkle_root := Merkle({log_t})"
+      }
+    }
+  ]
+}

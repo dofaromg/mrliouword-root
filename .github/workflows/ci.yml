@@ -38,7 +38,7 @@ jobs:
       - name: Validate JSON files
         run: |
           set -euo pipefail
-          mapfile -t files < <(find . -name '*.json' -not -path './.git/*' -not -path '*/node_modules/*')
+          mapfile -t files < <(find . -name '*.json' -not -path './.git/*' -not -path '*/node_modules/*' -not -path '*/ingest/*/raw/*')
           for f in "${files[@]}"; do
             python3 -m json.tool "$f" > /dev/null || { echo "invalid JSON: $f"; exit 1; }
           done
@@ -46,3 +46,6 @@ jobs:
 
       - name: Python pipeline tests
         run: python3 tests/test_mrl_pipeline.py
+
+      - name: Python codex tests (reproducibility, validator, privacy guard)
+        run: python3 tests/test_mrl_codex.py

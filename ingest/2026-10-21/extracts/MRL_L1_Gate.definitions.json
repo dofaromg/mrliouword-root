@@ -1,0 +1,168 @@
+{
+  "registry": "MRL_L1_GATE_DEFINITIONS",
+  "source": "MRL_L1_Gate_ParticleRuntime v1.1.0/1.2.0/1.3.0/1.2.2(定義性萃取,非原始碼)",
+  "definitions_from_version": "1.3.0",
+  "file_sha256": {
+    "README.md": "c7111760842b486d6bb32296f92714ff783a32ae43fde817238d3bdaf726de10",
+    "src/naming.ts": "ce119d917a6fe8b0cf5f58b9f977667f7f332cf907a87afd6e2cfa18acefa598",
+    "src/packet.ts": "447ee3d72911dd3a29a80977431488ab055eeea9e37ad8a8ba1667325b0a3eb3",
+    "src/gate.ts": "9c6e86cd60d03d31f1080f92e85ad8f0cca7edaf90670085636030a4b99e2e1f",
+    "src/registry.ts": "e451eaaa07210e0e396398ecf87dd29b6f986ca0a76e5da20a0f012dd1a5e79a",
+    "rootlaw/RootLaw_MobiusLoop_v1.seal": "d58129d1448d44540ad227366133c07dee4c5a0d58b690c9fb02f09627d76055",
+    "motherbody_store/ParticleMeta.schema.json": "19410af09686b9435aeec40b6bdc81d1c287dd2f13fe4c1dcf6837534f8318c5",
+    "notion/HOWTO_INDEX.md": "e2c5984f5c228ff9baf188d7996c27e608949a6fb4c30883e51e62760adb52db"
+  },
+  "layer_scheme": "l1_gate_runtime",
+  "definitions": [
+    {
+      "name": "Mrliou_ 命名律",
+      "layer": "L1",
+      "definition": "所有對外 API/封包/事件名稱一律以 MR_PREFIX=\"Mrliou_\" 開頭;mrliouName(name) 去除首尾空白、空值拒絕、未帶前綴者補上前綴。",
+      "attributes": {
+        "MR_PREFIX": "Mrliou_",
+        "behaviour": [
+          "trim",
+          "require non-empty",
+          "prefix if missing"
+        ]
+      },
+      "source_file": "src/naming.ts",
+      "present_in_versions": [
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "1.2.2"
+      ]
+    },
+    {
+      "name": "MrliouPacket 封包結構",
+      "layer": "L1",
+      "definition": "封包 = {type, name, payload, trace, created_utc, content_sha256, merkle_root, signature};type/name 經命名律;content_sha256 = sha256(JSON{publicType, publicName, payload, trace, created_utc});v1 中 merkle_root = content_sha256;signature = signV1({merkle_root, event_id, rid, tick})。",
+      "attributes": {
+        "trace": {
+          "event_id": "string",
+          "rid": "string",
+          "tick": "number",
+          "persona_id": "optional",
+          "source": "optional",
+          "upstream": "optional"
+        },
+        "created_utc": "ISO8601"
+      },
+      "source_file": "src/packet.ts",
+      "present_in_versions": [
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "1.2.2"
+      ]
+    },
+    {
+      "name": "Gate v1 授權",
+      "layer": "L1",
+      "definition": "單一入口 Gate:token 必填;格式 \"scope1,scope2|subject\";subject 缺省為 unknown;逐一檢查 requiredScopes,缺一即拒;成功回 {subject, scopes},失敗回 reason ∈ {missing_token, missing_scope:<scope>}。",
+      "attributes": {
+        "token_format": "scope1,scope2|subject",
+        "failure_reasons": [
+          "missing_token",
+          "missing_scope:<scope>"
+        ]
+      },
+      "source_file": "src/gate.ts",
+      "present_in_versions": [
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "1.2.2"
+      ]
+    },
+    {
+      "name": "Registry · ApiDef",
+      "layer": "L1",
+      "definition": "ApiDef = {api(對外 Mrliou_* 名稱,登錄時自動正規化), impl(內部 adapter id), upstream?{vendor, endpoint, method?, docs?}, scopes?};Registry.register 以正規化後的 api 為鍵。",
+      "attributes": {
+        "fields": [
+          "api",
+          "impl",
+          "upstream",
+          "scopes"
+        ]
+      },
+      "source_file": "src/registry.ts",
+      "present_in_versions": [
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "1.2.2"
+      ]
+    },
+    {
+      "name": "RootLaw · Mobius Loop v1(封存)",
+      "layer": "L1",
+      "definition": "ROOT LAW · MOBIUS LOOP · v1:「怎麼過去,就怎麼回來。一切沿莫比斯環循環。」署名 Mrliou_;狀態 封存。",
+      "attributes": {
+        "status": "封存",
+        "signed_by": "Mrliou_"
+      },
+      "source_file": "rootlaw/RootLaw_MobiusLoop_v1.seal",
+      "present_in_versions": [
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "1.2.2"
+      ]
+    },
+    {
+      "name": "ParticleMeta schema v1(母體儲存)",
+      "layer": "L1",
+      "definition": "MrliouParticleMetaSchema v1:必填 [mrliou_name(Mrliou_*), kind, domain, created_utc(ISO8601), trace_id, merkle_root(sha256 hex)];kind ∈ {packet, file, note, module};domain ∈ {git, notion, cloudflare, system, unknown};選填 tags[]、upstream{vendor, ref}。",
+      "attributes": {
+        "required": [
+          "mrliou_name",
+          "kind",
+          "domain",
+          "created_utc",
+          "trace_id",
+          "merkle_root"
+        ],
+        "kind": [
+          "packet",
+          "file",
+          "note",
+          "module"
+        ],
+        "domain": [
+          "git",
+          "notion",
+          "cloudflare",
+          "system",
+          "unknown"
+        ]
+      },
+      "source_file": "motherbody_store/ParticleMeta.schema.json",
+      "present_in_versions": [
+        "1.3.0"
+      ]
+    },
+    {
+      "name": "L1 入口原則(寫規則一次)",
+      "layer": "L1",
+      "definition": "第一層入口寫規則一次(改寫/命名/封包/授權),其後只做粒子組合(莫比斯無限)。提供:單一入口 Gate(授權即啟動)、Mrliou_ 命名規則、封包(trace + merkle_root + signature)、L1 生成器(upstream 定義 → Mrliou_* API 面)、Worker 端點 /ping /registry /packet;母體一致性:封包/檔案放 motherbody_store/particles/,索引輸出 particle_index.v1.json 與 notion/PARTICLE_INDEX.md。",
+      "attributes": {
+        "worker_endpoints": [
+          "/ping",
+          "/registry",
+          "/packet"
+        ],
+        "archival_guidance": "GitHub: Private Repo 上傳封存;Notion 貼 INDEX;手機母體保留原目錄"
+      },
+      "source_file": "README.md",
+      "present_in_versions": [
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "1.2.2"
+      ]
+    }
+  ]
+}

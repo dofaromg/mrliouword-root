@@ -28,7 +28,8 @@ const checkoutEvent = (id = "evt_1") => ({
   data: { object: {
     id: "cs_live_1", object: "checkout.session", mode: "payment", payment_status: "paid",
     payment_intent: "pi_1", customer: "cus_1", amount_total: 9900, currency: "twd",
-    payment_link: "plink_1", client_reference_id: "ORD-1", metadata: { sku: "MRL-X" },
+    payment_link: "plink_1", client_reference_id: "ORD-1", metadata: { sku: "MRL-X", mrl_license: "LIC-1", email: "leak@example.org", note: "customer typed this" },
+    total_details: { amount_tax: 471, amount_discount: 0, amount_shipping: 0 },
     customer_details: { email: "Buyer@Example.com", name: "should not be stored" },
   } },
 });
@@ -59,9 +60,34 @@ test("ledgerEntryFromEvent: checkout.session.completed → §4 schema, no raw em
   assert.equal(e.refs.client_reference_id, "ORD-1");
   assert.equal(e.evidence.event_id, "evt_1");
   assert.equal(e.evidence.event_type, "checkout.session.completed");
+  assert.equal(e.tax, 471);
+  assert.equal(e.amount_kind, "delta");
+  assert.deepEqual(e.refs.metadata, { sku: "MRL-X", mrl_license: "LIC-1" }); // 白名單外的 metadata 不落帳
   assert.match(e.email_fp, /^[0-9a-f]{16}$/);
   const dump = JSON.stringify(e);
-  assert.ok(!dump.includes("Example.com") && !dump.includes("should not be stored"));
+  assert.ok(!dump.includes("Example.com") && !dump.includes("should not be stored") && !dump.includes("leak@") && !dump.includes("customer typed"));
+});
+
+test("ledgerEntryFromEvent: subscription checkout has no Payment_ID; dispute and refund.created map from their own objects", async () => {
+  const sub = checkoutEvent("evt_sub");
+  Object.assign(sub.data.object, { id: "cs_sub", mode: "subscription", payment_intent: null, subscription: "sub_1" });
+  const se = await ledgerEntryFromEvent(sub);
+  assert.equal(se.Payment_ID, null);
+  assert.equal(se.Order_ID, "cs_sub");
+  assert.equal(se.refs.subscription, "sub_1");
+
+  const dp = await ledgerEntryFromEvent({ id: "evt_dp", type: "charge.dispute.created", created: 1, livemode: true,
+    data: { object: { id: "dp_1", object: "dispute", charge: "ch_1", payment_intent: "pi_9", amount: 1000, currency: "twd", reason: "fraudulent", status: "needs_response" } } });
+  assert.equal(dp.status, "disputed"); assert.equal(dp.Payment_ID, "pi_9"); assert.equal(dp.Order_ID, "pi_9");
+  assert.equal(dp.refs.dispute, "dp_1"); assert.equal(dp.refs.charge, "ch_1"); assert.equal(dp.amount, 1000);
+
+  const rf = await ledgerEntryFromEvent({ id: "evt_rf", type: "refund.created", created: 1, livemode: true,
+    data: { object: { id: "re_1", object: "refund", charge: "ch_1", payment_intent: "pi_9", amount: 100, currency: "twd", status: "succeeded" } } });
+  assert.equal(rf.status, "refunded"); assert.equal(rf.amount, 100); assert.equal(rf.amount_kind, "delta"); assert.equal(rf.refs.refund, "re_1");
+
+  const oob = await ledgerEntryFromEvent({ id: "evt_oob", type: "invoice.paid", created: 1, livemode: true,
+    data: { object: { id: "in_2", customer: "cus_2", amount_paid: 500, amount_due: 500, currency: "twd", paid_out_of_band: true, total_taxes: [{ amount: 20 }, { amount: 4 }] } } });
+  assert.equal(oob.Payment_ID, null); assert.equal(oob.refs.paid_out_of_band, true); assert.equal(oob.tax, 24);
 });
 
 test("ledgerEntryFromEvent: pending / invoice / refund / unknown", async () => {
@@ -75,6 +101,7 @@ test("ledgerEntryFromEvent: pending / invoice / refund / unknown", async () => {
   const ref = await ledgerEntryFromEvent({ id: "evt_ref", type: "charge.refunded", created: 1, livemode: true,
     data: { object: { id: "ch_1", payment_intent: "pi_9", customer: "cus_2", amount: 49900, amount_refunded: 49900, currency: "twd" } } });
   assert.equal(ref.status, "refunded"); assert.equal(ref.amount, 49900); assert.equal(ref.refs.charge, "ch_1");
+  assert.equal(ref.amount_kind, "cumulative"); // Charge 快照的累計退款額
 
   assert.equal(await ledgerEntryFromEvent({ id: "x", type: "customer.created", data: { object: { id: "cus_3" } } }), null);
   assert.equal(await ledgerEntryFromEvent(null), null);
@@ -85,6 +112,9 @@ test("POST /stripe/webhook: 503 without secret, 400 bad signature, 200 + ledger 
   const body = JSON.stringify(checkoutEvent());
 
   let r = await worker.fetch(post("/stripe/webhook", body, { "stripe-signature": sign(body) }), { EVENTS_KV: kv }, ctx);
+  assert.equal(r.status, 503);
+  // 有密鑰但沒綁 KV 也要 503:回 200 等於告訴 Stripe 已收妥,實際上什麼都沒記
+  r = await worker.fetch(post("/stripe/webhook", body, { "stripe-signature": sign(body) }), { STRIPE_WEBHOOK_SECRET: SECRET }, ctx);
   assert.equal(r.status, 503);
 
   const env = { EVENTS_KV: kv, STRIPE_WEBHOOK_SECRET: SECRET, MRL_HANDSHAKE_KEY: "op-key" };
@@ -117,6 +147,13 @@ test("POST /stripe/webhook: 503 without secret, 400 bad signature, 200 + ledger 
   assert.ok(await kv.get("MRL:evt:stripe:evt_c"));
   assert.equal([...kv.m.keys()].filter((k) => k.startsWith("MRL:ledger:payment:")).length, 1);
 
+  // 沒有 Payment_ID 的登錄(訂閱 checkout)用 Order_ID 當 key
+  const sub = checkoutEvent("evt_sub"); Object.assign(sub.data.object, { id: "cs_sub", mode: "subscription", payment_intent: null, subscription: "sub_1" });
+  const subBody = JSON.stringify(sub);
+  r = await worker.fetch(post("/stripe/webhook", subBody, { "stripe-signature": sign(subBody) }), env, ctx);
+  assert.equal(r.status, 200);
+  assert.ok(await kv.get("MRL:ledger:payment:cs_sub:evt_sub"));
+
   // 操作者讀帳本:無金鑰 404、有金鑰 200
   r = await worker.fetch(new Request("https://x/ledger/payments"), env, ctx);
   assert.equal(r.status, 404);
@@ -125,8 +162,8 @@ test("POST /stripe/webhook: 503 without secret, 400 bad signature, 200 + ledger 
   r = await worker.fetch(new Request("https://x/ledger/payments?k=op-key"), env, ctx);
   assert.equal(r.status, 200);
   const page = await r.json();
-  assert.equal(page.count, 1);
-  assert.equal(page.entries[0].entry.Order_ID, "cs_live_1");
+  assert.equal(page.count, 2);
+  assert.deepEqual(page.entries.map((e) => e.entry.Order_ID).sort(), ["cs_live_1", "cs_sub"]);
   // 標頭優先:Bearer 正確 → 200;Bearer 錯誤即使 ?k= 正確也 404(標頭存在時不退回查詢字串)
   r = await worker.fetch(new Request("https://x/ledger/payments", { headers: { authorization: "Bearer op-key" } }), env, ctx);
   assert.equal(r.status, 200);

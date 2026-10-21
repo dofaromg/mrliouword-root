@@ -16,7 +16,7 @@
 //
 // 環境變數 / 綁定(都不寫死在程式,見 wrangler.toml / Secrets Store):
 //   NOTION_WEBHOOK_SECRET  (可選)Notion 驗簽金鑰;未設時使用握手取出時自動存進 KV 的 token——設在 Secrets Store 會優先
-//   STRIPE_WEBHOOK_SECRET  Stripe webhook 端點簽章密鑰(whsec_…);未設時 /stripe/webhook 回 503,不收任何事件
+//   STRIPE_WEBHOOK_SECRET  Stripe webhook 端點簽章密鑰(whsec_…);未設(或 EVENTS_KV 未綁)時 /stripe/webhook 回 503,不收任何事件
 //   FORWARD_URL (可選)     Notion 驗證通過的事件要轉發到哪(你的「動作」端點)
 //   EVENTS_KV  (可選)      事件記錄 / 去重 / 死信佇列 / 握手 token 暫存 / 商業帳本 用 KV(有綁才用,沒有就略過)
 //   MRL_HANDSHAKE_KEY      你自設的操作者金鑰:一次性取出 Notion 握手 token、讀取帳本——放 Secrets Store
@@ -215,15 +215,35 @@ async function handleTriggeredAction(event, env, ctx) {
 //       帳本只增不刪——每個事件各寫一個 key、永不覆寫、不設 TTL。
 //       最小蒐集——不存 email 原文,只存不可逆指紋(email_fp),客戶細節留在金流商。
 const LEDGER_SCHEMA = "MRL_COMMERCIAL_LEDGER.v1/§4";
+// 會進帳本的事件 → 狀態。
+// 退款:以 refund.created 為準(單筆退款金額,amount_kind=delta);charge.refunded 的 amount_refunded 是 Charge 快照上的
+// 「累計」退款額,照樣登錄但標 amount_kind=cumulative,對帳加總時只加 delta 列。
+// 爭議:charge.dispute.created 的 data.object 是 Dispute(不是 Charge),另行映射。
 const LEDGER_EVENT_STATUS = {
   "checkout.session.completed": "paid",
   "checkout.session.async_payment_succeeded": "paid",
   "checkout.session.async_payment_failed": "failed",
   "invoice.paid": "paid",
   "invoice.payment_failed": "failed",
+  "refund.created": "refunded",
   "charge.refunded": "refunded",
   "charge.dispute.created": "disputed",
 };
+// metadata 只保留對帳用的白名單鍵(或 mrl_ 前綴);其餘客戶自填值可能含 email / 電話 / 姓名,不得永久落帳。
+const METADATA_ALLOWLIST = new Set(["sku", "asset_id", "canonical_product_id", "product_id", "license_id", "order_id", "origin_signature"]);
+function pickMetadata(metadata) {
+  const out = {};
+  for (const [k, v] of Object.entries(metadata || {})) {
+    if ((METADATA_ALLOWLIST.has(k) || k.startsWith("mrl_")) && (typeof v === "string" || typeof v === "number")) out[k] = String(v).slice(0, 200);
+  }
+  return out;
+}
+// Invoice 稅額:舊版 API 為 `tax`,新版為 `total_taxes[]`。
+function invoiceTax(inv) {
+  if (typeof inv?.tax === "number") return inv.tax;
+  if (Array.isArray(inv?.total_taxes)) return inv.total_taxes.reduce((sum, t) => sum + (Number(t?.amount) || 0), 0);
+  return null;
+}
 
 async function emailFingerprint(email) {
   if (!email) return null;
@@ -231,15 +251,21 @@ async function emailFingerprint(email) {
 }
 
 // 把 Stripe 事件正規化成帳本登錄(不是帳本事件回 null,只留事件紀錄)。
+// Payment_ID 只放真正的付款物件(PaymentIntent);沒有就留 null,session / subscription / invoice id 只放 refs。
 async function ledgerEntryFromEvent(event) {
   const type = event?.type;
   const obj = event?.data?.object;
   if (!type || !obj || !(type in LEDGER_EVENT_STATUS)) return null;
 
-  let status = LEDGER_EVENT_STATUS[type];
   const base = {
     processor: "stripe",
-    status,
+    status: LEDGER_EVENT_STATUS[type],
+    Order_ID: null,
+    Payment_ID: null,
+    Customer_ID: null,
+    amount: null,
+    amount_kind: "delta", // delta = 本事件的金額;cumulative = 物件快照上的累計值
+    tax: null,
     currency: obj.currency || null,
     refs: {},
     evidence: {
@@ -253,43 +279,64 @@ async function ledgerEntryFromEvent(event) {
   let email = null;
   if (type.startsWith("checkout.session.")) {
     // Checkout(含 Payment Link)完成:非同步付款未入帳時先記 pending,入帳事件再補一筆 paid。
-    if (type === "checkout.session.completed" && obj.payment_status && obj.payment_status !== "paid") status = "pending";
+    if (type === "checkout.session.completed" && obj.payment_status && obj.payment_status !== "paid") base.status = "pending";
     email = obj.customer_details?.email || obj.customer_email || null;
     Object.assign(base, {
-      status,
       Order_ID: obj.id,
-      Payment_ID: obj.payment_intent || obj.subscription || obj.id,
+      Payment_ID: obj.payment_intent || null, // subscription / setup 模式沒有 PaymentIntent → null
       Customer_ID: obj.customer || null,
       amount: obj.amount_total ?? null,
+      tax: obj.total_details?.amount_tax ?? null,
       refs: {
         mode: obj.mode || null,
         payment_link: obj.payment_link || null,
         subscription: obj.subscription || null,
+        invoice: obj.invoice || null,
         client_reference_id: obj.client_reference_id || null,
-        metadata: obj.metadata || {},
+        metadata: pickMetadata(obj.metadata),
       },
     });
   } else if (type.startsWith("invoice.")) {
     email = obj.customer_email || null;
+    const paymentIntent = obj.payment_intent
+      || (Array.isArray(obj.payments?.data) ? obj.payments.data.find((p) => p?.payment?.payment_intent)?.payment?.payment_intent : null)
+      || null;
     Object.assign(base, {
       Order_ID: obj.id,
-      Payment_ID: obj.payment_intent || obj.id,
+      Payment_ID: paymentIntent, // 帳外收款(paid_out_of_band)或無付款物件 → null
       Customer_ID: obj.customer || null,
       amount: (type === "invoice.paid" ? obj.amount_paid : obj.amount_due) ?? null,
+      tax: invoiceTax(obj),
       refs: {
         subscription: obj.subscription || obj.parent?.subscription_details?.subscription || null,
         invoice_number: obj.number || null,
-        metadata: obj.metadata || {},
+        paid_out_of_band: !!obj.paid_out_of_band,
+        metadata: pickMetadata(obj.metadata),
       },
     });
-  } else if (type.startsWith("charge.")) {
+  } else if (type === "refund.created") {
+    Object.assign(base, {
+      Order_ID: obj.payment_intent || obj.charge || obj.id,
+      Payment_ID: obj.payment_intent || null,
+      amount: obj.amount ?? null,
+      refs: { refund: obj.id, charge: obj.charge || null, reason: obj.reason || null, refund_status: obj.status || null, metadata: pickMetadata(obj.metadata) },
+    });
+  } else if (type === "charge.refunded") {
     email = obj.billing_details?.email || obj.receipt_email || null;
     Object.assign(base, {
       Order_ID: obj.invoice || obj.payment_intent || obj.id,
-      Payment_ID: obj.payment_intent || obj.id,
+      Payment_ID: obj.payment_intent || null,
       Customer_ID: obj.customer || null,
-      amount: (type === "charge.refunded" ? obj.amount_refunded : obj.amount) ?? null,
-      refs: { charge: obj.id, metadata: obj.metadata || {} },
+      amount: obj.amount_refunded ?? null,
+      amount_kind: "cumulative",
+      refs: { charge: obj.id, charge_amount: obj.amount ?? null, metadata: pickMetadata(obj.metadata) },
+    });
+  } else if (type === "charge.dispute.created") {
+    Object.assign(base, {
+      Order_ID: obj.payment_intent || obj.charge || obj.id,
+      Payment_ID: obj.payment_intent || null,
+      amount: obj.amount ?? null,
+      refs: { dispute: obj.id, charge: obj.charge || null, reason: obj.reason || null, dispute_status: obj.status || null, metadata: pickMetadata(obj.metadata) },
     });
   }
   base.email_fp = await emailFingerprint(email);
@@ -311,7 +358,7 @@ async function handleStripeEvent(event, env) {
     if (entry) {
       // 帳本登錄:永久保存(無 TTL)、每事件一 key、不覆寫既有 key。
       const asset = { ...toMrlAsset(summary, MRL.stripe_source), ledger: "commercial", schema: LEDGER_SCHEMA, entry, recorded_at: new Date().toISOString() };
-      await env.EVENTS_KV.put(kvKey("ledger:payment", `${entry.Payment_ID}:${eid}`), JSON.stringify(asset));
+      await env.EVENTS_KV.put(kvKey("ledger:payment", `${entry.Payment_ID || entry.Order_ID}:${eid}`), JSON.stringify(asset));
     } else {
       await env.EVENTS_KV.put(kvKey("evt:stripe", eid), JSON.stringify(toMrlAsset(summary, MRL.stripe_source)), { expirationTtl: 30 * DAY });
     }
@@ -400,9 +447,11 @@ export default {
       return json({ ok: true });
     }
 
-    // Stripe 收帳入口:未設密鑰 → 503(不收任何事件);驗簽失敗 → 400;通過 → 同步登錄帳本。
+    // Stripe 收帳入口:未設密鑰或未綁 KV → 503(不收任何事件,讓 Stripe 重送;否則回 200 等於默默丟帳);
+    // 驗簽失敗 → 400;通過 → 同步登錄帳本。
     if (url.pathname === "/stripe/webhook" && request.method === "POST") {
       if (!env.STRIPE_WEBHOOK_SECRET) return json({ ok: false, error: "stripe webhook not configured" }, 503);
+      if (!env.EVENTS_KV) return json({ ok: false, error: "ledger storage (EVENTS_KV) not bound" }, 503);
       const raw = await request.text();
       const valid = await verifyStripeSignature(env.STRIPE_WEBHOOK_SECRET, raw, request.headers.get("stripe-signature"));
       if (!valid) return json({ ok: false, error: "invalid signature" }, 400);

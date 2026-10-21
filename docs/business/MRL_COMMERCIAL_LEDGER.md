@@ -147,7 +147,8 @@ Schema:
 ### 9.3 收帳入口(本次建立)
 
 - 根源倉庫 worker `mrliouword-root` 新增 **`POST /stripe/webhook`**:驗 Stripe 簽章 → 正規化為第 4 節 schema → 寫入 KV `MRL:ledger:payment:<Payment_ID>:<event_id>`(永久、只增、不覆寫、外包 MRL 資產信封 `source=MRL_EXT_STRIPE`),以及 **`GET /ledger/payments?k=`** 供操作者讀取。細節見 `workers/notion-webhook/README.md`「收帳入口」。
-- 單元測試 `workers/notion-webhook/test/stripe_webhook.test.mjs`(CI 守門):驗簽(正確 / 竄改 / 過期 / 缺漏 / 多重 v1)、schema 映射、不存 email 原文、去重、操作者讀取、未設密鑰 503。
+- 登錄事件 8 個:`checkout.session.completed / async_payment_succeeded / async_payment_failed`、`invoice.paid / payment_failed`、`refund.created`(單筆退款 delta)、`charge.refunded`(累計值,標 `amount_kind=cumulative`)、`charge.dispute.created`。`Payment_ID` 只放真正的 PaymentIntent(訂閱 checkout、帳外收款為 null,相關 id 放 refs);另存 `tax`;`metadata` 只留對帳白名單鍵。
+- 單元測試 `workers/notion-webhook/test/stripe_webhook.test.mjs`(CI 守門):驗簽(正確 / 竄改 / 過期 / 缺漏 / 多重 v1)、schema 映射(含訂閱 / 爭議 / 退款 / 帳外收款)、不存 email 原文與白名單外 metadata、去重鍵晚於帳本寫入、操作者讀取(Bearer)、未設密鑰或未綁 KV 503。
 - 外部來源別名:`MRL_EXT_STRIPE` 已登錄 `registry/MRL_EXTERNAL_NAME_MAP.json`。
 
 ### 9.4 金流路線決定(INFERENCE,供 Root Owner 核准)
@@ -158,6 +159,6 @@ Schema:
 
 1. **綁撥款銀行帳戶**:Stripe 儀表板 → 設定 → 銀行帳戶與排程 → 新增 LLC 可收 USD 的帳戶(美國銀行或支援 USD 的台灣外幣帳戶,依 Stripe 支援清單),並決定撥款排程(目前 manual)。沒有這步,收到的錢只會停在 Stripe 餘額。
 2. **清掉逾期要求**:補代表人美國地址,或改由符合條件者擔任代表人(Atlas 客戶可洽 Stripe 支援)。
-3. **接上收帳入口**:Stripe → Developers → Webhooks → 新增端點 `…/stripe/webhook`、勾第 9.3 節七個事件 → 端點簽章密鑰放進 Worker 機密 `STRIPE_WEBHOOK_SECRET`(值進金庫,名字進程式;不貼聊天)。`GET /health` 的 `stripe_webhook_configured: true` **只代表密鑰已設,不代表 Stripe 會送事件過來**;完成的判準是:在 Stripe 該端點頁按「傳送測試事件」(`checkout.session.completed`)回 200,且 `GET /ledger/payments`(帶 `Authorization: Bearer <MRL_HANDSHAKE_KEY>`)看得到對應登錄。
+3. **接上收帳入口**:Stripe → Developers → Webhooks → 新增端點 `…/stripe/webhook`、勾第 9.3 節八個事件 → 端點簽章密鑰放進 Worker 機密 `STRIPE_WEBHOOK_SECRET`(值進金庫,名字進程式;不貼聊天)。`GET /health` 的 `stripe_webhook_configured: true` **只代表密鑰已設,不代表 Stripe 會送事件過來**;完成的判準是:在 Stripe 該端點頁按「傳送測試事件」(`checkout.session.completed`)回 200,且 `GET /ledger/payments`(帶 `Authorization: Bearer <MRL_HANDSHAKE_KEY>`)看得到對應登錄。
 
 完成 1–3 後,第一筆付款會自動出現在 `GET /ledger/payments`,並依第 8 節規則同步補登第 4/5 節表格。

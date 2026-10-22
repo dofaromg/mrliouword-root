@@ -10,6 +10,9 @@
 name = "mrliouword-root"
 main = "workers/notion-webhook/src/index.js"
 compatibility_date = "2026-08-01"
+# 加了 routes 之後 wrangler 預設會關掉 workers.dev 子網域;明確保留它:
+# Stripe webhook(…/stripe/webhook)、health、/pricing 的備援網址都在 workers.dev 上。
+workers_dev = true
 
 # 開啟 Workers Logs(存留日誌),方便讀 Notion 握手 token / 除錯
 [observability]

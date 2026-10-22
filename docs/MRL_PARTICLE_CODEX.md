@@ -90,3 +90,8 @@ Notion 定義層變動 (MRL_EXT_NOTION)
 - **可重生(怎麼過去,就怎麼回來)**:`python3 -m mrl_pipeline.runners.converge` 由 ingest 重生並比對(漂移 0);`tests/test_mrl_codex.py` 在 CI 守門(逐欄相等、驗證器、隱私/憑證守門)。
 - `genesis.sources.essence_meta` 保留本質索引的 Φ、≡、layer_map、vectors、resonance_keys、files_index。
 - `unresolved`:UNR-001 兩套分層未調和;UNR-002 形式化文件日期待找回;UNR-003 L1 Gate 1.3.0/1.2.2 待合流;UNR-004 公開邊界(私有封存 repo)待決。
+
+
+### 8.2 增量提案（2026-10-22）：UNR-001 跨分層對映
+
+[MRL UNR-001 R01](MRL_UNR001_CROSS_LAYER_MAPPING_20261022_R01.md) 與 [旁掛JSON](../registry/proposals/MRL_UNR001_CROSS_LAYER_MAPPING_20261022_R01.json) 已建立可審查提案。粒子本質、生成、系統運行、資料儲存分軸檢視；31顆原粒子與各自layer_scheme保留。UNR-001仍UNRESOLVED，所有新關係為proposed/INFERENCE；只有Root Owner核准後才可成為正式映射。

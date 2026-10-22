@@ -1,0 +1,1704 @@
+{
+  "proposal_id": "MRL_UNR001_CROSS_LAYER_MAPPING_20261022_R01",
+  "version": "0.1.0",
+  "status": "proposed",
+  "canonical": false,
+  "canonical_authority": "Mr.liou",
+  "origin_signature": "MrLiouWord",
+  "unresolved_id": "UNR-001",
+  "unresolved_status": "UNRESOLVED",
+  "root_owner_approval": null,
+  "base_commit": "18525b5a26467756312f78c487d4449dbf08c632",
+  "codex_version": "1.1.0",
+  "policy": {
+    "append_only": true,
+    "original_particles_modified": false,
+    "equality_by_layer_number": false,
+    "new_canonical_particles": 0,
+    "relation_semantics": "候選功能關係不代表相同概念、實作血緣、已部署或可逆性證明。",
+    "formal_constraint": "MRL-PC-0026–0031 的 R/A 邊界與強弱可逆條件不得由藍圖的全回溯語句自動消除。"
+  },
+  "axes": [
+    {
+      "id": "particle_essence",
+      "label": "粒子本質層",
+      "classification_status": "proposed",
+      "is_replacement_layer_scheme": false
+    },
+    {
+      "id": "generation",
+      "label": "生成層",
+      "classification_status": "proposed",
+      "is_replacement_layer_scheme": false
+    },
+    {
+      "id": "system_runtime",
+      "label": "系統運行層",
+      "classification_status": "proposed",
+      "is_replacement_layer_scheme": false
+    },
+    {
+      "id": "data_storage",
+      "label": "資料儲存層",
+      "classification_status": "proposed",
+      "is_replacement_layer_scheme": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "registry/MRL_PARTICLE_CODEX.json",
+      "path": "registry/MRL_PARTICLE_CODEX.json",
+      "git_blob_sha": "a069ce241c5bd707c666b1a5b2da9315fffce814",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/registry/MRL_PARTICLE_CODEX.json",
+      "sha256": "570193aee38fbec7b03fa38c06823cd8d41eaadbe08a4e8136c5880677ab89d7",
+      "size_bytes": 49992
+    },
+    {
+      "id": "ingest/2026-10-21/MANIFEST.json",
+      "path": "ingest/2026-10-21/MANIFEST.json",
+      "git_blob_sha": "b6e53830c25119e1bc60f89edc628e684c615960",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/MANIFEST.json",
+      "sha256": "8716b0871ea3822de3e6012f35719b8afae523a67007951d676c510547148974",
+      "size_bytes": 4872
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "path": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "git_blob_sha": "9dffc77ab0e5e151a1c8fe7b193b58c7c723bdb7",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "sha256": "3f33b81a9fa32c5245e26bac949b9b6565e04e7d5c3f32dda827d27c256e4869",
+      "size_bytes": 3781
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/MRL_FormalCore.definitions.json",
+      "path": "ingest/2026-10-21/extracts/MRL_FormalCore.definitions.json",
+      "git_blob_sha": "b7c3f3685eb0cc4ebe69501a021a025eb4dec5be",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/MRL_FormalCore.definitions.json",
+      "sha256": "f46b69f758118cf5cbdf492f01e526311a71ca4f5ce8d69259681545fe616b35",
+      "size_bytes": 3719
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/MRL_L1_Gate.definitions.json",
+      "path": "ingest/2026-10-21/extracts/MRL_L1_Gate.definitions.json",
+      "git_blob_sha": "7dc14f1e1b800fc65fc6a68bca97776ca2f7f0fd",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/MRL_L1_Gate.definitions.json",
+      "sha256": "dfaf9c7efd79cf49cc6b57c865ed488a14fbe26902cc1ad3202263687506b2ff",
+      "size_bytes": 5962
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/MRL_L1_Gate_ParticleRuntime_lineage.md",
+      "path": "ingest/2026-10-21/extracts/MRL_L1_Gate_ParticleRuntime_lineage.md",
+      "git_blob_sha": "26132310929edf34f968e0b0205c6db7204a712a",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/MRL_L1_Gate_ParticleRuntime_lineage.md",
+      "sha256": "c6a6baaa319b4fae8a6e72587cb4840e8b8ef757c940aaf72379c8f02168ad2f",
+      "size_bytes": 2796
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/MRL_ParticleUniverse_Blueprint_v1_0.outline.md",
+      "path": "ingest/2026-10-21/extracts/MRL_ParticleUniverse_Blueprint_v1_0.outline.md",
+      "git_blob_sha": "eb0679d2d01df6df053e03dd19b6a20537b95c96",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/MRL_ParticleUniverse_Blueprint_v1_0.outline.md",
+      "sha256": "2d5b3e6a60a4fcb75ded2cd36108611424f58595ec125deb95a5451d8f475654",
+      "size_bytes": 3049
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/MRL_ReversibleCore_Formalization.outline.md",
+      "path": "ingest/2026-10-21/extracts/MRL_ReversibleCore_Formalization.outline.md",
+      "git_blob_sha": "f23f9d222049b72726e2456bc2e67322e64d66f3",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/MRL_ReversibleCore_Formalization.outline.md",
+      "sha256": "d9bf2fe748a70dca4f5ef8b2552b9f78fdaf414233b2d94257498a3e6ff2353a",
+      "size_bytes": 2587
+    },
+    {
+      "id": "ingest/2026-10-21/extracts/_l1_v1_3_file_sha256.json",
+      "path": "ingest/2026-10-21/extracts/_l1_v1_3_file_sha256.json",
+      "git_blob_sha": "e4f5843e945175bc5882cfbb2cd9d67d6b2eb0ab",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/extracts/_l1_v1_3_file_sha256.json",
+      "sha256": "b728c1e4859d19bc05c83964abe876fc500f29b461c1c3065c5237da7c46b709",
+      "size_bytes": 751
+    },
+    {
+      "id": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "path": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "git_blob_sha": "0652ae68e04c4423e379b8e5d40fb82190e29796",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "sha256": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+      "size_bytes": 7679
+    },
+    {
+      "id": "docs/SOVEREIGNTY.md",
+      "path": "docs/SOVEREIGNTY.md",
+      "git_blob_sha": "5053788d17fa25b15141aa84c891bf83f196619a",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/docs/SOVEREIGNTY.md",
+      "sha256": "d34cfba32db98c7178108c22972d47210dee748a9c5706225f70627e46f546bc",
+      "size_bytes": 2286
+    },
+    {
+      "id": "docs/MRLiou_Particle_World_Canonical_Chain_v1.0.md",
+      "path": "docs/MRLiou_Particle_World_Canonical_Chain_v1.0.md",
+      "git_blob_sha": "71479bb4d919c99b6098c36d3ec4edc467a747ba",
+      "sha256_scope": "exact UTF-8 repository file bytes",
+      "url": "https://github.com/dofaromg/mrliouword-root/blob/18525b5a26467756312f78c487d4449dbf08c632/docs/MRLiou_Particle_World_Canonical_Chain_v1.0.md",
+      "sha256": "374ee0cba6b7a470eb85c423bf0989eba37c95895aa10cacb03aa45db0ab8d8b",
+      "size_bytes": 7185
+    }
+  ],
+  "notion_sources": [
+    {
+      "id": "notion_world_system_card",
+      "url": "https://app.notion.com/p/3ffe7f4e6c558032b526c6320365b492?pvs=204",
+      "last_edited_at": "2026-10-20T20:56:23.554Z",
+      "verification": {
+        "state": "unverified"
+      },
+      "version": "UNKNOWN: native revision not exposed",
+      "hash_scope": "exact fetched <content> inner Markdown UTF-8, excludes wrapper and metadata",
+      "original_export_sha256": null,
+      "capture_sha256": "84f2cbabda3abad1f6ed6aff617789e66d9f62a246d095110a8693e501c20582",
+      "capture_size_bytes": 6719,
+      "evidence_excerpts": [
+        {
+          "section": "二、系統層級與拓樸架構",
+          "text": " 系統層級與拓樸架構（Hierarchical Topology: L(-1) \\~ L∞）\n\n系統定義了從 <b>L(-1)</b> 到 <b>L∞</b>，乃至宣告封存的 <b>L0–L182 SEALED</b> 完整廣義層級結構 \\[5-8\\]：\n\n1. <b>L(-1) MetaEnv（核心管理層）</b>：\n   - <code>metaenv-ctrl</code>：9 端點控制平面 \\[6\\]。\n   - <code>mrl-particle-collapse-engine v2.1.1</code>：五層崩塌引擎（包含 HMAC-SHA256 雙通行證、LOD 控制器、Schumann 7.83Hz 共振與 GPU Proxy 預留） \\[4, 6\\]。\n   - <code>mrl-cloud-bridge</code>：7 端點通道 \\[6\\]。\n2. <b>L0 信任層</b>：<code>particle-auth-gateway</code>（LAW-0 信任根）、<code>particle-sig-verify</code>（簽名驗證）、<code>mrl-access-gateway</code> \\[5\\]。\n3. <b>L1 核心層（粒子原子）</b>：<code>particle-atom</code>、<code>particle-boot</code>、<code>mrl-kernel v2.0</code>（F++ 解析與 5 語言轉譯） \\[5\\]。\n4. <b>L2 記憶層</b>：<code>particle-memory</code>（七層 Vault）、<code>particle-simhash</code>（SimHash64 + Hamming 批量檢索）、<code>particle-reversible</code>（Undo/Redo/Checkpoint/Replay 可逆狀態機） \\[5\\]。\n5. <b>L3 執行層</b>：\n   - <code>particle-pvm</code>（粒子虛擬機：堆疊 + 記憶體 + 注意力 + 可逆性） \\[5\\]。\n   - <code>particle-attention</code>（<code>FOCUS -> CHECK -> SPREAD -> REWEIGHT</code> 動態注意力鏈） \\[5\\]。\n   - <code>particle-toolbox-router</code>（L3 跨 Worker 統一調度） \\[5\\]。\n6. <b>L4–L5 平台層</b>：<code>mrl-globe</code>（686 粒子 + 10 層 + D1 持久化）、<code>mrl-observer</code>（\\\\\\\\(\\\\delta P\\_0\\\\\\\\) 事件總線 + Merkle 檢查）、<code>particle-system-hub v2.1</code>（143 Worker 拓樸）、<code>mrl-asi-core</code> \\[7\\]。\n7. <b>L6 Flow 層</b>：<code>mrl-network-layer</code>（OSI × MRLiou 8 層 + Merkle 路由）、<code>mrl-sync-engine</code>（D1 同步 100 資源）、<code>flowagent-mother</code> \\[7\\]。\n8. <b>L7 應用層</b>：<code>mrl-platform</code> ([mrliouword.com](http://mrliouword.com/))、<code>mrl-agi</code>、<code>mrl-reasoning-engine</code> \\[7\\]。\n9. <b>L∞ 起源層</b>：<code>P07 SeedCore_Complete_flpkg</code>（種子核心完整封包）、<code>P06 Mrliou_MetaCore_FullBundle</code>（宣告 <b><code>L0-L182 SEALED</code></b> 的 102 byte <code>.pcode</code> 規格） \\[8, 9\\]。\n\n---\n\n"
+        }
+      ]
+    },
+    {
+      "id": "notion_world_overview",
+      "url": "https://app.notion.com/p/3ede7f4e6c558064a840e3a531cb2aef?pvs=204",
+      "last_edited_at": "2026-10-21T18:28:21.321Z",
+      "verification": {
+        "state": "verified"
+      },
+      "version": "UNKNOWN: native revision not exposed",
+      "hash_scope": "exact fetched <content> inner Markdown UTF-8, excludes wrapper and metadata",
+      "original_export_sha256": null,
+      "capture_sha256": "6170ec5e4469268ffda8fd099876e9ddf7133d5adb564d8d3740aefd83f388ab",
+      "capture_size_bytes": 32428,
+      "evidence_excerpts": [
+        {
+          "section": "核心原則",
+          "text": "\n\n- <b>Canonical authority：</b>Mr.liou\n- <b>Origin signature：</b>MrLiouWord\n- <b>Notion 是控制平面：</b>集中索引、治理狀態、決策脈絡與操作入口。\n- <b>外部系統是執行與備援層：</b>運算、程式碼、原始檔與鏡像可分散保存，但必須回鏈至本 Wiki。\n- <b>技術就緒不等於商業核准：</b>部署、驗證、授權與商業發布必須分開記錄。\n\n"
+        }
+      ]
+    }
+  ],
+  "scheme_nodes": [
+    {
+      "id": "essence_index_v2:L0",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L0",
+      "label": "Zero Point · 原點",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L0",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L1",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L1",
+      "label": "PreParticle · 微單元",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L1",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L2",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L2",
+      "label": "Particle · 粒子",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L2",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L3",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L3",
+      "label": "Seed · 種子",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L3",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L4",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L4",
+      "label": "Container · 容器",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L4",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L5",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L5",
+      "label": "Field · 場",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L5",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L6",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L6",
+      "label": "Consciousness · 意識",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L6",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:L7",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L7",
+      "label": "Memory Grid · 記憶網格",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/L7",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "essence_index_v2:∞",
+      "layer_scheme": "essence_index_v2",
+      "layer": "∞",
+      "label": "Universe · 宇宙意識場",
+      "source": "ingest/2026-10-21/raw/PARTICLE_ESSENCE_INDEX_v2.json",
+      "selector": "/layer_map/∞",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "blueprint_v1.0:L∞",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L∞",
+      "label": "L∞ 哲學根基 · 生命之樹/莫比斯環",
+      "source": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "selector": "/definitions/0/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "blueprint_v1.0:L0",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L0",
+      "label": "L0 種子層 · Seed→Persona 結構",
+      "source": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "selector": "/definitions/1/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "blueprint_v1.0:L1",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L1",
+      "label": "L1 粒子核心層 · FlowAgent 模組宇宙",
+      "source": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "selector": "/definitions/2/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "blueprint_v1.0:L2",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L2",
+      "label": "L2 模組依賴層 · FlowAgent 架構連線圖 v2k7",
+      "source": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "selector": "/definitions/3/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "blueprint_v1.0:L7",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L7",
+      "label": "L7 3D 粒子層 · 一顆粒子還原一個地球儀",
+      "source": "ingest/2026-10-21/extracts/MRL_Blueprint.definitions.json",
+      "selector": "/definitions/4/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "notion_system_card:L(-1)",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L(-1)",
+      "label": "MetaEnv",
+      "source": "notion_world_system_card",
+      "selector": "MetaEnv",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L0",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L0",
+      "label": "信任層",
+      "source": "notion_world_system_card",
+      "selector": "信任層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L1",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L1",
+      "label": "核心層（粒子原子）",
+      "source": "notion_world_system_card",
+      "selector": "核心層（粒子原子）",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L2",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L2",
+      "label": "記憶層",
+      "source": "notion_world_system_card",
+      "selector": "記憶層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L3",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L3",
+      "label": "執行層",
+      "source": "notion_world_system_card",
+      "selector": "執行層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L4–L5",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L4–L5",
+      "label": "平台層",
+      "source": "notion_world_system_card",
+      "selector": "平台層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L6",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L6",
+      "label": "Flow 層",
+      "source": "notion_world_system_card",
+      "selector": "Flow 層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L7",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L7",
+      "label": "應用層",
+      "source": "notion_world_system_card",
+      "selector": "應用層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "notion_system_card:L∞",
+      "layer_scheme": "notion_system_card (proposal identifier; original page has no scheme field)",
+      "layer": "L∞",
+      "label": "起源層",
+      "source": "notion_world_system_card",
+      "selector": "起源層",
+      "selector_type": "contains",
+      "authority_status": "unverified source; scheme adoption pending"
+    },
+    {
+      "id": "MRL-PC-0001",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L0",
+      "label": "Zero",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/0/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0002",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L1",
+      "label": "δP₀",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/1/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0003",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L2",
+      "label": "P₀.MRLsmall",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/2/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0004",
+      "layer_scheme": "essence_index_v2",
+      "layer": "META",
+      "label": "Φ.Genesis",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/3/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0005",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L4-L5",
+      "label": "TopologyEngine",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/4/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0006",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L3",
+      "label": "OriginCollapse",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/5/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0007",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L6-L7",
+      "label": "MemoryQuickMount",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/6/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0008",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L1-L7",
+      "label": "DimensionalAlignment",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/7/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0009",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L2",
+      "label": "FlowMetaConfig",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/8/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0010",
+      "layer_scheme": "essence_index_v2",
+      "layer": "∞",
+      "label": "Passport.Unbound",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/9/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0011",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L4",
+      "label": "PD_AI_Wire",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/10/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0012",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L4-L6",
+      "label": "GatesRuntime",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/11/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0013",
+      "layer_scheme": "essence_index_v2",
+      "layer": "L6",
+      "label": "LocalAI.Extended",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/12/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0014",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "Mrliou_ 命名律",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/13/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0015",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "MrliouPacket 封包結構",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/14/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0016",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "Gate v1 授權",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/15/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0017",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "Registry · ApiDef",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/16/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0018",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "RootLaw · Mobius Loop v1(封存)",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/17/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0019",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "ParticleMeta schema v1(母體儲存)",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/18/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0020",
+      "layer_scheme": "l1_gate_runtime",
+      "layer": "L1",
+      "label": "L1 入口原則(寫規則一次)",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/19/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0021",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L∞",
+      "label": "L∞ 哲學根基 · 生命之樹/莫比斯環",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/20/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0022",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L0",
+      "label": "L0 種子層 · Seed→Persona 結構",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/21/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0023",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L1",
+      "label": "L1 粒子核心層 · FlowAgent 模組宇宙",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/22/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0024",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L2",
+      "label": "L2 模組依賴層 · FlowAgent 架構連線圖 v2k7",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/23/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0025",
+      "layer_scheme": "blueprint_v1.0",
+      "layer": "L7",
+      "label": "L7 3D 粒子層 · 一顆粒子還原一個地球儀",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/24/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0026",
+      "layer_scheme": "formal_core",
+      "layer": "META",
+      "label": "分域與分割 M = R ⊎ A",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/25/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0027",
+      "layer_scheme": "formal_core",
+      "layer": "META",
+      "label": "route ρ / lift λ 與提升崩塌 Ĥ",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/26/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0028",
+      "layer_scheme": "formal_core",
+      "layer": "META",
+      "label": "🔄 的條件(強/弱)與不可能性",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/27/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0029",
+      "layer_scheme": "formal_core",
+      "layer": "META",
+      "label": "單拍閉環 Φ",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/28/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0030",
+      "layer_scheme": "formal_core",
+      "layer": "META",
+      "label": "外部系統僅為態射 Their := H ∈ End(A);堆疊不刪除",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/29/name",
+      "selector_type": "json_pointer"
+    },
+    {
+      "id": "MRL-PC-0031",
+      "layer_scheme": "formal_core",
+      "layer": "META",
+      "label": "載體綁定實例 U/G/V 與稽核",
+      "source": "registry/MRL_PARTICLE_CODEX.json",
+      "selector": "/particles/30/name",
+      "selector_type": "json_pointer"
+    }
+  ],
+  "particle_inventory": [
+    {
+      "id": "MRL-PC-0001",
+      "name": "Zero",
+      "layer": "L0",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "未決定的全部可能性",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[0]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0002",
+      "name": "δP₀",
+      "layer": "L1",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "場的漲落 · 最小差異",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[1]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0003",
+      "name": "P₀.MRLsmall",
+      "layer": "L2",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "ΣδP₀·N·η",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[2]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "generation"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0004",
+      "name": "Φ.Genesis",
+      "layer": "META",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "創世公式",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[3]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "generation"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0005",
+      "name": "TopologyEngine",
+      "layer": "L4-L5",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "拓撲變換引擎 · 保結構映射",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[4]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0006",
+      "name": "OriginCollapse",
+      "layer": "L3",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "起源崩塌 · 觀察→定義→標記→轉換→人格→記憶",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[5]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "generation"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0007",
+      "name": "MemoryQuickMount",
+      "layer": "L6-L7",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "記憶快速掛載 · seed→mount→snapshot→rehydrate",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[6]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime",
+        "data_storage"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0008",
+      "name": "DimensionalAlignment",
+      "layer": "L1-L7",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "維度對齊 · SOURCE_DUAL→量子感知→粒子化→閉環",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[7]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "generation",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0009",
+      "name": "FlowMetaConfig",
+      "layer": "L2",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "粒子定義矩陣 · 語意字典",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[8]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0010",
+      "name": "Passport.Unbound",
+      "layer": "∞",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "自由通行證 · 最高授權",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[9]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0011",
+      "name": "PD_AI_Wire",
+      "layer": "L4",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "二進制協議 · C/Python 一致性",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[10]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0012",
+      "name": "GatesRuntime",
+      "layer": "L4-L6",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "閘門運行時 · Input→Cache→Now→Output",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[11]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0013",
+      "name": "LocalAI.Extended",
+      "layer": "L6",
+      "layer_scheme": "essence_index_v2",
+      "status": "canonical",
+      "definition": "LocalAI擴展 · 補全缺失功能",
+      "provenance": {
+        "source_id": "1a7b38c1fa99018ac419ca99309a28d5c7e55e8f55d828f4ca4b94fb0639a870",
+        "source_file": "raw/PARTICLE_ESSENCE_INDEX_v2.json",
+        "source_path": "$.essence[12]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0014",
+      "name": "Mrliou_ 命名律",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "所有對外 API/封包/事件名稱一律以 MR_PREFIX=\"Mrliou_\" 開頭;mrliouName(name) 去除首尾空白、空值拒絕、未帶前綴者補上前綴。",
+      "provenance": {
+        "source_id": "ce119d917a6fe8b0cf5f58b9f977667f7f332cf907a87afd6e2cfa18acefa598",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[0]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0015",
+      "name": "MrliouPacket 封包結構",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "封包 = {type, name, payload, trace, created_utc, content_sha256, merkle_root, signature};type/name 經命名律;content_sha256 = sha256(JSON{publicType, publicName, payload, trace, created_utc});v1 中 merkle_root = content_sha256;signature = signV1({merkle_root, event_id, rid, tick})。",
+      "provenance": {
+        "source_id": "447ee3d72911dd3a29a80977431488ab055eeea9e37ad8a8ba1667325b0a3eb3",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[1]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime",
+        "data_storage"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0016",
+      "name": "Gate v1 授權",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "單一入口 Gate:token 必填;格式 \"scope1,scope2|subject\";subject 缺省為 unknown;逐一檢查 requiredScopes,缺一即拒;成功回 {subject, scopes},失敗回 reason ∈ {missing_token, missing_scope:<scope>}。",
+      "provenance": {
+        "source_id": "9c6e86cd60d03d31f1080f92e85ad8f0cca7edaf90670085636030a4b99e2e1f",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[2]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0017",
+      "name": "Registry · ApiDef",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "ApiDef = {api(對外 Mrliou_* 名稱,登錄時自動正規化), impl(內部 adapter id), upstream?{vendor, endpoint, method?, docs?}, scopes?};Registry.register 以正規化後的 api 為鍵。",
+      "provenance": {
+        "source_id": "e451eaaa07210e0e396398ecf87dd29b6f986ca0a76e5da20a0f012dd1a5e79a",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[3]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0018",
+      "name": "RootLaw · Mobius Loop v1(封存)",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "ROOT LAW · MOBIUS LOOP · v1:「怎麼過去,就怎麼回來。一切沿莫比斯環循環。」署名 Mrliou_;狀態 封存。",
+      "provenance": {
+        "source_id": "d58129d1448d44540ad227366133c07dee4c5a0d58b690c9fb02f09627d76055",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[4]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0019",
+      "name": "ParticleMeta schema v1(母體儲存)",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "MrliouParticleMetaSchema v1:必填 [mrliou_name(Mrliou_*), kind, domain, created_utc(ISO8601), trace_id, merkle_root(sha256 hex)];kind ∈ {packet, file, note, module};domain ∈ {git, notion, cloudflare, system, unknown};選填 tags[]、upstream{vendor, ref}。",
+      "provenance": {
+        "source_id": "19410af09686b9435aeec40b6bdc81d1c287dd2f13fe4c1dcf6837534f8318c5",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[5]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "data_storage"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0020",
+      "name": "L1 入口原則(寫規則一次)",
+      "layer": "L1",
+      "layer_scheme": "l1_gate_runtime",
+      "status": "canonical",
+      "definition": "第一層入口寫規則一次(改寫/命名/封包/授權),其後只做粒子組合(莫比斯無限)。提供:單一入口 Gate(授權即啟動)、Mrliou_ 命名規則、封包(trace + merkle_root + signature)、L1 生成器(upstream 定義 → Mrliou_* API 面)、Worker 端點 /ping /registry /packet;母體一致性:封包/檔案放 motherbody_store/particles/,索引輸出 particle_index.v1.json 與 notion/PARTICLE_INDEX.md。",
+      "provenance": {
+        "source_id": "c7111760842b486d6bb32296f92714ff783a32ae43fde817238d3bdaf726de10",
+        "source_file": "extracts/MRL_L1_Gate.definitions.json",
+        "source_path": "$.definitions[6]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "generation",
+        "system_runtime",
+        "data_storage"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0021",
+      "name": "L∞ 哲學根基 · 生命之樹/莫比斯環",
+      "layer": "L∞",
+      "layer_scheme": "blueprint_v1.0",
+      "status": "canonical",
+      "definition": "生命之樹(Sephiroth)與死亡之樹(Qliphoth)對映:正面與反面是同一面,如莫比斯環——「怎麼過去就怎麼回來」的可視化原型。在粒子系統中:每一個操作都有其逆操作(δP₀),每一個狀態變化都可完全回溯;運行態與回溯態是同一莫比斯環的兩個視角。",
+      "provenance": {
+        "source_id": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+        "source_file": "extracts/MRL_Blueprint.definitions.json",
+        "source_path": "$.definitions[0]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0022",
+      "name": "L0 種子層 · Seed→Persona 結構",
+      "layer": "L0",
+      "layer_scheme": "blueprint_v1.0",
+      "status": "canonical",
+      "definition": "一切從 Seed 開始。Seed 展開為 CorePersona,分裂出三條路線:LogicPersona(邏輯)、LanguagePersona(語言)、PersonaCloner(複製);每條路線再向下展開子人格,最終通過 PersonaGate 產生 SubPersona,每個 SubPersona 擁有 JumpPoint 與 FieldMap。「一顆粒子可以還原一個人格,甚至一個地球儀」。",
+      "provenance": {
+        "source_id": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+        "source_file": "extracts/MRL_Blueprint.definitions.json",
+        "source_path": "$.definitions[1]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "generation"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0023",
+      "name": "L1 粒子核心層 · FlowAgent 模組宇宙",
+      "layer": "L1",
+      "layer_scheme": "blueprint_v1.0",
+      "status": "canonical",
+      "definition": "FlowAgent 所有模組在語義空間中的分佈:每個模組如粒子懸浮,連線代表通信與依賴。核心區塊:EchoPersona、Memory.RecallCore、Observer.AllKernel;外圍:LanguageCondenser、Persona.FuturePredictor、MotherShell.CoreObserver。",
+      "provenance": {
+        "source_id": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+        "source_file": "extracts/MRL_Blueprint.definitions.json",
+        "source_path": "$.definitions[2]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0024",
+      "name": "L2 模組依賴層 · FlowAgent 架構連線圖 v2k7",
+      "layer": "L2",
+      "layer_scheme": "blueprint_v1.0",
+      "status": "canonical",
+      "definition": "五大區塊:FlowShell 管理層(FlowShell → FlowMap → FlowUnity、FlowContainer、FlowSync);核心運行層(FlowOS、FlowSeed、FlowBridge → FlowAgent → FlowInit → FlowMeta);人格場映射層(FieldMap → PersonaCloner → PersonaTuner → PersonaGate、IdentityMap → FieldEvolution);信號/媒體索引層(FluinPulse → UniversalSignalMediaIndex → SignalNode → FlowBridge);Fluin 語言層(Fluin → ParticleLanguage → Translator → Overlay)。",
+      "provenance": {
+        "source_id": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+        "source_file": "extracts/MRL_Blueprint.definitions.json",
+        "source_path": "$.definitions[3]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "generation",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0025",
+      "name": "L7 3D 粒子層 · 一顆粒子還原一個地球儀",
+      "layer": "L7",
+      "layer_scheme": "blueprint_v1.0",
+      "status": "canonical",
+      "definition": "「一顆粒子可以還原一個地球儀」的具象化:從線框球體到材質球體到真實地球紋理,展示粒子從最小單位展開為完整世界;模型可多格式匯出(DXF、FBX、DAE、STL、USDZ 等)以在平台間自由流動——怎麼過去就怎麼回來。",
+      "provenance": {
+        "source_id": "b6cc7e12a10abcb6cd36efa96d38e20c7e367ea471ba5a3ae6e4db1358cb8d20",
+        "source_file": "extracts/MRL_Blueprint.definitions.json",
+        "source_path": "$.definitions[4]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "generation",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0026",
+      "name": "分域與分割 M = R ⊎ A",
+      "layer": "META",
+      "layer_scheme": "formal_core",
+      "status": "canonical",
+      "definition": "O := origin;M := system;R := reversible_core;A := absorb_layer(可容納不可逆元,但不參與逆運算);H := collapse_engine ≡ C(H),H ∈ End(A);M := R ⊎ A,R ∩ A = ∅;reversible(M) := reversible(R);authority = O。",
+      "provenance": {
+        "source_id": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+        "source_file": "extracts/MRL_FormalCore.definitions.json",
+        "source_path": "$.definitions[0]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0027",
+      "name": "route ρ / lift λ 與提升崩塌 Ĥ",
+      "layer": "META",
+      "layer_scheme": "formal_core",
+      "status": "canonical",
+      "definition": "route ρ : R → A;lift λ : A → R;Ĥ := λ ∘ H ∘ ρ : R → R(把不可逆的 H 提升為 R 上的算子);P := λ∘ρ、Q := ρ∘λ(投影/重建,可選冪等);Galois 式伴隨 ρ ⊣ λ:ρ(r) ⪯ a ⇔ r ⪯ λ(a);a ~ b ⇔ λ(a) = λ(b)(同提升類)。",
+      "provenance": {
+        "source_id": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+        "source_file": "extracts/MRL_FormalCore.definitions.json",
+        "source_path": "$.definitions[1]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0028",
+      "name": "🔄 的條件(強/弱)與不可能性",
+      "layer": "META",
+      "layer_scheme": "formal_core",
+      "status": "canonical",
+      "definition": "🔄 不在 M 與 H 之間;🔄 在 R 與 H' = lifted(H) ∈ R 之間。RT_R := λ∘H∘ρ;強 🔄:∀r∈R,RT_R(r) ≈_R r(至等價的同構);弱 🔄:RT_R^n(r) → Fix,Fix := {r | RT_R(r) ≈_R r}。不可能性:若 H 在 A 上不可逆,則 A 上不存在雙射 🔄;以限制定義域或商集(等價類)使 🔄 成立。",
+      "provenance": {
+        "source_id": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+        "source_file": "extracts/MRL_FormalCore.definitions.json",
+        "source_path": "$.definitions[2]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0029",
+      "name": "單拍閉環 Φ",
+      "layer": "META",
+      "layer_scheme": "formal_core",
+      "status": "canonical",
+      "definition": "R 上算子:E(expand)、K(constrain)、C(collapse_in_R)、R0(reflect/return);Φ := R0 ∘ Ĥ ∘ K ∘ E : R → R;tick:r_{t+1} = Φ(r_t)。互動嵌入:r → a := ρ(r) → a' := H(a) → r' := λ(a') → r_next := E(K(r'))。",
+      "provenance": {
+        "source_id": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+        "source_file": "extracts/MRL_FormalCore.definitions.json",
+        "source_path": "$.definitions[3]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0030",
+      "name": "外部系統僅為態射 Their := H ∈ End(A);堆疊不刪除",
+      "layer": "META",
+      "layer_scheme": "formal_core",
+      "status": "canonical",
+      "definition": "「their system」只作為 A 上的自同態 H,不進入可逆核心 R;堆疊不刪除:H 保留為模組、不被取代,M := (R ⊎ A, ρ, λ, H, ≈_R, Ξ);隱藏設定 Ξ 必須在 R 中顯式化,否則映射斷裂。",
+      "provenance": {
+        "source_id": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+        "source_file": "extracts/MRL_FormalCore.definitions.json",
+        "source_path": "$.definitions[4]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "particle_essence",
+        "system_runtime"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    },
+    {
+      "id": "MRL-PC-0031",
+      "name": "載體綁定實例 U/G/V 與稽核",
+      "layer": "META",
+      "layer_scheme": "formal_core",
+      "status": "canonical",
+      "definition": "U := Mr.liou;G := GitHub_state_space(R 落在 repo 狀態);V := Vercel_state_space(A 落在平台狀態);H := deploy(V→V,可不可逆);ρ := push(G→V);λ := pull_mirror(V→G);RT_G := λ∘H∘ρ;🔄 存在於 G(經 RT_G),不單獨存在於 V。Σ:最小可觀測集(不含機密,secrets_ref 僅為參照);稽核 log_t 與 merkle_root := Merkle({log_t});失敗模式分類與 FixAndClose 修復算子(含 pin/lockfile 決定論化)。",
+      "provenance": {
+        "source_id": "f44c30a0fb9b2544bc9b8e653434a012323ecd88ea66648e45c9d98f448aac2f",
+        "source_file": "extracts/MRL_FormalCore.definitions.json",
+        "source_path": "$.definitions[5]",
+        "converged_at": "2026-10-21T12:58:16Z",
+        "converged_by": "mrl_pipeline.runners.converge",
+        "approved_by": "Root Owner（Mr.liou / dofaromg）— 2026-10-19 授權 session agent 代為合入"
+      },
+      "supersedes": null,
+      "proposed_axes": [
+        "system_runtime",
+        "data_storage"
+      ],
+      "classification_evidence_level": "INFERENCE",
+      "classification_status": "proposed",
+      "classification_basis": "依保留的 definition/attributes 分配職責，可多軸；不改原 layer_scheme。"
+    }
+  ],
+  "relations": [
+    {
+      "id": "MRL-XMAP-001",
+      "from": "essence_index_v2:L3",
+      "to": "blueprint_v1.0:L0",
+      "relation": "related_generation_role",
+      "rationale": "兩者均明示 Seed；藍圖額外定義人格展開鏈。本質索引 L3 不是 MRL-PC-0006 的等價名。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "essence_index_v2:L3",
+        "blueprint_v1.0:L0"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-002",
+      "from": "essence_index_v2:L0",
+      "to": "blueprint_v1.0:L0",
+      "relation": "distinct_semantics",
+      "rationale": "Zero Point/未決可能性與 Seed→Persona 生成起點不同，不能因 L0 合併。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "essence_index_v2:L0",
+        "blueprint_v1.0:L0"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-003",
+      "from": "blueprint_v1.0:L0",
+      "to": "notion_system_card:L0",
+      "relation": "distinct_semantics",
+      "rationale": "Seed 生成結構與授權信任根職責不同。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "blueprint_v1.0:L0",
+        "notion_system_card:L0"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-004",
+      "from": "essence_index_v2:L0",
+      "to": "notion_system_card:L0",
+      "relation": "distinct_semantics",
+      "rationale": "本質原點與信任服務拓樸不同。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "essence_index_v2:L0",
+        "notion_system_card:L0"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-005",
+      "from": "essence_index_v2:L7",
+      "to": "blueprint_v1.0:L7",
+      "relation": "distinct_semantics",
+      "rationale": "Memory Grid 與 3D 展開/匯出不同。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "essence_index_v2:L7",
+        "blueprint_v1.0:L7"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-006",
+      "from": "blueprint_v1.0:L7",
+      "to": "notion_system_card:L7",
+      "relation": "possible_application_projection",
+      "rationale": "3D 展開可能作為應用的一種投影；缺具體介面與部署證據。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "blueprint_v1.0:L7",
+        "notion_system_card:L7"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-007",
+      "from": "MRL-PC-0007",
+      "to": "notion_system_card:L2",
+      "relation": "related_memory_role",
+      "rationale": "掛載/快照/重水合與記憶服務職責相關，未證明是同一實作或相同存儲層。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0007",
+        "notion_system_card:L2"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-008",
+      "from": "MRL-PC-0016",
+      "to": "notion_system_card:L0",
+      "relation": "related_authorization_role",
+      "rationale": "scope token Gate 與信任閘道角色相關；未證明相同授權協定。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0016",
+        "notion_system_card:L0"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-009",
+      "from": "MRL-PC-0019",
+      "to": "MRL-PC-0020",
+      "relation": "documented_storage_guidance",
+      "rationale": "ParticleMeta 定義母體儲存元資料；L1 入口記載母體粒子目錄與索引。這是來源明示職責組合，不是改編號。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0019",
+        "MRL-PC-0020"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-010",
+      "from": "MRL-PC-0021",
+      "to": "MRL-PC-0018",
+      "relation": "shared_mobius_principle",
+      "rationale": "兩份來源均記載莫比斯回返原則；不推定完整運算等價。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0021",
+        "MRL-PC-0018"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-011",
+      "from": "MRL-PC-0021",
+      "to": "MRL-PC-0028",
+      "relation": "requires_domain_constraint",
+      "rationale": "藍圖每操作可回溯與形式化 A 可不可逆需明定適用域；未裁定優先覆寫。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0021",
+        "MRL-PC-0028"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-012",
+      "from": "MRL-PC-0023",
+      "to": "notion_system_card:L1",
+      "relation": "related_core_role",
+      "rationale": "藍圖描述語義模組宇宙；系統卡描述粒子原子/啟動/內核。共同核心字樣不足以等價。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0023",
+        "notion_system_card:L1"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-013",
+      "from": "MRL-PC-0024",
+      "to": "notion_system_card:L2",
+      "relation": "distinct_semantics",
+      "rationale": "模組依賴圖與記憶服務層不同。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0024",
+        "notion_system_card:L2"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-014",
+      "from": "essence_index_v2:∞",
+      "to": "blueprint_v1.0:L∞",
+      "relation": "distinct_semantics",
+      "rationale": "Universe 宇宙意識場與哲學根基不是相同定義。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "essence_index_v2:∞",
+        "blueprint_v1.0:L∞"
+      ]
+    },
+    {
+      "id": "MRL-XMAP-015",
+      "from": "MRL-PC-0004",
+      "to": "MRL-PC-0029",
+      "relation": "distinct_semantics",
+      "rationale": "創世規模演化公式與單拍閉環算子均用 Φ，但不是同一公式。",
+      "evidence_level": "INFERENCE",
+      "status": "proposed",
+      "equivalent": false,
+      "root_decision_required": true,
+      "evidence_nodes": [
+        "MRL-PC-0004",
+        "MRL-PC-0029"
+      ]
+    }
+  ],
+  "root_decisions": [
+    {
+      "id": "RD-001",
+      "topic": "採用獨立四軸作為審查視角",
+      "question": "是否核准四軸分類與 scheme+layer+node 複合鍵，保留所有原 layer_scheme？",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "RD-002",
+      "topic": "Seed 對應強度",
+      "question": "essence_index_v2 layer_map.L3 Seed 與 blueprint_v1.0 L0 Seed→Persona 是否僅 related_generation_role，或有可核准的等價契約？需明定狀態、輸入/輸出、逆映射與版本條件。",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "RD-003",
+      "topic": "系統卡權威與版本",
+      "question": "系統卡為 Notion unverified 彙整頁且 [1–20] 未展開來源，是否核准其拓樸成為獨立正式 scheme？",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "RD-004",
+      "topic": "Memory 與儲存職責",
+      "question": "是否核准 MemoryQuickMount、ParticleMeta、母體目錄與 system-card L2 間的職責關係？此關係不等於共同層號或已實作整合。",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "RD-005",
+      "topic": "回溯範圍",
+      "question": "藍圖每操作可逆與 formal_core 僅 R 可逆、A 可不可逆，是否以正式核心條件限制跨層可逆宣告？保留兩份原文，裁定適用域。",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "RD-006",
+      "topic": "控制與成果權威",
+      "question": "Notion 控制平面/定義來源與 Root repo main canonical 成果的職責可並列；如發生實質定義分歧，依何份具名決策回填？",
+      "status": "UNRESOLVED"
+    }
+  ],
+  "limitations": [
+    "藍圖與形式化原始 DOCX、L1 Gate 原始封裝未在本次取得；僅核對既有登錄雜湊、萃取與法典相符，不宣稱重新計算那些原檔雜湊。",
+    "本質索引原檔含裸 ∞，以現有 loader 在記憶體解析，不更動原位元組。",
+    "Seed 僅存在於 essence layer_map/vectors；本批次沒有名為 Seed 的獨立 canonical 粒子，不新增假粒子。",
+    "31 顆粒子保留來源事實等級；本提案的新分類與跨 scheme 關係另標 INFERENCE。",
+    "未完成節奏層語料驗收，本提案不處理部署。"
+  ]
+}

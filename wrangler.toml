@@ -10,6 +10,9 @@
 name = "mrliouword-root"
 main = "workers/notion-webhook/src/index.js"
 compatibility_date = "2026-08-01"
+# 加了 routes 之後 wrangler 預設會關掉 workers.dev 子網域;明確保留它:
+# Stripe webhook(…/stripe/webhook)、health、/pricing 的備援網址都在 workers.dev 上。
+workers_dev = true
 
 # 開啟 Workers Logs(存留日誌),方便讀 Notion 握手 token / 除錯
 [observability]
@@ -21,3 +24,14 @@ enabled = true
 # 建好的 id 可在 Cloudflare 儀表板 → 儲存 → KV 查看;要固定下來時再回填 id。
 [[kv_namespaces]]
 binding = "EVENTS_KV"
+
+# ── 定價頁路由:mrliouword.com/pricing 由本 worker 提供 ──
+# 比既有官網 worker 的 `mrliouword.com/*` 更精確,Cloudflare 以最精確路由優先,不影響首頁。
+# 需要部署用的 token 有該 zone 的 Workers Routes 權限;失敗時 build log 會顯示,屆時改在儀表板手動加路由。
+[[routes]]
+pattern = "mrliouword.com/pricing*"
+zone_name = "mrliouword.com"
+
+[[routes]]
+pattern = "www.mrliouword.com/pricing*"
+zone_name = "mrliouword.com"

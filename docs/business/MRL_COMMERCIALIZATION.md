@@ -107,7 +107,7 @@ Enterprise 年約議價   專屬額度、SLA 保證、DPA、發票/合約 ——
 第 3–6 週   可收費的最小 API 產品
   □ mrliouhan.ai 選定 1–2 個最有價值的 API 能力對外
   □ API 金鑰 + 用量計量落地（gateway 層）
-  □ 定價頁 + 文件頁上線（mrliouword.com）
+  □ 定價頁 + 文件頁上線（mrliouword.com）→ 定價頁 `/pricing` 2026-10-22 建置(帳本 §9.6);文件頁待辦
   □ TIPO 商標檢索與送件
 
 第 7–12 週  正式營運

@@ -8,6 +8,8 @@
 //   POST /stripe/webhook     接收 Stripe 事件 → 驗簽 → 商業帳本登錄(docs/business/MRL_COMMERCIAL_LEDGER.md §4)
 //   GET  /ledger/payments    操作者讀取帳本登錄(需 MRL_HANDSHAKE_KEY,走 Authorization: Bearer 標頭)
 //   GET  /health             健康 + 設定狀態
+//   GET  /pricing            MRL 定價頁(mrliouword.com/pricing;路由見 wrangler.toml)
+//   GET  /pricing.json       定價目錄(MRL 資產,供帳本對照)
 //
 // MRL 資產標記原則(治理):
 //   這支 worker 是 MRL 系統的「自動化出口」。任何從這裡送出去 / 記下來的資料
@@ -20,6 +22,8 @@
 //   FORWARD_URL (可選)     Notion 驗證通過的事件要轉發到哪(你的「動作」端點)
 //   EVENTS_KV  (可選)      事件記錄 / 去重 / 死信佇列 / 握手 token 暫存 / 商業帳本 用 KV(有綁才用,沒有就略過)
 //   MRL_HANDSHAKE_KEY      你自設的操作者金鑰:一次性取出 Notion 握手 token、讀取帳本——放 Secrets Store
+
+import { pricingHtml, PRICING_CATALOG } from "./pricing.js";
 
 const enc = new TextEncoder();
 
@@ -54,6 +58,19 @@ function json(data, status = 200) {
     headers: {
       "content-type": "application/json; charset=utf-8",
       // 回應也標記 MRL 資產出處
+      "x-mrl-asset": "true",
+      "x-mrl-namespace": MRL.namespace,
+      "x-mrl-origin-signature": MRL.origin_signature,
+    },
+  });
+}
+
+function html(markup, status = 200) {
+  return new Response(markup, {
+    status,
+    headers: {
+      "content-type": "text/html; charset=utf-8",
+      "cache-control": "public, max-age=300",
       "x-mrl-asset": "true",
       "x-mrl-namespace": MRL.namespace,
       "x-mrl-origin-signature": MRL.origin_signature,
@@ -384,6 +401,14 @@ export { verifyStripeSignature, ledgerEntryFromEvent, LEDGER_SCHEMA };
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    // 定價頁:mrliouword.com/pricing(路由在 wrangler.toml);目錄資料見 src/pricing.js
+    if ((url.pathname === "/pricing" || url.pathname === "/pricing/") && request.method === "GET") {
+      return html(pricingHtml());
+    }
+    if (url.pathname === "/pricing.json" && request.method === "GET") {
+      return json({ ...PRICING_CATALOG, emitted_by: MRL.emitted_by });
+    }
 
     if (url.pathname === "/health" && request.method === "GET") {
       const signingSecret = await getSigningSecret(env);

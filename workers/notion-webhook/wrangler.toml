@@ -13,6 +13,17 @@ enabled = true
 [[kv_namespaces]]
 binding = "EVENTS_KV"
 
+# ── 定價頁路由:mrliouword.com/pricing 由本 worker 提供 ──
+# 比既有官網 worker 的 `mrliouword.com/*` 更精確,Cloudflare 以最精確路由優先,不影響首頁。
+# 需要部署用的 token 有該 zone 的 Workers Routes 權限;失敗時 build log 會顯示,屆時改在儀表板手動加路由。
+[[routes]]
+pattern = "mrliouword.com/pricing*"
+zone_name = "mrliouword.com"
+
+[[routes]]
+pattern = "www.mrliouword.com/pricing*"
+zone_name = "mrliouword.com"
+
 # ── 可選:綁自訂網域路由 ──
 # [[routes]]
 # pattern = "notion-hook.mrliouword.com/*"

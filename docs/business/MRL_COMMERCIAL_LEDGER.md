@@ -162,3 +162,22 @@ Schema:
 3. **接上收帳入口**:Stripe → Developers → Webhooks → 新增端點 `…/stripe/webhook`、勾第 9.3 節八個事件 → 端點簽章密鑰放進 Worker 機密 `STRIPE_WEBHOOK_SECRET`(值進金庫,名字進程式;不貼聊天)。`GET /health` 的 `stripe_webhook_configured: true` **只代表密鑰已設,不代表 Stripe 會送事件過來**;完成的判準是:在 Stripe 該端點頁按「傳送測試事件」(`checkout.session.completed`)回 200,且 `GET /ledger/payments`(帶 `Authorization: Bearer <MRL_HANDSHAKE_KEY>`)看得到對應登錄。
 
 完成 1–3 後,第一筆付款會自動出現在 `GET /ledger/payments`,並依第 8 節規則同步補登第 4/5 節表格。
+
+### 9.6 定價頁(2026-10-22 建置)— 把付款連結接上官網
+
+- **位置**:`https://mrliouword.com/pricing`(路由 `mrliouword.com/pricing*` → worker `mrliouword-root`;workers.dev 同路徑亦可達)。目錄資料 `workers/notion-webhook/src/pricing.js`,`GET /pricing.json` 回同一份(MRL 資產標記)。
+- **接上的 8 條 Stripe 付款連結(FACT,2026-10-22 以 line items 核對)**:
+
+| 頁面項目 | 價格 | Payment Link | Price |
+|------|------|------|------|
+| MRL AI Pro 月費 | NT$499/月 | `plink_1TsLQLCpDvQ01veflZHUOXxb` | `price_1TWs0BCpDvQ01vefGDdm8GnN` |
+| MRL AI Enterprise 月費 | NT$1,999/月 | `plink_1TsLQQCpDvQ01vefid1J4ZIp`(舊連結 `plink_1TY1OzCpDvQ01vef830GbIUh` 同品) | `price_1TWs0PCpDvQ01vefYvJZpqxQ` |
+| MRL AI 月費(早期方案) | NT$299/月 | `plink_1TsLQcCpDvQ01veflQDL28xv` | `price_1TGxGaCpDvQ01vef8FU00LPO` |
+| 100 點數包 | NT$99 | `plink_1TsLQWCpDvQ01vefgjhFDVc8`(舊連結 `plink_1TY1OuCpDvQ01vef8pi0g2MB` 同品) | `price_1TWs0dCpDvQ01vef9mp6nzLg` |
+| 500 點數包 | NT$399 | `plink_1TY1OxCpDvQ01vefHmDpjZqw` | `price_1TWs0qCpDvQ01vefuvY01HrO` |
+| 1,000 點數包 | NT$699 | `plink_1TsLQiCpDvQ01vefMmy9zS1P` | `price_1TsJ3uCpDvQ01vef9N7ni4WE` |
+
+- **MRL APIWorks 方案**(DL580 主權自架/一次性建構費、Pro US$29 月起、私有雲洽談)連到 `mrl-apiworks.z814241.workers.dev` 的方案與聯絡區塊;其 Pro 結帳由該站自行開 Stripe Checkout(美金)。
+- **沒有付款連結的 58 項商品**(粒子服務、引擎、解決方案等)不在頁上編造按鈕;要上架時先在 Stripe 建 Payment Link 再加入目錄。
+- **證據等級**:連結/價格/收款方為 FACT;各方案「功能描述」逐字取自 Stripe 商品描述(案主自寫),屬 **CLAIM**(設定 ≠ 交付,例如 Enterprise 的 20 席、SLA 99.9%,需對應實際產品與 `MRL_SLA.md`)。
+- **路由前提(UNRESOLVED 至部署驗證)**:`mrliouword.com` zone 需與部署帳號同一 Cloudflare 帳號,且 Workers Builds 的部署 token 具 Workers Routes 權限;否則改在儀表板手動加路由 `mrliouword.com/pricing*` → `mrliouword-root`。

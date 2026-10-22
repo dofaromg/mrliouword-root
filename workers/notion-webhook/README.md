@@ -9,6 +9,7 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 |------|------|
 | `POST /notion/webhook` | 接收 Notion 事件(含首次驗證握手) |
 | `GET /health` | 健康 + 設定狀態(secret/kv/handshake-key/forward 是否已設) |
+| `GET /pricing` | **MRL 定價頁**(`mrliouword.com/pricing`,路由見 `wrangler.toml`):8 條 Stripe 付款連結 + MRL APIWorks 方案;目錄資料在 `src/pricing.js`,`GET /pricing.json` 回同一份目錄 |
 | `GET /notion/handshake?k=<MRL_HANDSHAKE_KEY>` | 一次性取出 Notion 握手 token(取出即刪,重放無效) |
 
 ## 部署(用你既有的 `mrliouword-root` 專案)

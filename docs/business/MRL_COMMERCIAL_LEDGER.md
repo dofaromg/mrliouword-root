@@ -181,3 +181,6 @@ Schema:
 - **沒有付款連結的 58 項商品**(粒子服務、引擎、解決方案等)不在頁上編造按鈕;要上架時先在 Stripe 建 Payment Link 再加入目錄。
 - **證據等級**:連結/價格/收款方為 FACT;各方案「功能描述」逐字取自 Stripe 商品描述(案主自寫),屬 **CLAIM**(設定 ≠ 交付,例如 Enterprise 的 20 席、SLA 99.9%,需對應實際產品與 `MRL_SLA.md`)。
 - **路由前提(UNRESOLVED 至部署驗證)**:`mrliouword.com` zone 需與部署帳號同一 Cloudflare 帳號,且 Workers Builds 的部署 token 具 Workers Routes 權限;否則改在儀表板手動加路由 `mrliouword.com/pricing*` → `mrliouword-root`。
+- **交付路徑(UNRESOLVED,Codex 審查提出)**:8 條付款連結在本頁建置前即已 live、任何人持連結皆可付款;本頁只是讓人找得到。付款後**沒有自動開通**:頁面明示「人工開通,1 個工作天內依 Stripe 付款通知處理」,收帳入口(§9.3)會把每筆付款記進帳本供操作者處理。第 2 節 Product Ledger 仍為 PLANNED、用量計量未落地(§6)——Root Owner 需決定:接受人工開通上線,或先下架 CTA 至交付流程就緒。
+- **客服信箱(UNRESOLVED)**:`legal@mrliouword.com` 的 Email Routing 尚未通過收信測試(`MRL_OPERATIONS.md`);頁面改以「回覆 Stripe 收據信」為主要管道(送達 Stripe 帳戶登記的支援信箱),信箱列為次要。驗證通過後回寫本節。
+- **SLA**:Enterprise 卡片的「SLA 99.9%」已標「依合約議定;SLA 文件尚為草案」,與 `MRL_SLA.md` 一致。

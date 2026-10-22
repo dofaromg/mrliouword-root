@@ -38,8 +38,13 @@ test("GET /pricing renders every link, APIWorks plans, merchant, MRL headers", a
   assert.ok(body.includes("NT$") && body.includes("US$"));
   assert.ok(!body.includes("undefined") && !body.includes("[object"));
   assert.equal(body, pricingHtml());
+  assert.ok(body.includes("人工開通") && body.includes("依合約議定"));
   const r2 = await worker.fetch(new Request("https://mrliouword.com/pricing/"), {}, ctx);
   assert.equal(r2.status, 200);
+  for (const p of ["/pricing", "/pricing/", "/pricing.json"]) {
+    const h = await worker.fetch(new Request("https://mrliouword.com" + p, { method: "HEAD" }), {}, ctx);
+    assert.equal(h.status, 200, `HEAD ${p}`);
+  }
 });
 
 test("GET /pricing.json returns the same catalog as an MRL asset", async () => {

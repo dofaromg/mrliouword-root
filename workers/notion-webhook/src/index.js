@@ -403,10 +403,11 @@ export default {
     const url = new URL(request.url);
 
     // 定價頁:mrliouword.com/pricing(路由在 wrangler.toml);目錄資料見 src/pricing.js
-    if ((url.pathname === "/pricing" || url.pathname === "/pricing/") && request.method === "GET") {
+    const isRead = request.method === "GET" || request.method === "HEAD";
+    if ((url.pathname === "/pricing" || url.pathname === "/pricing/") && isRead) {
       return html(pricingHtml());
     }
-    if (url.pathname === "/pricing.json" && request.method === "GET") {
+    if (url.pathname === "/pricing.json" && isRead) {
       return json({ ...PRICING_CATALOG, emitted_by: MRL.emitted_by });
     }
 

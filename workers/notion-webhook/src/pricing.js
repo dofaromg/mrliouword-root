@@ -26,7 +26,7 @@ export const PRICING_CATALOG = {
         {
           id: "enterprise", name: "MRL AI Enterprise", price: 199900, currency: "twd", interval: "month",
           description: "適合團隊與企業",
-          features: ["Pro 全部功能", "最多 20 個成員帳號", "影片生成器(無限制)", "API 存取", "自訂系統提示詞", "使用量分析", "SLA 99.9%"],
+          features: ["Pro 全部功能", "最多 20 個成員帳號", "影片生成器(無限制)", "API 存取", "自訂系統提示詞", "使用量分析", "SLA 99.9%(依合約議定;SLA 文件尚為草案)"],
           cta: "訂閱 Enterprise", url: "https://buy.stripe.com/eVqaEWdHR0EO2Xd8J0b7y04",
           alt_urls: ["https://buy.stripe.com/fZu14m9rB3R0cxN7EWb7y02"],
           stripe: { payment_link: "plink_1TsLQQCpDvQ01vefid1J4ZIp", price: "price_1TWs0PCpDvQ01vefYvJZpqxQ", product: "prod_UVtngTX51uM9ag", alt_payment_links: ["plink_1TY1OzCpDvQ01vef830GbIUh"] },
@@ -195,7 +195,7 @@ a{color:var(--acc2)}code,.mono{font-family:"JetBrains Mono",ui-monospace,monospa
     <p class="sig">origin_signature: <code>${esc(catalog.origin_signature)}</code> · namespace <code>${esc(catalog.mrl_namespace)}</code> · 目錄核對日 <code>${esc(catalog.verified_at)}</code></p>
   </div>
 ${sections}
-  <div class="note">付款連結會開啟 Stripe 託管的結帳頁;我們不經手你的卡號。訂閱可於 Stripe 寄送的收據連結中管理或取消。發票與退款事宜請來信 <a href="mailto:${esc(L.contact)}">${esc(L.contact)}</a>。</div>
+  <div class="note"><strong>付款與開通</strong>:付款連結會開啟 Stripe 託管的結帳頁,我們不經手你的卡號。目前採<strong>人工開通</strong>:付款完成後,我們依 Stripe 的付款通知於 1 個工作天內開通服務或入帳點數,並以你結帳時填的 email 聯絡。訂閱可於 Stripe 收據連結中管理或取消。發票、退款與開通問題請<strong>直接回覆 Stripe 寄給你的收據信</strong>(最可靠),或來信 <a href="mailto:${esc(L.contact)}">${esc(L.contact)}</a>。</div>
   <footer class="foot">
     <div>© 2026 ${esc(catalog.merchant)} · MrLiouWord / MRL</div>
     <div class="row"><a href="${esc(L.terms)}" rel="noopener">服務條款(草案)</a><a href="${esc(L.privacy)}" rel="noopener">隱私權政策(草案)</a><a href="${esc(L.sla)}" rel="noopener">SLA(草案)</a><a href="${esc(L.apiworks)}" rel="noopener">MRL APIWorks</a><a href="/pricing.json">pricing.json</a></div>

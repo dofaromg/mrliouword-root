@@ -1,0 +1,100 @@
+{
+  "origin_signature": "MrLiouWord",
+  "base_commit": "e024b957392c96adb53117a19cd8480695d7df4d",
+  "expected_file_list": [
+    "workers/notion-webhook/src/index.js",
+    "workers/notion-webhook/src/fulfillment.js",
+    "workers/notion-webhook/test/fulfillment.test.mjs",
+    "workers/notion-webhook/README.md",
+    "docs/business/MRL_COMMERCIAL_LEDGER.md",
+    "docs/business/MRL_MANUAL_FULFILLMENT.md",
+    "docs/business/MRL_PRICING_FULFILLMENT_AUDIT_20261023.json",
+    "docs/business/MRL_PRICING_FULFILLMENT_DELIVERY_20261023.json"
+  ],
+  "expected_file_count": 8,
+  "payload_files": [
+    {
+      "path": "workers/notion-webhook/src/index.js",
+      "size_bytes": 24829,
+      "sha256": "a32e2c38729c3d42cca9d3ba7eb8039bdf75c8647c39ab373049b57ac329b9fb"
+    },
+    {
+      "path": "workers/notion-webhook/src/fulfillment.js",
+      "size_bytes": 2139,
+      "sha256": "18d2860e12123fee94896b6e2c606ecb41fa39338e7af87e316b0ba70559bc6f"
+    },
+    {
+      "path": "workers/notion-webhook/test/fulfillment.test.mjs",
+      "size_bytes": 6990,
+      "sha256": "3e918cc1541d3886cd98126be64fd4d7fa767e218bd4414f7027b64c87c9f850"
+    },
+    {
+      "path": "workers/notion-webhook/README.md",
+      "size_bytes": 7631,
+      "sha256": "31fcae535954cc8e9449204c8e90d1264b4f2222f313a9a2d55695b51e6337ed"
+    },
+    {
+      "path": "docs/business/MRL_COMMERCIAL_LEDGER.md",
+      "size_bytes": 14870,
+      "sha256": "e4732ada36b4ee2b028c1d41f09c39e1eb0b95d1a7b169ce75c99ca6f1599a28"
+    },
+    {
+      "path": "docs/business/MRL_MANUAL_FULFILLMENT.md",
+      "size_bytes": 8439,
+      "sha256": "d7eb373eac0bf69b9d768a3bd0a57d0290ae7bc554be309c58b5a61c015efd66"
+    },
+    {
+      "path": "docs/business/MRL_PRICING_FULFILLMENT_AUDIT_20261023.json",
+      "size_bytes": 20200,
+      "sha256": "c03b249e688fd3c6e7764fd1c442dcd4aa11434fbad86d47fb809f9e2ed989ad"
+    }
+  ],
+  "self_integrity": "This manifest is excluded from its own content hashes; its integrity is anchored by the Git commit tree.",
+  "expected_dependency_tree": {
+    "workers/notion-webhook/src/index.js": [
+      "workers/notion-webhook/src/fulfillment.js",
+      "workers/notion-webhook/src/pricing.js"
+    ],
+    "workers/notion-webhook/src/fulfillment.js": [
+      "workers/notion-webhook/src/pricing.js"
+    ],
+    "workers/notion-webhook/test/fulfillment.test.mjs": [
+      "workers/notion-webhook/src/index.js",
+      "workers/notion-webhook/src/fulfillment.js",
+      "workers/notion-webhook/src/pricing.js"
+    ],
+    "docs/business/MRL_MANUAL_FULFILLMENT.md": [
+      "docs/business/MRL_COMMERCIAL_LEDGER.md",
+      "docs/business/MRL_COMMERCIAL_HISTORICAL_EVIDENCE_BACKFILL_20260905.md",
+      "docs/MRL_OPERATIONS.md",
+      "docs/business/MRL_PRICING_FULFILLMENT_AUDIT_20261023.json"
+    ]
+  },
+  "validation": {
+    "worker_tests": {
+      "pass": 15,
+      "fail": 0
+    },
+    "existing_python_tests": {
+      "pass": 29,
+      "fail": 0
+    },
+    "javascript_syntax": "PASS",
+    "diff_check": "PASS"
+  },
+  "package_map": "Eight Git changes based on existing repository; no ZIP requested or generated. Unchanged dependencies retained in base tree.",
+  "diff_audit": {
+    "missing": [],
+    "extra": [],
+    "mismatch": [],
+    "renamed": [],
+    "orphan": [],
+    "coverage_percent": 100
+  },
+  "completion_gate": {
+    "engineering_payload": "DELIVERY_PASS_AFTER_REMOTE_READBACK",
+    "customer_delivery": "UNVERIFIED",
+    "live_authenticated_reconciliation": "BLOCKED_STRIPE_REAUTH_AND_OPERATOR_ACCESS",
+    "deployment": "NOT_PERFORMED"
+  }
+}

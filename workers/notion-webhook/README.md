@@ -78,3 +78,9 @@ Notion 有變動 → POST 進來 → 驗證 Notion 簽章 → 觸發動作。
 - **最小蒐集**:不存 email 原文,只存不可逆指紋 `email_fp`;`metadata` 只保留對帳白名單鍵(`sku / asset_id / canonical_product_id / product_id / license_id / order_id / origin_signature` 與 `mrl_*`);客戶細節留在 Stripe。
 - **設定**:Stripe 儀表板 → Developers → Webhooks → 新增端點 `https://mrliouword-root.<子網域>.workers.dev/stripe/webhook`、勾上列事件 → 把端點的簽章密鑰放進本 Worker 機密 `STRIPE_WEBHOOK_SECRET`(勿貼聊天、勿進 repo)。`GET /health` 的 `stripe_webhook_configured` 轉 `true` 只代表密鑰已設;**接通的判準**是 Stripe 端點頁「傳送測試事件」回 200,且 `GET /ledger/payments` 看得到對應登錄。
 - **測試**:`node --test workers/notion-webhook/test/*.test.mjs`(CI 同步跑)。
+
+## MRL 履約核對（唯讀）
+
+`GET /ledger/fulfillment` 僅接受 `Authorization: Bearer <MRL_HANDSHAKE_KEY>`，不接受單獨 `?k=`；每頁最多 100 個付款事件，沿 `cursor` 續頁，回應 `Cache-Control: no-store`。保留原始帳本信封，將八個 Payment Link ID 對照六個 catalog item；所有列均 `grants_access=false`、`delivery_status=UNVERIFIED`。這不是訂單聚合或授權發放端點，不可直接按列發點數。
+
+實際人工核對、去重、授權範圍及驗收步驟見 [MRL_MANUAL_FULFILLMENT.md](../../docs/business/MRL_MANUAL_FULFILLMENT.md)。缺失/非 paid 的 Checkout 保持 pending；新列存 `refs.payment_status`，舊列原封保留並需重新驗證。重送若帳本 key 已存在則保留第一筆內容，但 KV get/put 非原子，不能宣稱強一致發放。

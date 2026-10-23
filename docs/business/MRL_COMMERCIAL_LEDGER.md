@@ -184,3 +184,13 @@ Schema:
 - **交付路徑(UNRESOLVED,Codex 審查提出)**:8 條付款連結在本頁建置前即已 live、任何人持連結皆可付款;本頁只是讓人找得到。付款後**沒有自動開通**:頁面明示「人工開通,1 個工作天內依 Stripe 付款通知處理」,收帳入口(§9.3)會把每筆付款記進帳本供操作者處理。第 2 節 Product Ledger 仍為 PLANNED、用量計量未落地(§6)——Root Owner 需決定:接受人工開通上線,或先下架 CTA 至交付流程就緒。
 - **客服信箱(UNRESOLVED)**:`legal@mrliouword.com` 的 Email Routing 尚未通過收信測試(`MRL_OPERATIONS.md`);頁面改以「回覆 Stripe 收據信」為主要管道(送達 Stripe 帳戶登記的支援信箱),信箱列為次要。驗證通過後回寫本節。
 - **SLA**:Enterprise 卡片的「SLA 99.9%」已標「依合約議定;SLA 文件尚為草案」,與 `MRL_SLA.md` 一致。
+
+### 9.7 定價與履約補核（2026-10-23 批次，只增不改）
+
+origin_signature: MrLiouWord
+
+- 本批[公開觀測證據](MRL_PRICING_FULFILLMENT_AUDIT_20261023.json)確認 `/pricing`、`/pricing.json`、八條 Stripe 結帳頁及 APIWorks 站可取得 200；六個付款商品價格一致。公開呈現不等於交易成功或授權交付。
+- **更正 §9.6 的推定**：正式 Worker `/health` 本批回 `stripe_webhook_configured=false`，僅 KV 與操作者金鑰已綁。依現行程式，該入口缺密鑰回 503，因此不能認定「每筆付款會記進本帳本」。歷史 webhook 是否運作仍 UNRESOLVED，Stripe 連線需重新驗證，私有帳本本批未讀；舊節的零交易／零授權不代表現時值。
+- 本批未取得任何商品的客戶授權、點數入帳、服務使用或客服實收回執；不推論其他系統無實作。[人工履約程序與逐產品判定](MRL_MANUAL_FULFILLMENT.md)列出可操作的查帳步驟、Owner 映射 gate、真正 runtime 開通證據及各方案驗收要求。BYOH 歷史工程證據保留，不能代替特定客戶節點驗收。
+- 本次工程提供受 Bearer 保護的唯讀 `GET /ledger/fulfillment`，保留原付款信封並對映八連結；不發放授權、不入帳點數、不修改原始交易或定價。不以人工程序文件冒充已履約。
+- 收費入口、交付時限及產品承諾由 Root Owner 裁定。客服、收據回覆/取消路徑與正式 webhook 投遞仍需實測；本批未寄信、付款、部署或授予客戶權限。

@@ -1,0 +1,356 @@
+{
+  "origin_signature": "MrLiouWord",
+  "mrl_namespace": "MRL",
+  "base_commit": "e024b957392c96adb53117a19cd8480695d7df4d",
+  "audit_date": "2026-10-23",
+  "time_zone": "Asia/Taipei",
+  "evidence_level": "FACT_observed_public_surface_only",
+  "method": "Firecrawl scrape, cache miss; read-only navigation, no forms submitted",
+  "limitations": [
+    "Stripe connector requires reauthentication; no current authenticated account, transactions, subscriptions, webhook endpoints or entitlement records read",
+    "No operator secret available; live private payment ledger not read",
+    "Public checkout rendering is not a completed payment or proof of entitlement delivery",
+    "Direct scratch HTTP attempts returned 403; search-service could not access pricing endpoints; Firecrawl returned 200",
+    "Scraped markdown is a transformed extraction, not original HTTP response bytes"
+  ],
+  "observations": [
+    {
+      "url": "https://mrliouword.com/pricing",
+      "status": 200,
+      "scrape_id": "01a1697b-6c6f-736b-b3fd-9996bc50719b",
+      "cache_state": "miss",
+      "excerpt": "[MrLiouWord MRL](https://mrliouword.com/) [方案](https://mrliouword.com/pricing#plans) [點數包](https://mrliouword.com/pricing#credits) [APIWorks](https://mrliouword.com/pricing#apiworks) [回首頁](https://mrliouword.com/)\n\n# 方案與定價\n\nMRL AI 訂閱、AI 點數包,以及 MRL APIWorks 的 API 建構服務。所有線上付款由 Stripe 處理,收款方為 **Mrliouword, LLC**;台幣方案以 NT$ 計價,APIWorks 以 US$ 計價。\n\norigin\\_signature: `MrLiouWord` · namespace `MRL` · 目錄核對日 `2026-10-22`\n\n## MRL AI 方案\n\n月費訂閱,隨時可取消。付款由 Stripe 處理,收款方為 Mrliouword, LLC。\n\n最多人選\n\n### MRL AI Pro\n\n適合專業用戶與開發者\n\nNT$499/ 月\n\n- 無限次 AI 對話\n- 所有 Claude 模型\n- 影片生成器(每月 50 次)\n- 技能創作者(無限制)\n- 優先回應速度\n\n[訂閱 Pro](h",
+      "live_mode_text": false,
+      "merchant_title": "MRL 定價 — MrLiouWord"
+    },
+    {
+      "url": "https://mrliouword.com/pricing.json",
+      "status": 200,
+      "scrape_id": "01a1697b-6c7a-71b8-9665-54c002882043",
+      "cache_state": "miss",
+      "excerpt": "```json\n{\"mrl_asset\":true,\"mrl_namespace\":\"MRL\",\"origin_signature\":\"MrLiouWord\",\"merchant\":\"Mrliouword, LLC\",\"processor\":\"stripe\",\"verified_at\":\"2026-10-22\",\"sections\":[{\"id\":\"plans\",\"title\":\"MRL AI 方案\",\"subtitle\":\"月費訂閱,隨時可取消。付款由 Stripe 處理,收款方為 Mrliouword, LLC。\",\"items\":[{\"id\":\"pro\",\"name\":\"MRL AI Pro\",\"price\":49900,\"currency\":\"twd\",\"interval\":\"month\",\"featured\":true,\"description\":\"適合專業用戶與開發者\",\"features\":[\"無限次 AI 對話\",\"所有 Claude 模型\",\"影片生成器(每月 50 次)\",\"技能創作者(無限制)\",\"優先回應速度\"],\"cta\":\"訂閱 Pro\",\"url\":\"https://buy.stripe.com/aFa00i9rBgDMbtJe3kb7y03\",\"stripe\":{\"payment_link\":\"plink_1TsLQLCpDvQ01veflZHUOX",
+      "live_mode_text": false
+    },
+    {
+      "url": "https://buy.stripe.com/aFa00i9rBgDMbtJe3kb7y03",
+      "status": 200,
+      "scrape_id": "01a1697b-6cc5-703b-ba76-7d152c7ca167",
+      "cache_state": "miss",
+      "excerpt": "## Subscribe to MRL AI Pro\n\nNT$499.00\n\nper\n\nmonth\n\n- MRL AI Pro\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n適合專業用戶與開發者 — 無限次 AI 對話、所有 Claude 模型、影片生成器（每月 50 次）、技能創作者（無限制）、優先回應速度\n\n\n\n\n\n\n\n\n\n\n\nBilled monthly\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNT$499.00\n\n\nSubtotal\n\nNT$499.00\n\nAdd promotion code\n\nApply\n\nTotal due today\n\nNT$499.00\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/eVqaEWdHR0EO2Xd8J0b7y04",
+      "status": 200,
+      "scrape_id": "01a1697b-b3b0-773d-8176-757ae8be8286",
+      "cache_state": "miss",
+      "excerpt": "## Subscribe to MRL AI Enterprise\n\nNT$1,999.00\n\nper\n\nmonth\n\n- MRL AI Enterprise\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n適合團隊與企業 — Pro 全部功能、最多 20 個成員帳號、影片生成器（無限制）、API 存取、自訂系統提示詞、使用量分析、SLA 99.9%\n\n\n\n\n\n\n\n\n\n\n\nBilled monthly\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNT$1,999.00\n\n\nSubtotal\n\nNT$1,999.00\n\nAdd promotion code\n\nApply\n\nTotal due today\n\nNT$1,999.00\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.strip",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/fZu14m9rB3R0cxN7EWb7y02",
+      "status": 200,
+      "scrape_id": "01a1697b-b44b-773d-84bf-763d2005eda6",
+      "cache_state": "miss",
+      "excerpt": "## Subscribe to MRL AI Enterprise\n\nNT$1,999.00\n\nper\n\nmonth\n\n適合團隊與企業 — Pro 全部功能、最多 20 個成員帳號、影片生成器（無限制）、API 存取、自訂系統提示詞、使用量分析、SLA 99.9%\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg)\n\nCard\n\nCard information\n\n![Visa](https://js.stripe.com/v3/fingerprinted/img/visa-729c05c240c4bdb47b03ac81d99",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/7sYaEWgU31IS55lf7ob7y06",
+      "status": 200,
+      "scrape_id": "01a1697b-b362-72c2-82b0-0591ea975651",
+      "cache_state": "miss",
+      "excerpt": "## Subscribe to MRL AI\n\nNT$299.00\n\nper\n\nmonth\n\n- MRL AI\n\n\n\n\n\n\n\n\n\n\nBilled monthly\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNT$299.00\n\n\nSubtotal\n\nNT$299.00\n\nAdd promotion code\n\nApply\n\nTotal due today\n\nNT$299.00\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg)\n\nCard\n\nCard information\n\n![Visa](https://js.stri",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/aFa14mfPZdrAapF8J0b7y05",
+      "status": 200,
+      "scrape_id": "01a1697b-dc40-7208-b934-4efeb283cfb7",
+      "cache_state": "miss",
+      "excerpt": "## Pay Mrliouword, LLC\n\nNT$99.00\n\n- MRL AI 100 點數包\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n購買 100 點 AI 使用點數，永不過期，可用於影片生成、技能創作等進階功能\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNT$99.00\n\n\nSubtotal\n\nNT$99.00\n\nAdd promotion code\n\nApply\n\nTotal due\n\nNT$99.00\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg)\n\nCard\n\nCard informati",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/cNi28qcDN9bk8hxgbsb7y00",
+      "status": 200,
+      "scrape_id": "01a1697b-dc2f-7672-943a-d4357ada8105",
+      "cache_state": "miss",
+      "excerpt": "## MRL AI 100 點數包\n\nNT$99.00\n\n購買 100 點 AI 使用點數，永不過期，可用於影片生成、技能創作等進階功能\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg)\n\nCard\n\nCard information\n\n![Visa](https://js.stripe.com/v3/fingerprinted/img/visa-729c05c240c4bdb47b03ac81d9945bfe.svg)\n\n![Mastercard](https://js.stripe.com/v3/fingerprinted",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/7sY6oG8nxfzI0P52kCb7y01",
+      "status": 200,
+      "scrape_id": "01a1697b-db82-707d-8006-eb7d00e38e91",
+      "cache_state": "miss",
+      "excerpt": "## MRL AI 500 點數包\n\nNT$399.00\n\n購買 500 點 AI 使用點數，享 8 折優惠，永不過期，超值方案\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg)\n\nCard\n\nCard information\n\n![Visa](https://js.stripe.com/v3/fingerprinted/img/visa-729c05c240c4bdb47b03ac81d9945bfe.svg)\n\n![Mastercard](https://js.stripe.com/v3/fingerprinted/img",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://buy.stripe.com/5kQ14meLVfzI55lcZgb7y07",
+      "status": 200,
+      "scrape_id": "01a1697d-ca94-7325-a85c-a359ca0a32ba",
+      "cache_state": "miss",
+      "excerpt": "## Pay Mrliouword, LLC\n\nNT$699.00\n\n- MRL AI 1,000 點數包\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n購買 1000 點 AI 使用點數，7折優惠，永不過期\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNT$699.00\n\n\nSubtotal\n\nNT$699.00\n\nAdd promotion code\n\nApply\n\nTotal due\n\nNT$699.00\n\nApple Logo\n\nPay securely with Pay with\n0000\n\n0000\n\n0000\n\n* * *\n\nOr\n\n## Contact information\n\nEmail\n\n## Payment method\n\n![](https://js.stripe.com/v3/fingerprinted/img/card-ce24697297bd3c6a00fdd2fb6f760f0d.svg)\n\nCard\n\nCard information\n\n![",
+      "live_mode_text": true,
+      "merchant_title": "Mrliouword, LLC"
+    },
+    {
+      "url": "https://mrl-apiworks.z814241.workers.dev",
+      "status": 200,
+      "scrape_id": "01a1697b-fd35-7256-91d3-8f7d8d012a06",
+      "cache_state": "miss",
+      "excerpt": "Services\n\n## 我們建構什麼\n\n不只寫程式，而是把 API 當成產品交付——可用、可維運、可收費。\n\n🔧\n\n### 客製 API 開發\n\n依你的業務邏輯設計並實作 REST / GraphQL 端點，含文件、版本控管與測試。\n\n🔀\n\n### API 代理閘道\n\n單一入口呼叫上千種外部服務，統一路由、限流、快取與監控。\n\n🔑\n\n### OAuth 全託管\n\nToken 申請、刷新、儲存全代管，你的程式只要呼叫 proxy，憑證集中保管。\n\n🤖\n\n### AI 工具層整合\n\n把 API 包成 AI Agent 可呼叫的工具，串接 Claude / OpenAI / 本地模型。\n\n🖥️\n\n### DL580 私有部署\n\n整套建構落地你自己的私有伺服器，資料主權在本地、不外流。\n\n📈\n\n### 維運與監控\n\n健康檢查、事件紀錄、用量計費模組，讓你的 API 能穩定對外收費。\n\nArchitecture\n\n## 運作架構\n\n你的系統只發一次請求，其餘登入、路由、轉發全由我們建",
+      "live_mode_text": false,
+      "merchant_title": "MRL APIWorks — 專業 API 建構服務"
+    },
+    {
+      "url": "https://mrliouword-root.z814241.workers.dev/health",
+      "status": 200,
+      "scrape_id": "01a1697d-e62f-72d5-ad52-0d676a0ec6c0",
+      "cache_state": "miss",
+      "excerpt": "```json\n{\"service\":\"mrliouword-root\",\"mrl_asset\":true,\"mrl_namespace\":\"MRL\",\"origin_signature\":\"MrLiouWord\",\"secret_configured\":false,\"signing_secret_source\":\"none\",\"kv_bound\":true,\"handshake_key_configured\":true,\"forward_configured\":false,\"stripe_webhook_configured\":false}\n```",
+      "live_mode_text": false
+    }
+  ],
+  "public_catalog": {
+    "mrl_asset": true,
+    "mrl_namespace": "MRL",
+    "origin_signature": "MrLiouWord",
+    "merchant": "Mrliouword, LLC",
+    "processor": "stripe",
+    "verified_at": "2026-10-22",
+    "sections": [
+      {
+        "id": "plans",
+        "title": "MRL AI 方案",
+        "subtitle": "月費訂閱,隨時可取消。付款由 Stripe 處理,收款方為 Mrliouword, LLC。",
+        "items": [
+          {
+            "id": "pro",
+            "name": "MRL AI Pro",
+            "price": 49900,
+            "currency": "twd",
+            "interval": "month",
+            "featured": true,
+            "description": "適合專業用戶與開發者",
+            "features": [
+              "無限次 AI 對話",
+              "所有 Claude 模型",
+              "影片生成器(每月 50 次)",
+              "技能創作者(無限制)",
+              "優先回應速度"
+            ],
+            "cta": "訂閱 Pro",
+            "url": "https://buy.stripe.com/aFa00i9rBgDMbtJe3kb7y03",
+            "stripe": {
+              "payment_link": "plink_1TsLQLCpDvQ01veflZHUOXxb",
+              "price": "price_1TWs0BCpDvQ01vefGDdm8GnN",
+              "product": "prod_UVtnEhYrLAbayG"
+            }
+          },
+          {
+            "id": "enterprise",
+            "name": "MRL AI Enterprise",
+            "price": 199900,
+            "currency": "twd",
+            "interval": "month",
+            "description": "適合團隊與企業",
+            "features": [
+              "Pro 全部功能",
+              "最多 20 個成員帳號",
+              "影片生成器(無限制)",
+              "API 存取",
+              "自訂系統提示詞",
+              "使用量分析",
+              "SLA 99.9%(依合約議定;SLA 文件尚為草案)"
+            ],
+            "cta": "訂閱 Enterprise",
+            "url": "https://buy.stripe.com/eVqaEWdHR0EO2Xd8J0b7y04",
+            "alt_urls": [
+              "https://buy.stripe.com/fZu14m9rB3R0cxN7EWb7y02"
+            ],
+            "stripe": {
+              "payment_link": "plink_1TsLQQCpDvQ01vefid1J4ZIp",
+              "price": "price_1TWs0PCpDvQ01vefYvJZpqxQ",
+              "product": "prod_UVtngTX51uM9ag",
+              "alt_payment_links": [
+                "plink_1TY1OzCpDvQ01vef830GbIUh"
+              ]
+            }
+          },
+          {
+            "id": "basic",
+            "name": "MRL AI",
+            "price": 29900,
+            "currency": "twd",
+            "interval": "month",
+            "description": "MRL AI 月費訂閱(早期方案)",
+            "features": [
+              "MRL 母體 AI 助手存取",
+              "月費計價,隨時取消"
+            ],
+            "cta": "訂閱 MRL AI",
+            "url": "https://buy.stripe.com/7sYaEWgU31IS55lf7ob7y06",
+            "stripe": {
+              "payment_link": "plink_1TsLQcCpDvQ01veflQDL28xv",
+              "price": "price_1TGxGaCpDvQ01vef8FU00LPO",
+              "product": "prod_UFSAkex5opoBju"
+            }
+          }
+        ]
+      },
+      {
+        "id": "credits",
+        "title": "AI 點數包",
+        "subtitle": "一次性購買,永不過期,可用於影片生成、技能創作等進階功能。",
+        "items": [
+          {
+            "id": "credits-100",
+            "name": "100 點數包",
+            "price": 9900,
+            "currency": "twd",
+            "interval": null,
+            "description": "購買 100 點 AI 使用點數,永不過期",
+            "features": [
+              "100 點",
+              "永不過期"
+            ],
+            "cta": "購買 100 點",
+            "url": "https://buy.stripe.com/aFa14mfPZdrAapF8J0b7y05",
+            "alt_urls": [
+              "https://buy.stripe.com/cNi28qcDN9bk8hxgbsb7y00"
+            ],
+            "stripe": {
+              "payment_link": "plink_1TsLQWCpDvQ01vefgjhFDVc8",
+              "price": "price_1TWs0dCpDvQ01vef9mp6nzLg",
+              "product": "prod_UVtoX1qoYuk4jg",
+              "alt_payment_links": [
+                "plink_1TY1OuCpDvQ01vef8pi0g2MB"
+              ]
+            }
+          },
+          {
+            "id": "credits-500",
+            "name": "500 點數包",
+            "price": 39900,
+            "currency": "twd",
+            "interval": null,
+            "featured": true,
+            "description": "購買 500 點 AI 使用點數,享 8 折優惠,永不過期",
+            "features": [
+              "500 點",
+              "8 折",
+              "永不過期"
+            ],
+            "cta": "購買 500 點",
+            "url": "https://buy.stripe.com/7sY6oG8nxfzI0P52kCb7y01",
+            "stripe": {
+              "payment_link": "plink_1TY1OxCpDvQ01vefHmDpjZqw",
+              "price": "price_1TWs0qCpDvQ01vefuvY01HrO",
+              "product": "prod_UVtoWG1JNX34Cw"
+            }
+          },
+          {
+            "id": "credits-1000",
+            "name": "1,000 點數包",
+            "price": 69900,
+            "currency": "twd",
+            "interval": null,
+            "description": "購買 1000 點 AI 使用點數,7 折優惠,永不過期",
+            "features": [
+              "1,000 點",
+              "7 折",
+              "永不過期"
+            ],
+            "cta": "購買 1,000 點",
+            "url": "https://buy.stripe.com/5kQ14meLVfzI55lcZgb7y07",
+            "stripe": {
+              "payment_link": "plink_1TsLQiCpDvQ01vefMmy9zS1P",
+              "price": "price_1TsJ3uCpDvQ01vef9N7ni4WE",
+              "product": "prod_Us3AvV0mgiwz6E"
+            }
+          }
+        ]
+      },
+      {
+        "id": "apiworks",
+        "title": "MRL APIWorks — API 建構服務",
+        "subtitle": "MrLiouWord 旗下 API 建構事業體:客製 API、代理閘道、OAuth 全託管、DL580 私有部署。美金計價。",
+        "items": [
+          {
+            "id": "apiworks-dl580",
+            "name": "DL580 主權自架",
+            "price": null,
+            "currency": "usd",
+            "interval": null,
+            "price_label": "一次性建構費",
+            "description": "跑在你自己的 DL580,資料完全不外流",
+            "features": [
+              "無限次呼叫(受硬體限制)",
+              "本地憑證保管",
+              "自訂路由規則",
+              "一次性建構費,無月費"
+            ],
+            "cta": "洽詢建構",
+            "url": "https://mrl-apiworks.z814241.workers.dev/#contact"
+          },
+          {
+            "id": "apiworks-pro",
+            "name": "APIWorks Pro",
+            "price": 2900,
+            "currency": "usd",
+            "interval": "month",
+            "price_label": "起",
+            "featured": true,
+            "description": "託管 Proxy + 主流連接器,開箱即用",
+            "features": [
+              "50 個連接器",
+              "10 萬次 / 月呼叫",
+              "OAuth 全託管",
+              "Email 技術支援"
+            ],
+            "cta": "選擇 Pro",
+            "url": "https://mrl-apiworks.z814241.workers.dev/#pricing"
+          },
+          {
+            "id": "apiworks-private",
+            "name": "私有雲",
+            "price": null,
+            "currency": "usd",
+            "interval": null,
+            "price_label": "洽談",
+            "description": "私有部署、SLA、自訂連接器與稽核",
+            "features": [
+              "不限連接器",
+              "私有 VPC / 地端部署",
+              "稽核與監控儀表板",
+              "專屬工程支援"
+            ],
+            "cta": "聯絡我們",
+            "url": "https://mrl-apiworks.z814241.workers.dev/#contact"
+          }
+        ]
+      }
+    ],
+    "links": {
+      "home": "https://mrliouword.com",
+      "apiworks": "https://mrl-apiworks.z814241.workers.dev",
+      "terms": "https://github.com/dofaromg/mrliouword-root/blob/main/docs/legal/TERMS_OF_SERVICE.md",
+      "privacy": "https://github.com/dofaromg/mrliouword-root/blob/main/docs/legal/PRIVACY_POLICY.md",
+      "sla": "https://github.com/dofaromg/mrliouword-root/blob/main/docs/business/MRL_SLA.md",
+      "contact": "legal@mrliouword.com"
+    },
+    "emitted_by": "mrliouword-root"
+  },
+  "evidence_pack_recorded_at": "2026-10-24T00:04:16.320523+08:00",
+  "date_note": "Audit batch initiated 2026-10-23 Asia/Taipei; recording time may cross local midnight."
+}

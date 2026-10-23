@@ -24,6 +24,7 @@
 //   MRL_HANDSHAKE_KEY      你自設的操作者金鑰:一次性取出 Notion 握手 token、讀取帳本——放 Secrets Store
 
 import { pricingHtml, PRICING_CATALOG } from "./pricing.js";
+import { fulfillmentReview } from "./fulfillment.js";
 
 const enc = new TextEncoder();
 
@@ -296,7 +297,7 @@ async function ledgerEntryFromEvent(event) {
   let email = null;
   if (type.startsWith("checkout.session.")) {
     // Checkout(含 Payment Link)完成:非同步付款未入帳時先記 pending,入帳事件再補一筆 paid。
-    if (type === "checkout.session.completed" && obj.payment_status && obj.payment_status !== "paid") base.status = "pending";
+    if (type !== "checkout.session.async_payment_failed" && obj.payment_status !== "paid") base.status = "pending";
     email = obj.customer_details?.email || obj.customer_email || null;
     Object.assign(base, {
       Order_ID: obj.id,
@@ -306,6 +307,7 @@ async function ledgerEntryFromEvent(event) {
       tax: obj.total_details?.amount_tax ?? null,
       refs: {
         mode: obj.mode || null,
+        payment_status: obj.payment_status || null,
         payment_link: obj.payment_link || null,
         subscription: obj.subscription || null,
         invoice: obj.invoice || null,
@@ -375,7 +377,10 @@ async function handleStripeEvent(event, env) {
     if (entry) {
       // 帳本登錄:永久保存(無 TTL)、每事件一 key、不覆寫既有 key。
       const asset = { ...toMrlAsset(summary, MRL.stripe_source), ledger: "commercial", schema: LEDGER_SCHEMA, entry, recorded_at: new Date().toISOString() };
-      await env.EVENTS_KV.put(kvKey("ledger:payment", `${entry.Payment_ID || entry.Order_ID}:${eid}`), JSON.stringify(asset));
+      const paymentKey = kvKey("ledger:payment", `${entry.Payment_ID || entry.Order_ID}:${eid}`);
+      // 去重鍵寫入失敗或過期後的重送,仍保留首筆 recorded_at 與原始證據。
+      // KV get/put 非原子;此處不宣稱並行寫入的強一致或 exactly-once 授權。
+      if (!(await env.EVENTS_KV.get(paymentKey))) await env.EVENTS_KV.put(paymentKey, JSON.stringify(asset));
     } else {
       await env.EVENTS_KV.put(kvKey("evt:stripe", eid), JSON.stringify(toMrlAsset(summary, MRL.stripe_source)), { expirationTtl: 30 * DAY });
     }
@@ -491,6 +496,18 @@ export default {
       if (!env.EVENTS_KV || !operatorAuthorized(url, env, request)) return json({ ok: false, error: "not found" }, 404);
       const page = await listLedgerPayments(env, url.searchParams.get("cursor"));
       return json({ ok: true, mrl_asset: true, ledger: "commercial", schema: LEDGER_SCHEMA, ...page });
+    }
+
+    // 唯讀、逐付款事件的履約核對,不是授權/點數發放端點。
+    if (url.pathname === "/ledger/fulfillment" && request.method === "GET") {
+      const auth = request.headers.get("authorization") || "";
+      if (!env.EVENTS_KV || !/^bearer\s+/i.test(auth) || !operatorAuthorized(url, env, request)) return json({ ok: false, error: "not found" }, 404);
+      const page = await listLedgerPayments(env, url.searchParams.get("cursor"));
+      const response = json({ ok: true, mrl_asset: true, origin_signature: MRL.origin_signature,
+        schema: "MRL_FULFILLMENT_REVIEW.v1", scope: "payment_event_page_not_order_queue",
+        grants_access: false, ...page, entries: page.entries.map(fulfillmentReview) });
+      response.headers.set("cache-control", "no-store");
+      return response;
     }
 
     return json({ ok: false, error: "not found" }, 404);
